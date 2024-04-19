@@ -1,0 +1,52 @@
+[
+	{
+		"id": "qwe",
+		"original": "alternative",
+		"translations": [
+			"альтернатива",
+			"переменный",
+			"взаимоисключающий",
+			"переменно действующий"
+		]
+	},
+	{
+		"id": "hdf",
+		"original": "different",
+		"translations": ["другой"]
+	},
+	{
+		"id": "glf",
+		"original": "especially",
+		"translations": ["особенно"]
+	},
+	{
+		"id": "wpg",
+		"original": "actually",
+		"translations": ["в частности"]
+	},
+	{
+		"id": "dvd",
+		"original": "mental",
+		"translations": ["ментальный"]
+	},
+	{
+		"id": "wpy",
+		"original": "typically",
+		"translations": ["типичный"]
+	},
+	{
+		"id": "hlf",
+		"original": "manage",
+		"translations": ["управлять"]
+	},
+	{
+		"id": "sjd",
+		"original": "though",
+		"translations": ["сквозь"]
+	},
+	{
+		"id": "glj",
+		"original": "combine",
+		"translations": ["объединять"]
+	}
+]
