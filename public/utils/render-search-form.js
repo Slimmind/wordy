@@ -1,5 +1,5 @@
 export default function renderSearchForm() {
-  return `
+	return `
     <div class="internal-window">
 			<form>
 				<input
@@ -11,7 +11,7 @@ export default function renderSearchForm() {
 					hx-target="#search-results"
 				/>
 			</form>
-			<div id="search-results"></div>
+			<ul id="search-results"></ul>
 		</div>
   `;
 }

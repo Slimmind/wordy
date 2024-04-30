@@ -1,16 +1,743 @@
 [
   {
     "id": "1714145712542",
+    "letter": "a",
+    "synonyms": [],
     "original": "apple",
     "translations": [
       "яблучько"
+    ],
+    "examples": [
+      "apple is sweet"
     ]
   },
   {
     "id": "1714145800048",
+    "letter": "p",
+    "synonyms": [],
     "original": "pear",
     "translations": [
       "грушка"
+    ],
+    "examples": [
+      "eat this pear"
+    ]
+  },
+  {
+    "id": "1714310029813",
+    "letter": "a",
+    "synonyms": [],
+    "original": "approach",
+    "translations": [
+      "подход"
+    ],
+    "examples": []
+  },
+  {
+    "id": "1714310096101",
+    "letter": "i",
+    "synonyms": [],
+    "original": "implies",
+    "translations": [
+      "подразумевает"
+    ],
+    "examples": []
+  },
+  {
+    "id": "1714310143203",
+    "letter": "a",
+    "synonyms": [],
+    "original": "assume",
+    "translations": [
+      "принимать",
+      " принять"
+    ],
+    "examples": []
+  },
+  {
+    "id": "1714316499871",
+    "letter": "h",
+    "synonyms": [],
+    "original": "handy",
+    "translations": [
+      "удобный"
+    ],
+    "examples": []
+  },
+  {
+    "id": "1714316643130",
+    "letter": "p",
+    "synonyms": [],
+    "original": "populating",
+    "translations": [
+      "Заселение"
+    ]
+  },
+  {
+    "id": "1714379944862",
+    "letter": "p",
+    "synonyms": [],
+    "original": "prominently",
+    "translations": [
+      "заметно"
+    ],
+    "examples": []
+  },
+  {
+    "id": "1714380002503",
+    "letter": "a",
+    "synonyms": [],
+    "original": "advantage",
+    "translations": [
+      "преимущество"
+    ]
+  },
+  {
+    "id": "1714380035894",
+    "letter": "s",
+    "synonyms": [],
+    "original": "seamless",
+    "translations": [
+      "бесшовный"
+    ],
+    "examples": []
+  },
+  {
+    "id": "1714380197568",
+    "letter": "a",
+    "synonyms": [],
+    "original": "aware",
+    "translations": [
+      "осведомленный",
+      "знающий",
+      "сознающий"
+    ],
+    "examples": []
+  },
+  {
+    "id": "1714380600014",
+    "letter": "e",
+    "synonyms": [],
+    "original": "eligible",
+    "translations": [
+      "имеющий право",
+      " подходящий",
+      " могущий быть",
+      " желательный"
+    ],
+    "examples": []
+  },
+  {
+    "id": "1714380683610",
+    "letter": "o",
+    "synonyms": [],
+    "original": "roundel",
+    "translations": [
+      "медальон",
+      " кружок",
+      " что-либо круглое"
+    ],
+    "examples": []
+  },
+  {
+    "id": "1714381830456",
+    "letter": "d",
+    "synonyms": [],
+    "original": "depiction",
+    "translations": [
+      "описание",
+      " изображение",
+      " рисунок"
+    ],
+    "examples": []
+  },
+  {
+    "id": "1714550066780",
+    "letter": "a",
+    "synonyms": [],
+    "original": "assessment",
+    "translations": [
+      "Оценка"
+    ],
+    "examples": [
+      "Assessment criteria"
+    ]
+  },
+  {
+    "id": "1714550106711",
+    "letter": "e",
+    "synonyms": [],
+    "original": "eligibility",
+    "translations": [
+      "Право на участие",
+      "приемлемость"
+    ],
+    "examples": [
+      "Eligibility requirements"
+    ]
+  },
+  {
+    "id": "1714550135488",
+    "letter": "j",
+    "synonyms": [],
+    "original": "justification",
+    "translations": [
+      "Оправдание",
+      "выравнивание",
+      "подтверждение"
+    ],
+    "examples": [
+      "Business justification for assessment"
+    ]
+  },
+  {
+    "id": "1714550223175",
+    "letter": "e",
+    "synonyms": [],
+    "original": "ensure",
+    "translations": [
+      "Гарантировать",
+      "обеспечивать",
+      "ручаться"
+    ],
+    "examples": [
+      "Ensure that…"
+    ]
+  },
+  {
+    "id": "1714550276783",
+    "letter": "c",
+    "synonyms": [],
+    "original": "completeness",
+    "translations": [
+      "Полнота"
+    ],
+    "examples": [
+      "Completeness of vision",
+      "Completeness check"
+    ]
+  },
+  {
+    "id": "1714550327249",
+    "letter": "o",
+    "synonyms": [],
+    "original": "otherwise",
+    "translations": [
+      "Иначе",
+      "в противном случае",
+      "иным образом"
+    ],
+    "examples": [
+      "Otherwise you will see a default stub text"
+    ]
+  },
+  {
+    "id": "1714550512952",
+    "letter": "s",
+    "synonyms": [],
+    "original": "snapshot",
+    "translations": [
+      "Снимок"
+    ],
+    "examples": [
+      "Snapshot in time"
+    ]
+  },
+  {
+    "id": "1714550605561",
+    "letter": "o",
+    "synonyms": [],
+    "original": "obtain",
+    "translations": [
+      "получать",
+      " добывать",
+      " добиваться",
+      " достигать",
+      " доставать"
+    ],
+    "examples": [
+      "Obtain the approval"
+    ]
+  },
+  {
+    "id": "1714551695499",
+    "letter": "i",
+    "synonyms": [],
+    "original": "intend",
+    "translations": [
+      "Намереваться"
+    ],
+    "examples": [
+      ""
+    ]
+  },
+  {
+    "id": "1714551713333",
+    "letter": "a",
+    "synonyms": [],
+    "original": "accomplish",
+    "translations": [
+      "Выпонить",
+      "совершать",
+      "завершать",
+      "достигать"
+    ],
+    "examples": [
+      ""
+    ]
+  },
+  {
+    "id": "1714667589914",
+    "letter": "b",
+    "synonyms": [],
+    "original": "borrow",
+    "translations": [
+      "одолжить",
+      " занять"
+    ],
+    "examples": [
+      "Do you mind if I borrow your car tomorrow?"
+    ]
+  },
+  {
+    "id": "1714913174575",
+    "letter": "g",
+    "synonyms": [],
+    "original": "glove",
+    "translations": [
+      "перчатка"
+    ],
+    "examples": [
+      ""
+    ]
+  },
+  {
+    "id": "1714913377229",
+    "letter": "c",
+    "synonyms": [],
+    "original": "certain",
+    "translations": [
+      "определенный"
+    ],
+    "examples": [
+      "In a certain town"
+    ]
+  },
+  {
+    "id": "1714913513369",
+    "letter": "p",
+    "synonyms": [],
+    "original": "prudent",
+    "translations": [
+      "благоразумный"
+    ],
+    "examples": [
+      "It will be prudent to refrain from mentioning"
+    ]
+  },
+  {
+    "id": "1714913552702",
+    "letter": "m",
+    "synonyms": [],
+    "original": "mention",
+    "translations": [
+      "упоминание"
+    ],
+    "examples": [
+      "To mention about"
+    ]
+  },
+  {
+    "id": "1714913648395",
+    "letter": "r",
+    "synonyms": [],
+    "original": "refrain",
+    "translations": [
+      "воздержаться"
+    ],
+    "examples": [
+      "To refrain from"
+    ]
+  },
+  {
+    "id": "1714913870324",
+    "letter": "a",
+    "synonyms": [],
+    "original": "anciently",
+    "translations": [
+      "в древности",
+      " в древние времена"
+    ],
+    "examples": [
+      "There is one anciently common thing"
+    ]
+  },
+  {
+    "id": "1714913956000",
+    "letter": "f",
+    "synonyms": [],
+    "original": "fictitious ",
+    "translations": [
+      "вымышленный"
+    ],
+    "examples": [
+      "I will assign no fictitious name"
+    ]
+  },
+  {
+    "id": "1714915146451",
+    "letter": "c",
+    "synonyms": [],
+    "original": "consequence",
+    "translations": [
+      "последствие"
+    ],
+    "examples": [
+      ""
+    ]
+  },
+  {
+    "id": "1714915224130",
+    "letter": "m",
+    "synonyms": [],
+    "original": "mortality",
+    "translations": [
+      "смертность"
+    ],
+    "examples": [
+      ""
+    ]
+  },
+  {
+    "id": "1714915235396",
+    "letter": "s",
+    "synonyms": [],
+    "original": "sorrow",
+    "translations": [
+      "печаль"
+    ],
+    "examples": [
+      ""
+    ]
+  },
+  {
+    "id": "1714915283626",
+    "letter": "s",
+    "synonyms": [],
+    "original": "surgeon",
+    "translations": [
+      "хирург"
+    ],
+    "examples": [
+      ""
+    ]
+  },
+  {
+    "id": "1714915333872",
+    "letter": "r",
+    "synonyms": [],
+    "original": "remain",
+    "translations": [
+      "оставаться"
+    ],
+    "examples": [
+      "To remain"
+    ]
+  },
+  {
+    "id": "1714915505456",
+    "letter": "m",
+    "synonyms": [],
+    "original": "matter",
+    "translations": [
+      "значение",
+      " дело",
+      " вопрос",
+      " вещество",
+      " материал",
+      " предмет",
+      " содержание",
+      " повод"
+    ],
+    "examples": [
+      "It remained a matter of considerable doubt"
+    ]
+  },
+  {
+    "id": "1714915625512",
+    "letter": "s",
+    "synonyms": [],
+    "original": "somewhat",
+    "translations": [
+      "в некотором роде"
+    ],
+    "examples": [
+      ""
+    ]
+  },
+  {
+    "id": "1714915637719",
+    "letter": "m",
+    "synonyms": [],
+    "original": "memoirs",
+    "translations": [
+      "мемуары"
+    ],
+    "examples": [
+      ""
+    ]
+  },
+  {
+    "id": "1714915712522",
+    "letter": "c",
+    "synonyms": [],
+    "original": "comprise",
+    "translations": [
+      "включать",
+      " содержать",
+      " охватывать",
+      " вмещать",
+      " входить в состав",
+      " заключать в себя"
+    ],
+    "examples": [
+      ""
+    ]
+  },
+  {
+    "id": "1714984123868",
+    "letter": "a",
+    "synonyms": [],
+    "original": "attend",
+    "translations": [
+      "посещать",
+      " присутствовать",
+      " ходить",
+      " следить",
+      " заниматься"
+    ],
+    "examples": [
+      ""
+    ]
+  },
+  {
+    "id": "1714984183354",
+    "letter": "a",
+    "synonyms": [],
+    "original": "although ",
+    "translations": [
+      "хотя",
+      " несмотря на",
+      " если бы даже"
+    ],
+    "examples": [
+      "Although I am not disposed to maintain…"
+    ]
+  },
+  {
+    "id": "1714984327023",
+    "letter": "f",
+    "synonyms": [],
+    "original": "fortunate",
+    "translations": [
+      "удачливый"
+    ],
+    "examples": [
+      "The most fortunate"
+    ]
+  },
+  {
+    "id": "1714984427010",
+    "letter": "e",
+    "synonyms": [],
+    "original": "enviable",
+    "translations": [
+      "завидный"
+    ],
+    "examples": [
+      ""
+    ]
+  },
+  {
+    "id": "1714984457558",
+    "letter": "b",
+    "synonyms": [],
+    "original": "befall",
+    "translations": [
+      "случиться",
+      " приключаться",
+      " происходить"
+    ],
+    "examples": [
+      ""
+    ]
+  },
+  {
+    "id": "1714984513416",
+    "letter": "p",
+    "synonyms": [],
+    "original": "particular",
+    "translations": [
+      "особый",
+      " специфический",
+      " отдельный"
+    ],
+    "examples": [
+      ""
+    ]
+  },
+  {
+    "id": "1714984606289",
+    "letter": "c",
+    "synonyms": [],
+    "original": "considerable",
+    "translations": [
+      "значительный",
+      " большой",
+      " немалый"
+    ],
+    "examples": [
+      "Considerable amount",
+      "Considerable time"
+    ]
+  },
+  {
+    "id": "1714984729298",
+    "letter": "t",
+    "synonyms": [],
+    "original": "troublesome ",
+    "translations": [
+      "хлопотный"
+    ],
+    "examples": [
+      "A troublesome practice"
+    ]
+  },
+  {
+    "id": "1714984910219",
+    "letter": "d",
+    "synonyms": [],
+    "original": "decidedly",
+    "translations": [
+      "решительно"
+    ],
+    "examples": [
+      ""
+    ]
+  },
+  {
+    "id": "1714984943548",
+    "letter": "f",
+    "synonyms": [],
+    "original": "favour",
+    "translations": [
+      "услуга"
+    ],
+    "examples": [
+      ""
+    ]
+  },
+  {
+    "id": "1714985087410",
+    "letter": "p",
+    "synonyms": [],
+    "original": "pauper",
+    "translations": [
+      "нищий"
+    ],
+    "examples": [
+      "A pauper old woman"
+    ]
+  },
+  {
+    "id": "1714985181428",
+    "letter": "l",
+    "synonyms": [],
+    "original": "latter",
+    "translations": [
+      "последний"
+    ],
+    "examples": [
+      "In favour of the latter"
+    ]
+  },
+  {
+    "id": "1714985268583",
+    "letter": "b",
+    "synonyms": [],
+    "original": "brief",
+    "translations": [
+      "краткий",
+      " недолгий",
+      " сжатый"
+    ],
+    "examples": [
+      "During this brief period"
+    ]
+  },
+  {
+    "id": "1714985335849",
+    "letter": "a",
+    "synonyms": [],
+    "original": "anxious",
+    "translations": [
+      "тревожный",
+      " озабоченный",
+      " беспокойный",
+      " встревоженный"
+    ],
+    "examples": [
+      ""
+    ]
+  },
+  {
+    "id": "1714985424021",
+    "letter": "n",
+    "synonyms": [],
+    "original": "nurse",
+    "translations": [
+      "медсестра"
+    ],
+    "examples": [
+      "Her mother’s old nurse"
+    ]
+  },
+  {
+    "id": "1714985512294",
+    "letter": "p",
+    "synonyms": [],
+    "original": "profound ",
+    "translations": [
+      "глубокий",
+      " основательный",
+      " проникновенный"
+    ],
+    "examples": [
+      "A profound philosopher"
+    ]
+  },
+  {
+    "id": "1714985582849",
+    "letter": "w",
+    "synonyms": [],
+    "original": "wisdom",
+    "translations": [
+      "мудрость"
+    ],
+    "examples": [
+      "The traditional farming wisdom of India"
+    ]
+  },
+  {
+    "id": "1714985664045",
+    "letter": "i",
+    "synonyms": [],
+    "original": "inevitably ",
+    "translations": [
+      "неизбежно"
+    ],
+    "examples": [
+      "War inevitably has casualties "
     ]
   }
 ]

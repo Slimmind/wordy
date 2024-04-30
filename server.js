@@ -8,9 +8,12 @@ import renderMessage from './public/utils/render-message.js';
 import renderWordDetails from './public/utils/render-word-details.js';
 import renderEditWordForm from './public/utils/render-edit-word-form.js';
 import renderSearchForm from './public/utils/render-search-form.js';
+import getExamples from './public/utils/get-examples.js';
+import renderFooter from './public/utils/render-footer.js';
+import renderSearchResults from './public/utils/render-search-results.js';
+import renderHeader from './public/utils/render-header.js';
 
 const appData = readData() || [];
-console.log('DATA: ', appData);
 
 const app = express();
 
@@ -34,19 +37,21 @@ app.get('/', (req, res) => {
 		</head>
 
 		<body>
-    <header class="main-header">
-      <h1>Wordy</h1>
-    </header>
-			<main hx-swap="innerHTML">
-				<ul id="words" hx-get="/words" hx-trigger="load"></ul>
-			</main>
-			<footer>
-				<button class="circle-btn search-btn" aria-label="search button" hx-get="/search" hx-target="main"></button>
-				<button class="circle-btn menu-btn" aria-label="open application menu"></button>
-				<button class="circle-btn add-btn" aria-label="add word button" hx-get="/add-word" hx-target="main"></button>
-			</footer>
+			${renderHeader()}
+			<main hx-swap="innerHTML" hx-get="/words" hx-trigger="load"></main>
+			${renderFooter()}
 		</body>
 		</html>
+	`);
+});
+
+app.get('/main-menu', (req, res) => {
+	res.send(`
+		<nav class="main-menu">
+			<menu>
+				<li>Menu Item</li>
+			</menu>
+		</nav>
 	`);
 });
 
@@ -59,14 +64,12 @@ app.get('/words/:id', (req, res) => {
 
 	res.send(`
     ${renderBackButton()}
-		${renderWordDetails(word)}
+		${renderWordDetails(appData, word)}
 	`);
 });
 
 app.get('/edit-word/:id', (req, res) => {
-	const wordToEdit = appData.find(
-		(word) => word.id === req.params.id
-	);
+	const wordToEdit = appData.find((word) => word.id === req.params.id);
 
 	res.send(`
     ${renderBackButton()}
@@ -77,13 +80,15 @@ app.get('/edit-word/:id', (req, res) => {
 app.put('/edit-word/:id', (req, res) => {
 	const { id } = req.params;
 	const { original, translations } = req.body;
-
 	const editingWordIndex = appData.findIndex((word) => word.id === id);
+	const letter = original.charAt(0).toLowerCase();
 
 	const updatedWord = {
-		id,
+		...appData[editingWordIndex],
+		letter,
 		original,
 		translations: translations.split(', '),
+		examples: getExamples(req.body),
 	};
 
 	appData[editingWordIndex] = updatedWord;
@@ -102,9 +107,18 @@ app.get('/add-word', (req, res) => {
 	res.send(`
     ${renderBackButton()}
 		<div class="internal-window">
-			<form hx-post="/add-word" hx-target="main">
+			<form class="form add-word" hx-post="/add-word" hx-target="main">
 				<input type="text" name="original" placeholder="Original word..." />
-				<textarea name="translations" placeholder="translaion-1, translation-2..."></textarea>
+				<textarea name="translations" placeholder="translation-1, translation-2..."></textarea>
+				<textarea name="example" placeholder="example"></textarea>
+				<button
+					type="button"
+					class="add-btn"
+					aria-label="add example of word usage"
+					hx-get="/add-example"
+					hx-swap="beforebegin"
+					hx-target="this"
+				></button>
 				<button type="submit">Submit</button>
 			</form>
 		</div>
@@ -114,12 +128,14 @@ app.get('/add-word', (req, res) => {
 app.post('/add-word', (req, res) => {
 	const newWord = {
 		id: Date.now().toString(),
+		letter: req.body.original.toLowerCase().charAt(0),
 		original: req.body.original.toLowerCase(),
 		translations:
 			req.body.translations
 				.split(',')
 				.map((translation) => translation.toLowerCase()) ||
 			req.body.translations.toLowerCase(),
+		examples: getExamples(req.body),
 	};
 
 	const isNewWordAlreadyExist = appData.find(
@@ -143,6 +159,12 @@ app.post('/add-word', (req, res) => {
 	res.send(renderWords(appData));
 });
 
+app.get('/add-example', (req, res) => {
+	res.send(
+		`<textarea name="example-${Date.now()}" placeholder="example"></textarea>`
+	);
+});
+
 app.get('/search', (req, res) => {
 	res.send(`
     ${renderBackButton()}
@@ -158,7 +180,7 @@ app.post('/search', (req, res) => {
 		searchResults = appData.filter((word) =>
 			word.original.startsWith(searchTerm)
 		);
-		return res.send(renderWords(searchResults));
+		return res.send(renderSearchResults(searchResults));
 	}
 
 	return res.send();
