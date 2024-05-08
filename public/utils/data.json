@@ -8,7 +8,7 @@
       "яблучько"
     ],
     "examples": [
-      "apple is sweet"
+      "yeah, that apple was really sweet"
     ]
   },
   {
@@ -31,7 +31,11 @@
     "translations": [
       "подход"
     ],
-    "examples": []
+    "examples": [
+      "but there is another approach called system analysis.",
+      "google blatantly stated that this approach is favorable.",
+      "the main approach in mass valuation is usually the comparable sales approach."
+    ]
   },
   {
     "id": "1714310096101",
@@ -46,13 +50,24 @@
   {
     "id": "1714310143203",
     "letter": "a",
-    "synonyms": [],
+    "synonyms": [
+      "think",
+      "suppose",
+      "accept",
+      "imagine"
+    ],
     "original": "assume",
     "translations": [
+      "предполагать",
+      "считать",
       "принимать",
-      " принять"
+      "принять"
     ],
-    "examples": []
+    "examples": [
+      "you cannot just pick any vpn service and assume it will serve.",
+      "so we can assume there is a secret underground implanter base in australia.",
+      "business leaders should never assume they know what their employees think."
+    ]
   },
   {
     "id": "1714316499871",
@@ -86,10 +101,20 @@
   {
     "id": "1714380002503",
     "letter": "a",
-    "synonyms": [],
+    "synonyms": [
+      "benefit",
+      "profit",
+      "interest",
+      "gain"
+    ],
     "original": "advantage",
     "translations": [
       "преимущество"
+    ],
+    "examples": [
+      "our advantage is what we know.",
+      "i have an advantage over him.",
+      "these unique heating systems offer another advantage."
     ]
   },
   {
@@ -105,14 +130,22 @@
   {
     "id": "1714380197568",
     "letter": "a",
-    "synonyms": [],
+    "synonyms": [
+      "informed",
+      "mindful",
+      "up to date"
+    ],
     "original": "aware",
     "translations": [
       "осведомленный",
       "знающий",
       "сознающий"
     ],
-    "examples": []
+    "examples": [
+      "we are aware that he (andersen) is incarcerated in uzbekistan.",
+      "microsoft is aware that some legitimate gadgets running in windows sidebar could contain vulnerabilities.",
+      "survey participants are aware and responsible how much personal information they provide."
+    ]
   },
   {
     "id": "1714380600014",
@@ -154,13 +187,21 @@
   {
     "id": "1714550066780",
     "letter": "a",
-    "synonyms": [],
+    "synonyms": [
+      "evaluation",
+      "estimation",
+      "judgment"
+    ],
     "original": "assessment",
     "translations": [
-      "Оценка"
+      "оценка"
     ],
     "examples": [
-      "Assessment criteria"
+      "assessment criteria",
+      "a constructive assessment was given regarding the rates for advanced training of teachers and assessment level of personnel activities at schools.",
+      "this latter assessment is generally less costly compared to an external assessment.",
+      "if this assessment leads to more significant concerns then you should request a psychological assessment.",
+      "technology assessment for potential solutions and other methodologies for assessment and forecasting are important here."
     ]
   },
   {
@@ -250,10 +291,10 @@
     "original": "obtain",
     "translations": [
       "получать",
-      " добывать",
-      " добиваться",
-      " достигать",
-      " доставать"
+      "добывать",
+      "добиваться",
+      "достигать",
+      "доставать"
     ],
     "examples": [
       "Obtain the approval"
@@ -267,23 +308,29 @@
     "translations": [
       "Намереваться"
     ],
-    "examples": [
-      ""
-    ]
+    "examples": []
   },
   {
     "id": "1714551713333",
     "letter": "a",
-    "synonyms": [],
+    "synonyms": [
+      "achieve",
+      "fulfil",
+      "carry out",
+      "perform"
+    ],
     "original": "accomplish",
     "translations": [
-      "Выпонить",
+      "выпонить",
       "совершать",
       "завершать",
       "достигать"
     ],
     "examples": [
-      ""
+      "what you can accomplish is irrelevant.",
+      "you can accomplish your goals, if you set them.",
+      "imagine what we can accomplish with these skills.",
+      "it takes several steps-usually three-to accomplish this entire process."
     ]
   },
   {
@@ -307,9 +354,7 @@
     "translations": [
       "перчатка"
     ],
-    "examples": [
-      ""
-    ]
+    "examples": []
   },
   {
     "id": "1714913377229",
@@ -366,7 +411,7 @@
     "original": "anciently",
     "translations": [
       "в древности",
-      " в древние времена"
+      "в древние времена"
     ],
     "examples": [
       "There is one anciently common thing"
@@ -392,9 +437,7 @@
     "translations": [
       "последствие"
     ],
-    "examples": [
-      ""
-    ]
+    "examples": []
   },
   {
     "id": "1714915224130",
@@ -404,9 +447,7 @@
     "translations": [
       "смертность"
     ],
-    "examples": [
-      ""
-    ]
+    "examples": []
   },
   {
     "id": "1714915235396",
@@ -416,9 +457,7 @@
     "translations": [
       "печаль"
     ],
-    "examples": [
-      ""
-    ]
+    "examples": []
   },
   {
     "id": "1714915283626",
@@ -428,9 +467,7 @@
     "translations": [
       "хирург"
     ],
-    "examples": [
-      ""
-    ]
+    "examples": []
   },
   {
     "id": "1714915333872",
@@ -447,7 +484,10 @@
   {
     "id": "1714915505456",
     "letter": "m",
-    "synonyms": [],
+    "synonyms": [
+      "mean",
+      "signify"
+    ],
     "original": "matter",
     "translations": [
       "значение",
@@ -471,9 +511,7 @@
     "translations": [
       "в некотором роде"
     ],
-    "examples": [
-      ""
-    ]
+    "examples": []
   },
   {
     "id": "1714915637719",
@@ -483,9 +521,7 @@
     "translations": [
       "мемуары"
     ],
-    "examples": [
-      ""
-    ]
+    "examples": []
   },
   {
     "id": "1714915712522",
@@ -500,9 +536,7 @@
       " входить в состав",
       " заключать в себя"
     ],
-    "examples": [
-      ""
-    ]
+    "examples": []
   },
   {
     "id": "1714984123868",
@@ -516,15 +550,13 @@
       " следить",
       " заниматься"
     ],
-    "examples": [
-      ""
-    ]
+    "examples": []
   },
   {
     "id": "1714984183354",
     "letter": "a",
     "synonyms": [],
-    "original": "although ",
+    "original": "although",
     "translations": [
       "хотя",
       " несмотря на",
@@ -554,22 +586,27 @@
     "translations": [
       "завидный"
     ],
-    "examples": [
-      ""
-    ]
+    "examples": []
   },
   {
     "id": "1714984457558",
     "letter": "b",
-    "synonyms": [],
+    "synonyms": [
+      "happen",
+      "occur"
+    ],
     "original": "befall",
     "translations": [
       "случиться",
-      " приключаться",
-      " происходить"
+      "приключаться",
+      "происходить",
+      "обрушиться",
+      "постигнуть"
     ],
     "examples": [
-      ""
+      "substandard or unsafe operations will result in the birth of a crippled or sick children, discarded may befall even more terrible fate.",
+      "it is a misfortune which may befall anyone.",
+      "no previous labour leader would have allowed this huge shame to befall the party."
     ]
   },
   {
@@ -582,9 +619,7 @@
       " специфический",
       " отдельный"
     ],
-    "examples": [
-      ""
-    ]
+    "examples": []
   },
   {
     "id": "1714984606289",
@@ -593,8 +628,8 @@
     "original": "considerable",
     "translations": [
       "значительный",
-      " большой",
-      " немалый"
+      "большой",
+      "немалый"
     ],
     "examples": [
       "Considerable amount",
@@ -621,9 +656,7 @@
     "translations": [
       "решительно"
     ],
-    "examples": [
-      ""
-    ]
+    "examples": []
   },
   {
     "id": "1714984943548",
@@ -633,9 +666,7 @@
     "translations": [
       "услуга"
     ],
-    "examples": [
-      ""
-    ]
+    "examples": []
   },
   {
     "id": "1714985087410",
@@ -652,13 +683,22 @@
   {
     "id": "1714985181428",
     "letter": "l",
-    "synonyms": [],
+    "synonyms": [
+      "recent",
+      "second",
+      "another",
+      "such"
+    ],
     "original": "latter",
     "translations": [
       "последний"
     ],
     "examples": [
-      "In favour of the latter"
+      "in favour of the latter",
+      "he discovered drugs and hip-hop, and the latter changed his life.",
+      "the latter was detained in 2014 for taking money for registrations.",
+      "the difficulty of trying to do the latter is fully appreciated.",
+      "the latter approach would include commercial presence or establishment."
     ]
   },
   {
@@ -678,16 +718,24 @@
   {
     "id": "1714985335849",
     "letter": "a",
-    "synonyms": [],
+    "synonyms": [
+      "nervous",
+      "troubled",
+      "worried",
+      "uneasy"
+    ],
     "original": "anxious",
     "translations": [
       "тревожный",
-      " озабоченный",
-      " беспокойный",
-      " встревоженный"
+      "озабоченный",
+      "беспокойный",
+      "встревоженный"
     ],
     "examples": [
-      ""
+      "no surprise that socially anxious people feel more comfortable avoiding human interaction.",
+      "parents may feel anxious or low in mood during pregnancy and after birth.",
+      "some people can get anxious or paranoid.",
+      "those extra-sensitive babies were more likely to report feeling anxious socializing and attending parties as teenagers."
     ]
   },
   {
@@ -738,6 +786,310 @@
     ],
     "examples": [
       "War inevitably has casualties "
+    ]
+  },
+  {
+    "id": "1715177304892",
+    "letter": "s",
+    "original": "sweet",
+    "translations": [
+      "сладкий"
+    ],
+    "examples": []
+  },
+  {
+    "id": "1715180477309",
+    "letter": "s",
+    "original": "signify",
+    "translations": [
+      "обозначать",
+      "означать",
+      "значить"
+    ],
+    "examples": []
+  },
+  {
+    "id": "1715260449781",
+    "letter": "e",
+    "original": "efficient",
+    "translations": [
+      "effective"
+    ],
+    "examples": [
+      "Efficient manner"
+    ]
+  },
+  {
+    "id": "1715260535197",
+    "letter": "m",
+    "original": "manner",
+    "translations": [
+      "style",
+      "way"
+    ],
+    "examples": [
+      "A shy and different manner"
+    ]
+  },
+  {
+    "id": "1715327862041",
+    "letter": "r",
+    "original": "reliability",
+    "translations": [
+      "security",
+      "safety"
+    ],
+    "examples": []
+  },
+  {
+    "id": "1715364653162",
+    "letter": "i",
+    "original": "irrelevant",
+    "translations": [
+      "Неуместный",
+      "неактуальный"
+    ],
+    "examples": [
+      "For properties that were acquired after 1994, that is irrelevant "
+    ],
+    "synonyms": [
+      "unconnected",
+      " unimportant",
+      " unrelated",
+      " pointless",
+      " inappropriate "
+    ]
+  },
+  {
+    "id": "1715442886111",
+    "letter": "t",
+    "original": "towards",
+    "translations": [
+      "в сторону",
+      "к"
+    ],
+    "synonyms": [],
+    "examples": [
+      "towards the end of november"
+    ]
+  },
+  {
+    "id": "1715442936075",
+    "letter": "t",
+    "original": "thaw",
+    "translations": [
+      "оттепель"
+    ],
+    "synonyms": [],
+    "examples": [
+      "during a thaw"
+    ]
+  },
+  {
+    "id": "1715443025213",
+    "letter": "d",
+    "original": "damp",
+    "translations": [
+      "влажный"
+    ],
+    "synonyms": [],
+    "examples": [
+      "the morning was so damp and misty"
+    ]
+  },
+  {
+    "id": "1715443070494",
+    "letter": "m",
+    "original": "misty",
+    "translations": [
+      "туманный"
+    ],
+    "synonyms": [],
+    "examples": [
+      "the morning was so damp and misty"
+    ]
+  },
+  {
+    "id": "1715443276281",
+    "letter": "d",
+    "original": "distinguish ",
+    "translations": [
+      "отличать",
+      "отличить"
+    ],
+    "synonyms": [],
+    "examples": [
+      "it was impossible to distinguish anything more than a few yards away from the carriage windows"
+    ]
+  },
+  {
+    "id": "1715443462925",
+    "letter": "i",
+    "original": "insignificant ",
+    "translations": [
+      "ничтожный"
+    ],
+    "synonyms": [],
+    "examples": [
+      "insignificant persons of various occupations and degrees"
+    ]
+  },
+  {
+    "id": "1715443673941",
+    "letter": "f",
+    "original": "fellow",
+    "translations": [
+      "парень"
+    ],
+    "synonyms": [],
+    "examples": [
+      "one of them was a young fellow"
+    ]
+  },
+  {
+    "id": "1715443757782",
+    "letter": "i",
+    "original": "impudent",
+    "translations": [
+      "дерзкий"
+    ],
+    "synonyms": [],
+    "examples": []
+  },
+  {
+    "id": "1715452955698",
+    "letter": "p",
+    "original": "pallor",
+    "translations": [
+      "бледность"
+    ],
+    "synonyms": [],
+    "examples": [
+      "death-like pallor"
+    ]
+  },
+  {
+    "id": "1715453096092",
+    "letter": "e",
+    "original": "entirely",
+    "translations": [
+      "совершенно"
+    ],
+    "synonyms": [],
+    "examples": [
+      "entirely unprepared"
+    ]
+  },
+  {
+    "id": "1715453170437",
+    "letter": "p",
+    "original": "passionate",
+    "translations": [
+      "страстный"
+    ],
+    "synonyms": [],
+    "examples": []
+  },
+  {
+    "id": "1715453270809",
+    "letter": "s",
+    "original": "suffering",
+    "translations": [
+      "страдание"
+    ],
+    "synonyms": [],
+    "examples": []
+  },
+  {
+    "id": "1715453376365",
+    "letter": "p",
+    "original": "peculiarity",
+    "translations": [
+      "особенность"
+    ],
+    "synonyms": [],
+    "examples": []
+  },
+  {
+    "id": "1715453449053",
+    "letter": "a",
+    "original": "affirm",
+    "translations": [
+      "утверждать",
+      "утвердить"
+    ],
+    "synonyms": [],
+    "examples": [
+      "some people affirm to be a peculiarity as well as evidence"
+    ]
+  },
+  {
+    "id": "1715453632530",
+    "letter": "e",
+    "original": "evidence",
+    "translations": [
+      "доказательство"
+    ],
+    "synonyms": [],
+    "examples": []
+  },
+  {
+    "id": "1715498947175",
+    "letter": "t",
+    "original": "treatment",
+    "translations": [
+      "уход",
+      "лечения",
+      "терапия"
+    ],
+    "synonyms": [],
+    "examples": []
+  },
+  {
+    "id": "1715499032793",
+    "letter": "b",
+    "original": "blatantly",
+    "translations": [
+      "явно"
+    ],
+    "synonyms": [],
+    "examples": [
+      "blatantly obvious"
+    ]
+  },
+  {
+    "id": "1715499100336",
+    "letter": "f",
+    "original": "favorable",
+    "translations": [
+      "благоприятный",
+      "подходящий",
+      "удобный",
+      "благосклонный"
+    ],
+    "synonyms": [],
+    "examples": [
+      "a very favorable, sometimes glorious, october"
+    ]
+  },
+  {
+    "id": "1715499679137",
+    "letter": "e",
+    "original": "entire",
+    "translations": [
+      "весь"
+    ],
+    "synonyms": [
+      "full",
+      "whole",
+      "complete",
+      "absolute",
+      "total"
+    ],
+    "examples": [
+      "entire process",
+      "we wanted to create a celebration for the entire sports world, for the entire planet.",
+      "this means that each particle must sense itself as belonging to the entire system and behave in a way that benefits the entire whole."
     ]
   }
 ]

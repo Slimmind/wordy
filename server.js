@@ -12,6 +12,8 @@ import getExamples from './public/utils/get-examples.js';
 import renderFooter from './public/utils/render-footer.js';
 import renderSearchResults from './public/utils/render-search-results.js';
 import renderHeader from './public/utils/render-header.js';
+import sanitizeValue from './public/utils/sanitize-value.js';
+import renderPhrasesList from './public/utils/render-phrases-list.js';
 
 const appData = readData() || [];
 
@@ -45,16 +47,6 @@ app.get('/', (req, res) => {
 	`);
 });
 
-app.get('/main-menu', (req, res) => {
-	res.send(`
-		<nav class="main-menu">
-			<menu>
-				<li>Menu Item</li>
-			</menu>
-		</nav>
-	`);
-});
-
 app.get('/words', (req, res) => {
 	res.send(renderWords(appData));
 });
@@ -79,15 +71,19 @@ app.get('/edit-word/:id', (req, res) => {
 
 app.put('/edit-word/:id', (req, res) => {
 	const { id } = req.params;
-	const { original, translations } = req.body;
+	const { original, translations, synonyms } = req.body;
 	const editingWordIndex = appData.findIndex((word) => word.id === id);
-	const letter = original.charAt(0).toLowerCase();
+	const letter = sanitizeValue(original.charAt(0));
+  const updatedOriginal = sanitizeValue(original);
+  const updatedTranslations = sanitizeValue(translations.split(', '));
+  const updatedSynonyms = sanitizeValue(synonyms.split(', '));
 
 	const updatedWord = {
 		...appData[editingWordIndex],
 		letter,
-		original,
-		translations: translations.split(', '),
+		original: updatedOriginal,
+		translations: updatedTranslations,
+		synonyms: updatedSynonyms,
 		examples: getExamples(req.body),
 	};
 
@@ -110,6 +106,7 @@ app.get('/add-word', (req, res) => {
 			<form class="form add-word" hx-post="/add-word" hx-target="main">
 				<input type="text" name="original" placeholder="Original word..." />
 				<textarea name="translations" placeholder="translation-1, translation-2..."></textarea>
+				<textarea name="synonyms" placeholder="synonym-1, synonym-2..."></textarea>
 				<textarea name="example" placeholder="example"></textarea>
 				<button
 					type="button"
@@ -128,13 +125,10 @@ app.get('/add-word', (req, res) => {
 app.post('/add-word', (req, res) => {
 	const newWord = {
 		id: Date.now().toString(),
-		letter: req.body.original.toLowerCase().charAt(0),
-		original: req.body.original.toLowerCase(),
-		translations:
-			req.body.translations
-				.split(',')
-				.map((translation) => translation.toLowerCase()) ||
-			req.body.translations.toLowerCase(),
+		letter: sanitizeValue(req.body.original).charAt(0),
+		original: sanitizeValue(req.body.original),
+		translations: sanitizeValue(req.body.translations.split(',')),
+		synonyms: sanitizeValue(req.body.synonyms.split(',')),
 		examples: getExamples(req.body),
 	};
 
@@ -184,6 +178,13 @@ app.post('/search', (req, res) => {
 	}
 
 	return res.send();
+});
+
+app.get('/phrases', (req, res) => {
+  res.send(`
+    ${renderBackButton()}
+    ${renderPhrasesList(appData)}
+  `);
 });
 
 app.listen(3000);

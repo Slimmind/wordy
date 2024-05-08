@@ -1,7 +1,7 @@
 export default function renderEditWordForm({
 	id,
 	original,
-  synonyms,
+	synonyms,
 	translations,
 	examples,
 }) {
@@ -9,7 +9,7 @@ export default function renderEditWordForm({
 		!!examples?.length
 			? examples
 					.map(
-						(example, idx) =>
+						(example) =>
 							`<textarea name="example" placeholder="example">${example}</textarea>`
 					)
 					.join('')
@@ -26,14 +26,14 @@ export default function renderEditWordForm({
 						value="${original}" />
 					<textarea
 						name="translations"
-						placeholder="translation-1, translation-2...">${translations.join(
-							', '
-					)}</textarea>
+						placeholder="translation-1, translation-2...">${
+							!!translations?.length ? translations.join(', '): ''
+						}</textarea>
 					<textarea
 						name="synonyms"
-						placeholder="synonym-1, synonym-2...">${synonyms.join(
-							', '
-					)}</textarea>
+						placeholder="synonym-1, synonym-2...">${
+							!!synonyms?.length ? synonyms.join(', ') : ''
+						}</textarea>
           ${renderExamples()}
           <button
             type="button"
