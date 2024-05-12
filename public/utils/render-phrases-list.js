@@ -21,7 +21,7 @@ export default function renderPhrasesList(data) {
     return modifiedExample;
   };
 
-  const phrasesHTML = phrases.map((phrase) => `<li class="phrase">${highlightWords(phrase)}</li>`).join('');
+  const phrasesHTML = phrases.map((phrase) => `<li class="phrase block">${highlightWords(phrase)}</li>`).join('');
 
   return `
     <div class="internal-window">

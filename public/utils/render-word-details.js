@@ -28,7 +28,7 @@ export default function renderWordDetails(words, currentWord) {
       const preparedTranslations = translations.filter((item) => item !== '');
       return `
         <div class="word__details-translations block">
-          <h3 class="title">Translations: </h3>
+          <h3 class="block__title">Translations: </h3>
           <ul class="word__details-list marker">${preparedTranslations
             .map(
               (translation) =>
@@ -48,7 +48,7 @@ export default function renderWordDetails(words, currentWord) {
       const preparedSynonyms = synonyms.filter((item) => item !== '');
       return `
         <div class="word__details-synonyms block">
-          <h3 class="title">Synonyms: </h3>
+          <h3 class="block__title">Synonyms: </h3>
           <ul class="word__details-list marker">${preparedSynonyms
             .map(
               (synonym) =>
@@ -70,7 +70,7 @@ export default function renderWordDetails(words, currentWord) {
       const preparedExamples = examples.filter((item) => item !== '');
       return `
         <div class="word__details-examples block">
-          <h3 class="title">Examples: </h3>
+          <h3 class="block__title">Examples: </h3>
           <ul class="word__details-examples-list marker">${preparedExamples
             .map(
               (example) =>
@@ -97,12 +97,12 @@ export default function renderWordDetails(words, currentWord) {
 			</section>
 			<footer class="word__details-footer">
 				<button
-					class="circle-btn bg-btn delete-btn"
+					class="btn--circle btn--bg btn--delete"
 					aria-label="delete word button"
           hx-confirm="Are you sure want to delete this word?"
 					hx-delete="/words/${currentWord.id}" hx-target="main"></button>
 				<button
-					class="circle-btn bg-btn edit-btn"
+					class="btn--circle btn--bg btn--edit"
 					aria-label="edit word button"
 					hx-get="edit-word/${currentWord.id}"
 					hx-target="main"></button>

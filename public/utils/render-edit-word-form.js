@@ -37,7 +37,7 @@ export default function renderEditWordForm({
           ${renderExamples()}
           <button
             type="button"
-            class="add-btn"
+            class="btn--add"
             aria-label="add example of word usage"
             hx-get="/add-example"
             hx-swap="beforebegin"
@@ -47,12 +47,12 @@ export default function renderEditWordForm({
 			</section>
 			<footer class="word__details-footer">
 				<button
-					class="circle-btn bg-btn delete-btn"
+					class="btn--circle btn--bg btn--delete"
 					aria-label="delete word button"
 					hx-delete="/words/${id}" hx-target="main"></button>
 				<button
 					type="submit"
-					class="circle-btn apply-btn"
+					class="btn--circle btn--apply"
 					aria-label="edit word button"
 					form="edit-word-form"
 				></button>

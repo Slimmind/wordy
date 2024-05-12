@@ -18,7 +18,7 @@ export default function getAppColors() {
 			.map(
 				(color) =>
 					`<li class="app-colors-item">
-				<button class="circle-btn" style="background-color: ${color.transparent}; border-color: ${color.main}"></button>
+				<button class="btn--circle" style="background-color: ${color.transparent}; border-color: ${color.main}"></button>
 			</li>`
 			)
 			.join('')}

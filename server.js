@@ -14,6 +14,8 @@ import renderSearchResults from './public/utils/render-search-results.js';
 import renderHeader from './public/utils/render-header.js';
 import sanitizeValue from './public/utils/sanitize-value.js';
 import renderPhrasesList from './public/utils/render-phrases-list.js';
+import renderMainMenu from './public/utils/render-main-menu.js';
+import renderGame from './public/utils/render-game.js';
 
 const appData = readData() || [];
 
@@ -110,7 +112,7 @@ app.get('/add-word', (req, res) => {
 				<textarea name="example" placeholder="example"></textarea>
 				<button
 					type="button"
-					class="add-btn"
+					class="btn--add"
 					aria-label="add example of word usage"
 					hx-get="/add-example"
 					hx-swap="beforebegin"
@@ -180,10 +182,21 @@ app.post('/search', (req, res) => {
 	return res.send();
 });
 
+app.get('/menu', (req ,res) => {
+  res.send(renderMainMenu());
+});
+
 app.get('/phrases', (req, res) => {
   res.send(`
     ${renderBackButton()}
     ${renderPhrasesList(appData)}
+  `);
+});
+
+app.get('/game', (req, res) => {
+  res.send(`
+    ${renderBackButton()}
+    ${renderGame()}
   `);
 });
 
