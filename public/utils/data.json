@@ -154,9 +154,9 @@
     "original": "eligible",
     "translations": [
       "имеющий право",
-      " подходящий",
-      " могущий быть",
-      " желательный"
+      "подходящий",
+      "могущий быть",
+      "желательный"
     ],
     "examples": []
   },
@@ -167,8 +167,8 @@
     "original": "roundel",
     "translations": [
       "медальон",
-      " кружок",
-      " что-либо круглое"
+      "кружок",
+      "что-либо круглое"
     ],
     "examples": []
   },
@@ -179,8 +179,8 @@
     "original": "depiction",
     "translations": [
       "описание",
-      " изображение",
-      " рисунок"
+      "изображение",
+      "рисунок"
     ],
     "examples": []
   },
@@ -264,7 +264,7 @@
     "synonyms": [],
     "original": "otherwise",
     "translations": [
-      "Иначе",
+      "иначе",
       "в противном случае",
       "иным образом"
     ],
@@ -306,7 +306,7 @@
     "synonyms": [],
     "original": "intend",
     "translations": [
-      "Намереваться"
+      "намереваться"
     ],
     "examples": []
   },
@@ -340,7 +340,7 @@
     "original": "borrow",
     "translations": [
       "одолжить",
-      " занять"
+      "занять"
     ],
     "examples": [
       "Do you mind if I borrow your car tomorrow?"
@@ -491,13 +491,13 @@
     "original": "matter",
     "translations": [
       "значение",
-      " дело",
-      " вопрос",
-      " вещество",
-      " материал",
-      " предмет",
-      " содержание",
-      " повод"
+      "дело",
+      "вопрос",
+      "вещество",
+      "материал",
+      "предмет",
+      "содержание",
+      "повод"
     ],
     "examples": [
       "It remained a matter of considerable doubt"
@@ -530,11 +530,11 @@
     "original": "comprise",
     "translations": [
       "включать",
-      " содержать",
-      " охватывать",
-      " вмещать",
-      " входить в состав",
-      " заключать в себя"
+      "содержать",
+      "охватывать",
+      "вмещать",
+      "входить в состав",
+      "заключать в себя"
     ],
     "examples": []
   },
@@ -545,10 +545,10 @@
     "original": "attend",
     "translations": [
       "посещать",
-      " присутствовать",
-      " ходить",
-      " следить",
-      " заниматься"
+      "присутствовать",
+      "ходить",
+      "следить",
+      "заниматься"
     ],
     "examples": []
   },
@@ -559,8 +559,8 @@
     "original": "although",
     "translations": [
       "хотя",
-      " несмотря на",
-      " если бы даже"
+      "несмотря на",
+      "если бы даже"
     ],
     "examples": [
       "Although I am not disposed to maintain…"
@@ -616,8 +616,8 @@
     "original": "particular",
     "translations": [
       "особый",
-      " специфический",
-      " отдельный"
+      "специфический",
+      "отдельный"
     ],
     "examples": []
   },
@@ -708,8 +708,8 @@
     "original": "brief",
     "translations": [
       "краткий",
-      " недолгий",
-      " сжатый"
+      "недолгий",
+      "сжатый"
     ],
     "examples": [
       "During this brief period"
@@ -757,8 +757,8 @@
     "original": "profound ",
     "translations": [
       "глубокий",
-      " основательный",
-      " проникновенный"
+      "основательный",
+      "проникновенный"
     ],
     "examples": [
       "A profound philosopher"
@@ -811,9 +811,10 @@
   {
     "id": "1715260449781",
     "letter": "e",
+    "synonyms": ["effective", "successfull", "powerfull"],
     "original": "efficient",
     "translations": [
-      "effective"
+      "эффективный"
     ],
     "examples": [
       "Efficient manner"
@@ -822,10 +823,10 @@
   {
     "id": "1715260535197",
     "letter": "m",
+    "synonyms": ["style", "way"],
     "original": "manner",
     "translations": [
-      "style",
-      "way"
+      "образ", "способ", "порядок"
     ],
     "examples": [
       "A shy and different manner"
@@ -834,10 +835,10 @@
   {
     "id": "1715327862041",
     "letter": "r",
+    "synonyms": ["security", "safety"],
     "original": "reliability",
     "translations": [
-      "security",
-      "safety"
+      "надежность", "достоверность"
     ],
     "examples": []
   },
@@ -854,10 +855,10 @@
     ],
     "synonyms": [
       "unconnected",
-      " unimportant",
-      " unrelated",
-      " pointless",
-      " inappropriate "
+      "unimportant",
+      "unrelated",
+      "pointless",
+      "inappropriate "
     ]
   },
   {

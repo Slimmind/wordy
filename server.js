@@ -76,9 +76,9 @@ app.put('/edit-word/:id', (req, res) => {
 	const { original, translations, synonyms } = req.body;
 	const editingWordIndex = appData.findIndex((word) => word.id === id);
 	const letter = sanitizeValue(original.charAt(0));
-  const updatedOriginal = sanitizeValue(original);
-  const updatedTranslations = sanitizeValue(translations.split(', '));
-  const updatedSynonyms = sanitizeValue(synonyms.split(', '));
+	const updatedOriginal = sanitizeValue(original);
+	const updatedTranslations = sanitizeValue(translations.split(', '));
+	const updatedSynonyms = sanitizeValue(synonyms.split(', '));
 
 	const updatedWord = {
 		...appData[editingWordIndex],
@@ -182,21 +182,34 @@ app.post('/search', (req, res) => {
 	return res.send();
 });
 
-app.get('/menu', (req ,res) => {
-  res.send(renderMainMenu());
+app.get('/menu', (req, res) => {
+	res.send(renderMainMenu());
 });
 
 app.get('/phrases', (req, res) => {
-  res.send(`
+	res.send(`
     ${renderBackButton()}
     ${renderPhrasesList(appData)}
   `);
 });
 
 app.get('/game', (req, res) => {
-  res.send(`
+	const currentWord = appData.find((word) => word.id === req.query.wordId);
+	let gameScore = parseInt(req.query.score) || 0;
+	let gameTotal = parseInt(req.query.total) || 0;
+	if (currentWord && currentWord.translations.includes(req.query.variant)) {
+		gameScore += 1;
+	}
+	const data = {
+		wordId: '',
+		score: gameScore,
+		total: (gameTotal += 1),
+		variant: '',
+	};
+
+	res.send(`
     ${renderBackButton()}
-    ${renderGame()}
+    ${renderGame(appData, data)}
   `);
 });
 
