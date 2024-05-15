@@ -1,2 +1,4 @@
 node_modules
 /public/utils/data.json
+.DS_Store
+.env

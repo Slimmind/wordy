@@ -9,9 +9,8 @@
 :root {
 	--color-theme: black;
   --color-white: white;
-  --color-theme: black;
-  --color-green: rgb(46, 139, 87);
-  --color-green-transparent: rgba(46, 139, 87, 0.3);
+  --color-main: rgb(46, 139, 87);
+  --color-main-transparent: rgba(46, 139, 87, 0.3);
   --radius-small: 4px;
 }
 
@@ -20,8 +19,8 @@ html {
   background: var(--color-theme)
     repeating-linear-gradient(
       45deg,
-      var(--color-green-transparent),
-      var(--color-green-transparent) 10px,
+      var(--color-main-transparent),
+      var(--color-main-transparent) 10px,
       var(--color-theme) 10px,
       var(--color-theme) 20px
     );
@@ -38,7 +37,7 @@ body {
   height: 100dvh;
   margin: 0;
   background-image: linear-gradient(to right, var(--color-theme), transparent);
-  color: var(--color-green);
+  color: var(--color-main);
 }
 
 main {
@@ -66,9 +65,9 @@ textarea {
   margin-bottom: 20px;
   padding: 10px;
   background-color: var(--color-theme);
-  border: 4px solid var(--color-green);
+  border: 4px solid var(--color-main);
   border-radius: var(--radius-small);
-  color: var(--color-green);
+  color: var(--color-main);
   font: inherit;
   outline: none;
   resize: none;
@@ -76,7 +75,7 @@ textarea {
 
 input::placeholder,
 textarea::placeholder {
-  color: var(--color-green-transparent);
+  color: var(--color-main-transparent);
 }
 
 .marker {
@@ -97,7 +96,7 @@ textarea::placeholder {
   left: 10px;
   border: solid transparent;
   border-width: 40px 20px;
-  border-top-color: var(--color-green-transparent);
+  border-top-color: var(--color-main-transparent);
 }
 
 .main-header::after {
@@ -111,7 +110,7 @@ button {
   width: 100%;
   padding: 10px;
   border: none;
-  background-color: var(--color-green);
+  background-color: var(--color-main);
   color: var(--color-theme);
 	border-radius: var(--radius-small);
   cursor: pointer;
@@ -124,11 +123,11 @@ button {
   padding: 0;
   background-color: transparent;
   border-radius: 50%;
-  border: 4px solid var(--color-green);
+  border: 4px solid var(--color-main);
 }
 
 .btn--bg {
-  background-color: var(--color-green-transparent);
+  background-color: var(--color-main-transparent);
   border: none;
 }
 
@@ -141,14 +140,14 @@ button {
   left: calc(50% - 10px);
   width: 20px;
   height: 4px;
-  background-color: var(--color-green);
+  background-color: var(--color-main);
   border-radius: 2px;
 }
 
 .btn--menu::before {
   box-shadow:
-    0 6px 0 0 var(--color-green),
-    0 -6px 0 0 var(--color-green);
+    0 6px 0 0 var(--color-main),
+    0 -6px 0 0 var(--color-main);
 }
 
 .btn--search::before {
@@ -158,7 +157,7 @@ button {
   left: 5px;
   width: 20px;
   height: 20px;
-  border: 4px solid var(--color-green);
+  border: 4px solid var(--color-main);
   border-radius: 50%;
 }
 
@@ -169,7 +168,7 @@ button {
   right: 6px;
   width: 8px;
   height: 4px;
-  background-color: var(--color-green);
+  background-color: var(--color-main);
   border-radius: 2px;
   transform: rotate(45deg);
 }
@@ -185,7 +184,7 @@ button {
   left: 3px;
   width: 12px;
   height: 4px;
-  background-color: var(--color-green);
+  background-color: var(--color-main);
   border-radius: 2px;
   transform: rotate(45deg);
 }
@@ -197,7 +196,7 @@ button {
   left: 8px;
   width: 22px;
   height: 4px;
-  background-color: var(--color-green);
+  background-color: var(--color-main);
   border-radius: 2px;
   transform: rotate(-45deg);
 }
@@ -221,18 +220,18 @@ button {
 	height: 40px;
 	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgdmlld0JveD0iMCAwIDQ0OCA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbD0iIzJlOGI1NyIgZD0iTTQ0Ny4xIDI1NkM0NDcuMSAyNzMuNyA0MzMuNyAyODggNDE2IDI4OEgxMDkuM2wxMDUuNCAxMDUuNGMxMi41IDEyLjUgMTIuNSAzMi43NSAwIDQ1LjI1QzIwOC40IDQ0NC45IDIwMC4yIDQ0OCAxOTIgNDQ4cy0xNi4zOC0zLjEyNS0yMi42Mi05LjM3NWwtMTYwLTE2MGMtMTIuNS0xMi41LTEyLjUtMzIuNzUgMC00NS4yNWwxNjAtMTYwYzEyLjUtMTIuNSAzMi43NS0xMi41IDQ1LjI1IDBzMTIuNSAzMi43NSAwIDQ1LjI1TDEwOS4zIDIyNEg0MTZDNDMzLjcgMjI0IDQ0Ny4xIDIzOC4zIDQ0Ny4xIDI1NnoiLz48L3N2Zz4K)
 		no-repeat 50% 50% / 80% auto;
-	border: 4px solid var(--color-green);
+	border: 4px solid var(--color-main);
 	border-radius: 50%;
 }
 
 .btn--delete {
-  background: var(--color-green-transparent)
+  background: var(--color-main-transparent)
     url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaWQ9Ikljb25zIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOiMyZThiNTc7fTwvc3R5bGU+PC9kZWZzPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEzLDBIMTFBMywzLDAsMCwwLDgsM1Y0SDJBMSwxLDAsMCwwLDIsNkgzVjIwYTQsNCwwLDAsMCw0LDRIMTdhNCw0LDAsMCwwLDQtNFY2aDFhMSwxLDAsMCwwLDAtMkgxNlYzQTMsMywwLDAsMCwxMywwWk0xMCwzYTEsMSwwLDAsMSwxLTFoMmExLDEsMCwwLDEsMSwxVjRIMTBabTksMTdhMiwyLDAsMCwxLTIsMkg3YTIsMiwwLDAsMS0yLTJWNkgxOVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xMiw5YTEsMSwwLDAsMC0xLDF2OGExLDEsMCwwLDAsMiwwVjEwQTEsMSwwLDAsMCwxMiw5WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTE1LDE4YTEsMSwwLDAsMCwyLDBWMTBhMSwxLDAsMCwwLTIsMFoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik04LDlhMSwxLDAsMCwwLTEsMXY4YTEsMSwwLDAsMCwyLDBWMTBBMSwxLDAsMCwwLDgsOVoiLz48L3N2Zz4=)
     no-repeat 50% 50% / 70% auto;
 }
 
 .btn--edit {
-  background: var(--color-green-transparent)
+  background: var(--color-main-transparent)
     url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgdmlld0JveD0iMCAwIDk2IDk2IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0aXRsZS8+PGc+PHBhdGggZmlsbD0iIzJlOGI1NyIgZD0iTTc4LDYwYTUuOTk2Niw1Ljk5NjYsMCwwLDAtNiw2Vjg0SDEyVjI0SDMwYTYsNiwwLDAsMCwwLTEySDZhNS45OTY2LDUuOTk2NiwwLDAsMC02LDZWOTBhNS45OTY2LDUuOTk2NiwwLDAsMCw2LDZINzhhNS45OTY2LDUuOTk2NiwwLDAsMCw2LTZWNjZBNS45OTY2LDUuOTk2NiwwLDAsMCw3OCw2MFoiLz48cGF0aCBmaWxsPSIjMmU4YjU3IiBkPSJNOTQuMjQyMiwxMy43NTc4bC0xMi0xMmE1Ljk5NzksNS45OTc5LDAsMCwwLTguNDg0NCwwbC0zNiwzNkE1Ljk5NTgsNS45OTU4LDAsMCwwLDM2LDQyVjU0YTUuOTk2Niw1Ljk5NjYsMCwwLDAsNiw2SDU0YTUuOTk1Niw1Ljk5NTYsMCwwLDAsNC4yNDIyLTEuNzU3OGwzNi0zNkE1Ljk5NzksNS45OTc5LDAsMCwwLDk0LjI0MjIsMTMuNzU3OFpNNTEuNTE1Niw0OEg0OFY0NC40ODQ0bDMwLTMwTDgxLjUxNTYsMThaIi8+PC9nPjwvc3ZnPg==)
     no-repeat 50% 50% / 50% auto;
 }
@@ -252,9 +251,9 @@ button {
   vertical-align: top;
   margin: 5px;
   padding: 10px;
-  background-color: var(--color-green-transparent);
+  background-color: var(--color-main-transparent);
   border-radius: 1.5rem;
-  color: var(--color-green);
+  color: var(--color-main);
   cursor: pointer;
 }
 
@@ -268,12 +267,12 @@ button {
 	top: 18px;
 	right: 10px;
 	padding: 5px 8px;
-	background-color: var(--color-green-transparent);
+	background-color: var(--color-main-transparent);
 	-webkit-backdrop-filter: blur(7px);
   backdrop-filter: blur(7px);
-	border: 4px solid var(--color-green-transparent);
+	border: 4px solid var(--color-main-transparent);
 	border-radius: 20px;
-	color: var(--color-green);
+	color: var(--color-main);
 }
 
 .word__navigation {
@@ -298,7 +297,7 @@ button {
   height: 40px;
   padding: 7px;
   border-radius: 50%;
-  color: var(--color-green);
+  color: var(--color-main);
   font-weight: 700;
   text-align: center;
   text-decoration: none;
@@ -306,7 +305,7 @@ button {
 }
 
 .word__navigation-item a:hover {
-  background-color: var(--color-green-transparent);
+  background-color: var(--color-main-transparent);
   -webkit-backdrop-filter: blur(7px);
   backdrop-filter: blur(7px);
 }
@@ -319,7 +318,7 @@ button {
   max-width: 414px;
   margin-right: 10px;
   padding: 5px;
-  background-color: var(--color-green-transparent);
+  background-color: var(--color-main-transparent);
   -webkit-backdrop-filter: blur(7px);
   backdrop-filter: blur(7px);
   border-radius: 1rem;
@@ -340,7 +339,7 @@ button {
   height: 43px;
   margin: 5px;
   padding: 5px;
-  background-color: var(--color-green);
+  background-color: var(--color-main);
   border-radius: 50%;
   color: var(--color-theme);
   font-size: 1.5rem;
@@ -361,7 +360,7 @@ button {
 .word__details-header,
 .word__details-footer {
   width: calc(100% + 40px);
-  background-color: var(--color-green-transparent);
+  background-color: var(--color-main-transparent);
 }
 
 .word__details-header {
@@ -384,7 +383,7 @@ button {
   align-items: center;
   margin: 0 0 -20px -20px;
   padding: 10px 20px;
-  background-color: var(--color-green-transparent);
+  background-color: var(--color-main-transparent);
   border-radius: 0 0 1rem 1rem;
 }
 
@@ -399,7 +398,7 @@ button {
 .word__message,
 .word__alert {
   padding: 20px;
-  background-color: var(--color-green-transparent);
+  background-color: var(--color-main-transparent);
   border-radius: 1rem;
 }
 
@@ -411,7 +410,7 @@ button {
   position: fixed;
   top: 50%;
   left: 50%;
-  border: 4px solid var(--color-green-transparent);
+  border: 4px solid var(--color-main-transparent);
   transform: translate(-50%, -50%);
 }
 
@@ -426,7 +425,7 @@ button {
   margin: 0 10px 0 50px;
   padding: 20px;
   border-radius: 1rem;
-  background-color: var(--color-green-transparent);
+  background-color: var(--color-main-transparent);
   -webkit-backdrop-filter: blur(7px);
   backdrop-filter: blur(7px);
 }
@@ -434,7 +433,7 @@ button {
 .block {
   padding: 10px;
   margin-bottom: 20px;
-  background-color: var(--color-green-transparent);
+  background-color: var(--color-main-transparent);
   border-radius: var(--radius-small);
 }
 
@@ -444,7 +443,7 @@ button {
 
 .block__title {
   margin-bottom: 10px;
-  border-bottom: 4px solid var(--color-green-transparent);
+  border-bottom: 4px solid var(--color-main-transparent);
   font-weight: 700;
 }
 
@@ -454,7 +453,7 @@ button {
   height: 40px;
   margin: -24px 0 20px auto;
   background-color: transparent;
-  border: 4px solid var(--color-green);
+  border: 4px solid var(--color-main);
   border-radius: 0 0 var(--radius-small) var(--radius-small);
 }
 
@@ -481,7 +480,7 @@ button {
   padding: 20px;
   -webkit-backdrop-filter: blur(7px);
   backdrop-filter: blur(7px);
-  background-color: var(--color-green-transparent);
+  background-color: var(--color-main-transparent);
   border-radius: 1rem;
 }
 
@@ -495,7 +494,7 @@ button {
   align-items: start;
   margin-bottom: 20px;
   padding: 10px;
-  background-color: var(--color-green-transparent);
+  background-color: var(--color-main-transparent);
 	border-radius: var(--radius-small);
 	font-size: .75rem;
 	font-weight: 700;
@@ -504,7 +503,7 @@ button {
 .game__word {
   margin-bottom: 20px;
   padding: 20px;
-  border: 4px solid var(--color-green);
+  border: 4px solid var(--color-main);
 	border-radius: var(--radius-small);
   text-align: center;
 	text-shadow: 0 0 10px var(--color-black);

@@ -40,17 +40,17 @@ app.get('/', (req, res) => {
 			<link rel="stylesheet" href="/main.css" />
 			<link rel="manifest" href="/manifest.json">
 			<script src="/htmx.js" defer></script>
+			<style>
+				:root {
+					--color-theme: ${currentTheme};
+				}
+			</style>
 		</head>
 
 		<body>
 			${renderHeader()}
 			<main hx-swap="innerHTML" hx-get="/words" hx-trigger="load"></main>
 			${renderFooter()}
-			<script>
-				document.querySelector('html').style.setProperty("--color-theme", "${
-					req.query.theme || 'black'
-				}");
-			</script>
 		</body>
 		</html>
 	`);
@@ -60,11 +60,18 @@ app.get('/switch-theme', (req, res) => {
 	const newTheme = currentTheme === DARK_THEME ? LIGHT_THEME : DARK_THEME;
 	appData.settings.theme = newTheme;
 	writeData(appData);
-	res.redirect(`/?theme=${newTheme}`);
+	res.send(`
+		<style>
+			:root {
+				--color-theme: ${newTheme};
+			}
+		</style>
+	`);
 });
 
 app.get('/words', (req, res) => {
-	res.send(renderWords(appData.words));
+	console.log('WORDS');
+	res.send(renderWords(appData, req));
 });
 
 app.get('/words/:id', (req, res) => {
