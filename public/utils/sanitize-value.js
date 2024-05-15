@@ -1,5 +1,4 @@
 export default function sanitizeValue(val) {
-	console.log('SANITIZE: ', val);
 	if (Array.isArray(val)) {
 		return (
 			val

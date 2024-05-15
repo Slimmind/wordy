@@ -16,8 +16,10 @@ import sanitizeValue from './public/utils/sanitize-value.js';
 import renderPhrasesList from './public/utils/render-phrases-list.js';
 import renderMainMenu from './public/utils/render-main-menu.js';
 import renderGame from './public/utils/render-game.js';
+import { DARK_THEME, LIGHT_THEME } from './public/utils/constants.js';
 
-const appData = readData() || [];
+const appData = readData() || {};
+const currentTheme = appData.settings.theme;
 
 const app = express();
 
@@ -44,26 +46,38 @@ app.get('/', (req, res) => {
 			${renderHeader()}
 			<main hx-swap="innerHTML" hx-get="/words" hx-trigger="load"></main>
 			${renderFooter()}
+			<script>
+				document.querySelector('html').style.setProperty("--color-theme", "${
+					req.query.theme || 'black'
+				}");
+			</script>
 		</body>
 		</html>
 	`);
 });
 
+app.get('/switch-theme', (req, res) => {
+	const newTheme = currentTheme === DARK_THEME ? LIGHT_THEME : DARK_THEME;
+	appData.settings.theme = newTheme;
+	writeData(appData);
+	res.redirect(`/?theme=${newTheme}`);
+});
+
 app.get('/words', (req, res) => {
-	res.send(renderWords(appData));
+	res.send(renderWords(appData.words));
 });
 
 app.get('/words/:id', (req, res) => {
-	const word = appData.find((word) => word.id === req.params.id);
+	const word = appData.words.find((word) => word.id === req.params.id);
 
 	res.send(`
     ${renderBackButton()}
-		${renderWordDetails(appData, word)}
+		${renderWordDetails(appData.words, word)}
 	`);
 });
 
 app.get('/edit-word/:id', (req, res) => {
-	const wordToEdit = appData.find((word) => word.id === req.params.id);
+	const wordToEdit = appData.words.find((word) => word.id === req.params.id);
 
 	res.send(`
     ${renderBackButton()}
@@ -74,14 +88,14 @@ app.get('/edit-word/:id', (req, res) => {
 app.put('/edit-word/:id', (req, res) => {
 	const { id } = req.params;
 	const { original, translations, synonyms } = req.body;
-	const editingWordIndex = appData.findIndex((word) => word.id === id);
+	const editingWordIndex = appData.words.findIndex((word) => word.id === id);
 	const letter = sanitizeValue(original.charAt(0));
 	const updatedOriginal = sanitizeValue(original);
 	const updatedTranslations = sanitizeValue(translations.split(', '));
 	const updatedSynonyms = sanitizeValue(synonyms.split(', '));
 
 	const updatedWord = {
-		...appData[editingWordIndex],
+		...appData.words[editingWordIndex],
 		letter,
 		original: updatedOriginal,
 		translations: updatedTranslations,
@@ -89,15 +103,18 @@ app.put('/edit-word/:id', (req, res) => {
 		examples: getExamples(req.body),
 	};
 
-	appData[editingWordIndex] = updatedWord;
+	appData.words[editingWordIndex] = updatedWord;
 	writeData(appData);
 
-	res.status(200).send(renderWords(appData));
+	res.status(200).send(renderWords(appData.words));
 });
 
 app.delete('/words/:id', (req, res) => {
-	const filteredWords = appData.filter((word) => word.id !== req.params.id);
-	writeData(filteredWords);
+	const filteredWords = appData.words.filter(
+		(word) => word.id !== req.params.id
+	);
+	appData.words = filteredWords;
+	writeData(appData);
 	res.send(renderWords(filteredWords));
 });
 
@@ -134,7 +151,7 @@ app.post('/add-word', (req, res) => {
 		examples: getExamples(req.body),
 	};
 
-	const isNewWordAlreadyExist = appData.find(
+	const isNewWordAlreadyExist = appData.words.find(
 		(word) => word.original === newWord.original
 	);
 
@@ -149,10 +166,10 @@ app.post('/add-word', (req, res) => {
 		);
 	}
 
-	appData.push(newWord);
+	appData.words.push(newWord);
 	writeData(appData);
 
-	res.send(renderWords(appData));
+	res.send(renderWords(appData.words));
 });
 
 app.get('/add-example', (req, res) => {
@@ -173,7 +190,7 @@ app.post('/search', (req, res) => {
 	let searchResults;
 
 	if (searchTerm) {
-		searchResults = appData.filter((word) =>
+		searchResults = appData.words.filter((word) =>
 			word.original.startsWith(searchTerm)
 		);
 		return res.send(renderSearchResults(searchResults));
@@ -189,12 +206,14 @@ app.get('/menu', (req, res) => {
 app.get('/phrases', (req, res) => {
 	res.send(`
     ${renderBackButton()}
-    ${renderPhrasesList(appData)}
+    ${renderPhrasesList(appData.words)}
   `);
 });
 
 app.get('/game', (req, res) => {
-	const currentWord = appData.find((word) => word.id === req.query.wordId);
+	const currentWord = appData.words.find(
+		(word) => word.id === req.query.wordId
+	);
 	let gameScore = parseInt(req.query.score) || 0;
 	let gameTotal = parseInt(req.query.total) || 0;
 	if (currentWord && currentWord.translations.includes(req.query.variant)) {
@@ -209,7 +228,7 @@ app.get('/game', (req, res) => {
 
 	res.send(`
     ${renderBackButton()}
-    ${renderGame(appData, data)}
+    ${renderGame(appData.words, data)}
   `);
 });
 

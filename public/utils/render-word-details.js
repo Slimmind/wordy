@@ -30,7 +30,7 @@ export default function renderWordDetails(words, currentWord) {
 		if (!!translations?.length) {
 			const preparedTranslations = translations.filter((item) => item !== '');
 			return `
-        <div class="word__details-translations block">
+        <div class="word__details block">
           <h3 class="block__title">Translations: </h3>
           <ul class="word__details-list marker">${preparedTranslations
 						.map(
@@ -50,7 +50,7 @@ export default function renderWordDetails(words, currentWord) {
 		if (!!synonyms?.length) {
 			const preparedSynonyms = synonyms.filter((item) => item !== '');
 			return `
-        <div class="word__details-synonyms block">
+        <div class="word__details block">
           <h3 class="block__title">Synonyms: </h3>
           <ul class="word__details-list marker">${preparedSynonyms
 						.map(
