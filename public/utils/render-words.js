@@ -1,12 +1,14 @@
-export default function renderWords(words) {
-	const lettersArray = [...new Set(words.map(({ letter }) => letter))].sort();
+export default function renderWords(data, req) {
+	const lettersArray = [
+		...new Set(data.words.map(({ letter }) => letter)),
+	].sort();
 	const groupedWords = [];
 	lettersArray.forEach((letter) =>
-		groupedWords.push(words.filter((word) => word.letter === letter))
+		groupedWords.push(data.words.filter((word) => word.letter === letter))
 	);
 	const getWordsAmount = () => {
-		return !!words.length
-			? `<strong class="word__amount">Words: ${words.length}</strong>`
+		return !!data.words.length
+			? `<strong class="word__amount">Words: ${data.words.length}</strong>`
 			: null;
 	};
 
@@ -28,7 +30,7 @@ export default function renderWords(words) {
 					(letter) => `
 					<li class="word__group-wrap">
 						<ul id="${letter}" class="word__group" data-letter="${letter}">
-							${words
+							${data.words
 								.filter((word) => word.letter === letter)
 								.map(
 									(word) => `
@@ -43,5 +45,11 @@ export default function renderWords(words) {
 			`
 				)
 				.join('')}
-	</ul>`;
+		</ul>
+		<script>
+			document.querySelector('html').style.setProperty("--color-theme", "${
+				req.query.theme || data.settings.theme
+			}");
+		</script>
+	`;
 }

@@ -46,11 +46,6 @@ app.get('/', (req, res) => {
 			${renderHeader()}
 			<main hx-swap="innerHTML" hx-get="/words" hx-trigger="load"></main>
 			${renderFooter()}
-			<script>
-				document.querySelector('html').style.setProperty("--color-theme", "${
-					req.query.theme || 'black'
-				}");
-			</script>
 		</body>
 		</html>
 	`);
@@ -60,11 +55,12 @@ app.get('/switch-theme', (req, res) => {
 	const newTheme = currentTheme === DARK_THEME ? LIGHT_THEME : DARK_THEME;
 	appData.settings.theme = newTheme;
 	writeData(appData);
-	res.redirect(`/?theme=${newTheme}`);
+	res.redirect(`/words?theme=${newTheme}`);
 });
 
 app.get('/words', (req, res) => {
-	res.send(renderWords(appData.words));
+	console.log('WORDS');
+	res.send(renderWords(appData, req));
 });
 
 app.get('/words/:id', (req, res) => {
