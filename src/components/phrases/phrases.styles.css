@@ -1,0 +1,14 @@
+.phrases {
+  max-height: 100%;
+  overflow-y: auto;
+  list-style: decimal;
+  list-style-position: inside;
+}
+
+.phrase:last-of-type {
+  margin-bottom: 0;
+}
+
+.phrase::first-letter {
+  text-transform: uppercase;
+}

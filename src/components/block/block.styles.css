@@ -1,0 +1,16 @@
+.block {
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: var(--color-main-transparent);
+  border-radius: var(--radius-small);
+}
+
+.block:last-of-type {
+	margin-bottom: 0;
+}
+
+.block__title {
+  margin-bottom: 10px;
+  border-bottom: 4px solid var(--color-main-transparent);
+  font-weight: 700;
+}

@@ -1,0 +1,37 @@
+.word__group-wrap {
+  display: inline-block;
+  vertical-align: top;
+  flex-shrink: 0;
+  width: 80vw;
+  max-width: 414px;
+  margin-right: 10px;
+  padding: 5px;
+  background-color: var(--color-main-transparent);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
+  border-radius: 1rem;
+  scroll-snap-align: start;
+}
+
+.word__group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.word__group::before {
+  content: attr(data-letter);
+  display: inline-block;
+  vertical-align: top;
+  flex-shrink: 0;
+  width: 43px;
+  height: 43px;
+  margin: 5px;
+  padding: 5px;
+  background-color: var(--color-main);
+  border-radius: 50%;
+  color: var(--color-black);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+}

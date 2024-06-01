@@ -1,0 +1,22 @@
+.internal-window {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.internal-window__content {
+  height: 100%;
+  max-height: 100%;
+  margin: 0 10px 0 50px;
+  padding: 20px;
+  border-radius: 1rem;
+  background-color: var(--color-main-transparent);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
+  overflow: auto;
+}
+
+.internal-window__back-btn {
+  
+}
+
