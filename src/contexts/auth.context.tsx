@@ -12,15 +12,16 @@ import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 	signOut,
-  User,
+	User,
+	UserCredential,
 } from 'firebase/auth';
 
 // Create a type for the auth context data
 type AuthContextType = {
 	currentUser: User | null;
-	login: (email: string, password: string) => Promise<void>;
-	signup: (email: string, password: string) => Promise<void>;
-	loginWithGoogle: () => Promise<void>;
+	login: (email: string, password: string) => Promise<UserCredential>;
+	signup: (email: string, password: string) => Promise<UserCredential>;
+	loginWithGoogle: () => Promise<UserCredential>;
 	logout: () => Promise<void>;
 };
 
@@ -37,12 +38,12 @@ export const useAuth = () => useContext(AuthContext);
 // Auth provider component
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+	const [loading, setLoading] = useState<boolean>(true);
 
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged((user) => {
 			setCurrentUser(user);
-      setLoading(false);
+			setLoading(false);
 		});
 
 		return unsubscribe;
@@ -73,5 +74,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		logout,
 	};
 
-	return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
+	return (
+		<AuthContext.Provider value={value}>
+			{!loading && children}
+		</AuthContext.Provider>
+	);
 };

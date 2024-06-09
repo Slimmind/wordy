@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useAuth } from '../../contexts/auth.context';
 import { Link } from '@tanstack/react-router';
 import { Button } from '../button/Button';
 import './footer.styles.css';
 import MainMenu from '../main-menu';
 
 export const Footer = () => {
+  const {currentUser} = useAuth();
 	const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
 
 	function switchMenuVisibility(): void {
@@ -23,11 +25,13 @@ export const Footer = () => {
 				aria-label='menu button'
 				onClick={switchMenuVisibility}
 			/>
-			<Link
-				to='/add-word'
-				className='btn btn--circle btn--add'
-				aria-label='add word button'
-			/>
+      {currentUser?.email && (
+        <Link
+          to='/add-word'
+          className='btn btn--circle btn--add'
+          aria-label='add word button'
+        />
+      )}
 		</footer>
 	);
 };

@@ -17,23 +17,39 @@ import { Route as IndexImport } from './routes/index'
 
 // Create Virtual Routes
 
+const UpdateProfileLazyImport = createFileRoute('/update-profile')()
+const SignupLazyImport = createFileRoute('/signup')()
 const SearchLazyImport = createFileRoute('/search')()
-const RegisterLazyImport = createFileRoute('/register')()
+const ProfileLazyImport = createFileRoute('/profile')()
 const PhrasesLazyImport = createFileRoute('/phrases')()
 const LoginLazyImport = createFileRoute('/login')()
 const AddWordLazyImport = createFileRoute('/add-word')()
+const WordsIndexLazyImport = createFileRoute('/words/')()
+const WordsWordIdLazyImport = createFileRoute('/words/$wordId')()
 
 // Create/Update Routes
+
+const UpdateProfileLazyRoute = UpdateProfileLazyImport.update({
+  path: '/update-profile',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/update-profile.lazy').then((d) => d.Route),
+)
+
+const SignupLazyRoute = SignupLazyImport.update({
+  path: '/signup',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/signup.lazy').then((d) => d.Route))
 
 const SearchLazyRoute = SearchLazyImport.update({
   path: '/search',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/search.lazy').then((d) => d.Route))
 
-const RegisterLazyRoute = RegisterLazyImport.update({
-  path: '/register',
+const ProfileLazyRoute = ProfileLazyImport.update({
+  path: '/profile',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/register.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/profile.lazy').then((d) => d.Route))
 
 const PhrasesLazyRoute = PhrasesLazyImport.update({
   path: '/phrases',
@@ -55,6 +71,16 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const WordsIndexLazyRoute = WordsIndexLazyImport.update({
+  path: '/words/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/words/index.lazy').then((d) => d.Route))
+
+const WordsWordIdLazyRoute = WordsWordIdLazyImport.update({
+  path: '/words/$wordId',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/words/$wordId.lazy').then((d) => d.Route))
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -75,12 +101,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PhrasesLazyImport
       parentRoute: typeof rootRoute
     }
-    '/register': {
-      preLoaderRoute: typeof RegisterLazyImport
+    '/profile': {
+      preLoaderRoute: typeof ProfileLazyImport
       parentRoute: typeof rootRoute
     }
     '/search': {
       preLoaderRoute: typeof SearchLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/signup': {
+      preLoaderRoute: typeof SignupLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/update-profile': {
+      preLoaderRoute: typeof UpdateProfileLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/words/$wordId': {
+      preLoaderRoute: typeof WordsWordIdLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/words/': {
+      preLoaderRoute: typeof WordsIndexLazyImport
       parentRoute: typeof rootRoute
     }
   }
@@ -93,8 +135,12 @@ export const routeTree = rootRoute.addChildren([
   AddWordLazyRoute,
   LoginLazyRoute,
   PhrasesLazyRoute,
-  RegisterLazyRoute,
+  ProfileLazyRoute,
   SearchLazyRoute,
+  SignupLazyRoute,
+  UpdateProfileLazyRoute,
+  WordsWordIdLazyRoute,
+  WordsIndexLazyRoute,
 ])
 
 /* prettier-ignore-end */

@@ -12,6 +12,10 @@
   --color-black: black;
   --color-main: #2e8b57;
   --color-main-transparent: rgba(46, 139, 87, 0.3);
+  --color-red: maroon;
+  --color-red-transparent: rgba(128, 0, 0, 0.3);
+  --color-blue: darkcyan;
+  --color-blue-transparent: rgba(0, 139, 139, 0.3);
   --radius-small: 4px;
 	--border-width: 4px;
 }
@@ -59,11 +63,11 @@ a {
   color: var(--color-main);
 }
 
-h2, p {
+p {
   margin-bottom: 20px;
 }
 
-ul, ol, menu {
+ul, menu {
   list-style: none;
 }
 
@@ -82,4 +86,13 @@ button {
 .marker {
 	list-style-type: disc;
 	list-style-position: inside;
+}
+
+.centered {
+  text-align: center;
+}
+
+.underlined {
+  text-decoration: underline;
+  cursor: pointer;
 }

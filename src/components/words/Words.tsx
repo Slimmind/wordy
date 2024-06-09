@@ -6,6 +6,7 @@ import WordGroup from '../word-group';
 
 export const Words = () => {
 	const { words } = useFirestore();
+	console.log('WORDS: ', words);
 	const letters = useMemo(
 		() => [...new Set(words.map((word: WordType) => word.letter))].sort(),
 		[words]

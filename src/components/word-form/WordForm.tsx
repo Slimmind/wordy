@@ -1,24 +1,25 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { nanoid } from 'nanoid';
 import { useFirestore } from '../../contexts/firestore.context';
-import { WordDetail } from '../../utils/constants';
+import { useNavigate } from '@tanstack/react-router';
+import { type WordDetail } from '../../utils/constants';
+import InternalWindow from '../internal-window';
 import Button from '../button';
 import Input from '../input';
-import InternalWindow from '../internal-window';
 import './word-form.styles.css';
 
 export const WordForm = () => {
 	const { addWord } = useFirestore();
+	const navigate = useNavigate();
 	const [original, setOriginal] = useState<string>('');
 
 	const [synonyms, setSynonyms] = useState<WordDetail[]>([
-		{ id: nanoid(), value: 'TEST' },
+		{ id: 'synonym-1', value: '' },
 	]);
 	const [translations, setTranslations] = useState<WordDetail[]>([
-		{ id: nanoid(), value: '' },
+		{ id: 'translation-1', value: '' },
 	]);
 	const [examples, setExamples] = useState<WordDetail[]>([
-		{ id: nanoid(), value: '' },
+		{ id: 'example-1', value: '' },
 	]);
 
 	const handleAddField = (
@@ -46,7 +47,7 @@ export const WordForm = () => {
 		const { value } = event.target;
 		setField((prevFields) =>
 			prevFields.map((field, i) =>
-				i === index ? { ...field, value: value.toLowerCase() } : field
+				i === index ? { ...field, value: value } : field
 			)
 		);
 	};
@@ -54,9 +55,8 @@ export const WordForm = () => {
 	const submitForm = (event: FormEvent) => {
 		event.preventDefault();
 		const newWord = {
-			id: nanoid(),
-			original,
-			letter: original.charAt(0),
+			original: original.toLowerCase(),
+			letter: original.charAt(0).toLowerCase(),
 			synonyms,
 			translations,
 			examples,
@@ -64,12 +64,12 @@ export const WordForm = () => {
 
 		console.log('NEW_WORD: ', newWord);
 		addWord(newWord);
+		navigate({ to: '/' });
 	};
 
 	return (
-		<InternalWindow>
+		<InternalWindow title='Add Word'>
 			<form className='word-form' onSubmit={submitForm}>
-				<h2>Add word</h2>
 				<Input
 					id='original'
 					placeholder='Word...'

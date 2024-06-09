@@ -1,17 +1,20 @@
-import { WordType } from "../../utils/constants";
+import { Link } from '@tanstack/react-router';
+import { WordType } from '../../utils/constants';
 import './word.styles.css';
 
 type WordProps = {
-  word: WordType;
-}
+	word: WordType;
+};
 
 export const Word = ({ word }: WordProps) => {
-  const open = () => {
-    console.log('WORD: ', word);
-  }
-  return (
-    <li id={word.id} className="word">
-      <strong onClick={open}>{word.original}</strong>
-    </li>
-  );
-}
+	const { id, original } = word;
+	// console.log('WORD: ', word);
+
+	return (
+		<li id={id} className='word'>
+			<Link to={`/words/${id}`} params={{ wordId: id }}>
+				<strong>{original}</strong>
+			</Link>
+		</li>
+	);
+};

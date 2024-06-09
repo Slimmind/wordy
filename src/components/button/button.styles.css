@@ -15,15 +15,19 @@
 .btn--wide {
 	display: block;
 	width: 100%;
+  margin-bottom: 20px;
 }
 
 .btn--bordered,
 .btn--circle {
+	display: inline-block;
+	vertical-align: top;
 	width: 40px;
 	height: 40px;
 	padding: 0;
 	background-color: transparent;
 	border: var(--border-width) solid var(--color-main);
+  overflow: hidden;
 }
 
 .btn--circle {
@@ -101,6 +105,29 @@
 	background-color: var(--color-main);
 	border-radius: 2px;
 	transform: rotate(-45deg);
+}
+
+.btn--profile::before,
+.btn--profile::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  border: var(--border-width) solid var(--color-main);
+  border-radius: 50%;
+  /* background-color: var(--color-main); */
+  transform: translateX(-50%);
+}
+
+.btn--profile::before {
+  width: 100%;
+  height: 100%;
+  top: 18px;
+}
+
+.btn--profile::after {
+  width: 16px;
+  height: 16px;
+  top: 6px;
 }
 
 .btn--back {

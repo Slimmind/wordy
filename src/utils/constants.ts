@@ -1,10 +1,10 @@
 export type WordDetail = {
-	id: string;
-	value: string;
+	id?: string;
+	value?: string;
 };
 
 export type WordType = {
-	id: string;
+	id?: string;
 	letter: string;
 	original: string;
 	synonyms: WordDetail[];

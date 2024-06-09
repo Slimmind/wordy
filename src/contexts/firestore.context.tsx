@@ -12,6 +12,7 @@ import {
 	deleteDoc,
 	updateDoc,
 	doc,
+	getDoc,
 } from 'firebase/firestore'; // Import necessary Firestore functions
 import db from '../firebase';
 import { SettingsType, WordType } from '../utils/constants';
@@ -19,9 +20,10 @@ import { SettingsType, WordType } from '../utils/constants';
 interface FirestoreContextType {
 	settings: SettingsType;
 	words: WordType[];
+	readWord: (wordId: string) => Promise<WordType | undefined>;
 	addWord: (word: WordType) => Promise<void>;
 	deleteWord: (wordId: string) => Promise<void>;
-	updateWord: (wordId: string, updatedWord: Partial<WordType>) => Promise<void>;
+	changeWord: (wordId: string, updatedWord: Partial<WordType>) => Promise<void>;
 }
 
 const FirestoreContext = createContext<FirestoreContextType | undefined>(
@@ -66,24 +68,31 @@ export const FirestoreProvider: React.FC<FirestoreProviderProps> = ({
 		};
 	}, []);
 
-	// Add a new word to Firestore
+	const readWord = async (wordId: string) => {
+		const wordRef = doc(db, 'words', wordId);
+		const wordSnapshot = await getDoc(wordRef);
+		if (wordSnapshot.exists()) {
+			return { id: wordSnapshot.id, ...wordSnapshot.data() } as WordType;
+		} else {
+			console.log('No such document!');
+		}
+	};
+
 	const addWord = async (word: WordType) => {
 		await addDoc(collection(db, 'words'), word);
 	};
 
-	// Delete a word from Firestore
 	const deleteWord = async (wordId: string) => {
 		await deleteDoc(doc(db, 'words', wordId));
 	};
 
-	// Update a word in Firestore
-	const updateWord = async (wordId: string, updatedWord: Partial<WordType>) => {
+	const changeWord = async (wordId: string, updatedWord: Partial<WordType>) => {
 		await updateDoc(doc(db, 'words', wordId), updatedWord);
 	};
 
 	return (
 		<FirestoreContext.Provider
-			value={{ settings, words, addWord, deleteWord, updateWord }}
+			value={{ settings, words, readWord, addWord, deleteWord, changeWord }}
 		>
 			{children}
 		</FirestoreContext.Provider>
