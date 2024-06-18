@@ -1,0 +1,6 @@
+.main-footer {
+	position: relative;
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 10px 30px;
+}

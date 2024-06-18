@@ -1,0 +1,33 @@
+.main-menu {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	padding: 20px;
+	background-color: var(--color-main-transparent);
+	background: var(--color-theme)
+    repeating-linear-gradient(
+      45deg,
+      var(--color-main-transparent),
+      var(--color-main-transparent) 10px,
+      var(--color-theme) 10px,
+      var(--color-theme) 20px
+    );
+	border: var(--border-width) solid var(--color-main);
+	transition: transform .2s, opacity .2s;
+	opacity: 0;
+  z-index: -1;
+}
+
+.main-menu--visible {
+	opacity: 1;
+	transform: translateY(-90px);
+  z-index: 1;
+}
+
+.main-menu__item {
+	margin-bottom: 20px;
+}
+
+.main-menu__item:last-child {
+	margin-bottom: 0;
+}
