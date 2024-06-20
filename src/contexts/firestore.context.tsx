@@ -15,10 +15,9 @@ import {
 	getDoc,
 } from 'firebase/firestore'; // Import necessary Firestore functions
 import db from '../firebase';
-import { SettingsType, WordType } from '../utils/constants';
+import { WordType } from '../utils/constants';
 
 interface FirestoreContextType {
-	settings: SettingsType;
 	words: WordType[];
 	readWord: (wordId: string) => Promise<WordType | undefined>;
 	addWord: (word: WordType) => Promise<void>;
@@ -37,10 +36,6 @@ type FirestoreProviderProps = {
 export const FirestoreProvider: React.FC<FirestoreProviderProps> = ({
 	children,
 }) => {
-	const [settings, setSettings] = useState<SettingsType>({
-		theme: 'black',
-		color: 'seagreen',
-	});
 	const [words, setWords] = useState<WordType[]>([]);
 
 	useEffect(() => {
@@ -50,21 +45,8 @@ export const FirestoreProvider: React.FC<FirestoreProviderProps> = ({
 			);
 		});
 
-		const unsubscribeSettings = onSnapshot(
-			collection(db, 'settings'),
-			(snapshot) => {
-				const settingsData = snapshot.docs.map(
-					(doc) => doc.data() as SettingsType
-				);
-				if (settingsData.length > 0) {
-					setSettings(settingsData[0]);
-				}
-			}
-		);
-
 		return () => {
 			unsubscribeWords();
-			unsubscribeSettings();
 		};
 	}, []);
 
@@ -92,7 +74,13 @@ export const FirestoreProvider: React.FC<FirestoreProviderProps> = ({
 
 	return (
 		<FirestoreContext.Provider
-			value={{ settings, words, readWord, addWord, deleteWord, changeWord }}
+			value={{
+				words,
+				readWord,
+				addWord,
+				deleteWord,
+				changeWord,
+			}}
 		>
 			{children}
 		</FirestoreContext.Provider>

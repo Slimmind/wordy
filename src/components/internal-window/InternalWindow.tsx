@@ -1,6 +1,7 @@
 import { PropsWithChildren } from 'react';
-import './internal-window.styles.css';
 import { Link } from '@tanstack/react-router';
+import getMod from '../../utils/get-mod';
+import './internal-window.styles.css';
 
 type InternalWindowProps = {
 	title?: string;
@@ -12,7 +13,9 @@ export const InternalWindow = ({
 	title,
 	children,
 }: InternalWindowProps) => (
-	<section className={`internal-window ${mod}`}>
+	<section
+		className={`internal-window ${mod && getMod('internal-window', mod)}`}
+	>
 		<Link to='/' className='internal-window__back-btn btn--circle btn--back' />
 		<div className='internal-window__wrapper'>
 			{!!title && (

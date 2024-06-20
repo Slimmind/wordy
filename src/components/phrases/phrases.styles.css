@@ -1,6 +1,5 @@
 .phrases {
   max-height: 100%;
-  overflow-y: auto;
   list-style: decimal;
   list-style-position: inside;
 }

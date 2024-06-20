@@ -46,7 +46,9 @@ export const LoginForm = () => {
 				<p>
 					Need an account? <Link to='/signup'>Sign Up</Link>
 				</p>
-				<Button mod='btn--wide' type='submit'>Log In</Button>
+				<Button mod='wide' type='submit'>
+					Log In
+				</Button>
 			</form>
 		</InternalWindow>
 	);

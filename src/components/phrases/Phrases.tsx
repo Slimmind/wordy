@@ -12,12 +12,14 @@ export const Phrases: React.FC = () => {
 		return words.flatMap((word: WordType) => word.examples);
 	}, [words]);
 
+	console.log('PHRASES: ', phrases);
+
 	return (
-		<InternalWindow>
+		<InternalWindow mod='phrases'>
 			<ul className='phrases'>
-				{phrases.map((phrase: WordDetail) => (
-					<Block tag='li' key={phrase.id}>
-						{phrase.value}
+				{phrases.map((phrase: WordDetail, idx: number) => (
+					<Block tag='li' key={idx}>
+						{phrase?.value}
 					</Block>
 				))}
 			</ul>

@@ -1,5 +1,17 @@
 .word-form .btn--add {
 	display: block;
+	width: 32px;
+	height: 32px;
 	margin: -24px 0 20px auto;
+	background-color: var(--color-bg);
 	border-radius: 4px 0 4px 4px;
+}
+
+.word-form .btn--add::before,
+.word-form .btn--add::after {
+	background-color: var(--color-main);
+}
+
+.word-form .btn--wide {
+	margin-bottom: 0;
 }

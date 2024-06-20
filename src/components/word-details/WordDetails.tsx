@@ -14,7 +14,6 @@ export const WordDetails = () => {
 		from: '/words/$wordId',
 		select: (params) => params.wordId,
 	});
-	console.log('ID: ', wordId);
 	const [word, setWord] = useState<WordType>();
 	const { readWord, deleteWord } = useFirestore();
 
@@ -60,7 +59,7 @@ export const WordDetails = () => {
 				)}
 				{!!currentUser?.email && (
 					<footer className='internal-window__footer'>
-						<Button mod='btn--circle btn--delete' onClick={deleteHandler} />
+						<Button mod='circle delete' onClick={deleteHandler} />
 						<Link className='btn btn--circle btn--edit'></Link>
 					</footer>
 				)}

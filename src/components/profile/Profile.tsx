@@ -39,12 +39,9 @@ export const Profile = () => {
 			<p className='centered underlined' onClick={handleLogOut}>
 				Log Out
 			</p>
-			<Alert title='SUCCESS!'>Success</Alert>
+			<Alert title='ALERT!'>Common Alert</Alert>
 			<Alert type='error' title='ERROR!'>
 				Error
-			</Alert>
-			<Alert type='info' title='INFO!'>
-				Info
 			</Alert>
 		</InternalWindow>
 	);

@@ -20,11 +20,13 @@
 	background-color: var(--color-main-transparent);
 	margin-bottom: 10px;
 	padding: 10px;
+	color: var(--color-main);
+	text-shadow: 2px 2px var(--color-white-transparent);
 }
 
 .internal-window__content {
 	flex-grow: 1;
-	max-height: calc(100% - 75px);
+	max-height: calc(100% - 65px);
 	padding: 10px;
 	overflow: auto;
 }
@@ -46,6 +48,10 @@
 	width: 100%;
 	padding: 10px;
 	background-color: var(--color-main-transparent);
+}
+
+.internal-window .block {
+	background-color: var(--color-main-transparent-2);
 }
 
 .internal-window__back-btn {

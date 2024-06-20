@@ -10,6 +10,7 @@ export type WordType = {
 	synonyms: WordDetail[];
 	translations: WordDetail[];
 	examples: WordDetail[];
+	creator?: string;
 };
 
 export type SettingsType = {
@@ -21,3 +22,6 @@ export type AppDataType = {
 	settings: SettingsType;
 	words: WordType[];
 };
+
+export const THEME_DARK = 'dark';
+export const THEME_LIGHT = 'light';

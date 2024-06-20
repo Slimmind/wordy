@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { nanoid } from 'nanoid';
 import { useFirestore } from '../../contexts/firestore.context';
 import { useNavigate } from '@tanstack/react-router';
 import { type WordDetail } from '../../utils/constants';
@@ -6,36 +7,33 @@ import InternalWindow from '../internal-window';
 import Button from '../button';
 import Input from '../input';
 import './word-form.styles.css';
+import { useAuth } from '../../contexts/auth.context';
 
 export const WordForm = () => {
 	const { addWord } = useFirestore();
+	const { currentUser } = useAuth();
 	const navigate = useNavigate();
 	const [original, setOriginal] = useState<string>('');
 
 	const [synonyms, setSynonyms] = useState<WordDetail[]>([
-		{ id: 'synonym-1', value: '' },
+		{ id: nanoid(), value: '' },
 	]);
 	const [translations, setTranslations] = useState<WordDetail[]>([
-		{ id: 'translation-1', value: '' },
+		{ id: nanoid(), value: '' },
 	]);
 	const [examples, setExamples] = useState<WordDetail[]>([
-		{ id: 'example-1', value: '' },
+		{ id: nanoid(), value: '' },
 	]);
 
 	const handleAddField = (
-		setField: React.Dispatch<React.SetStateAction<WordDetail[]>>,
-		prefix: string
+		setField: React.Dispatch<React.SetStateAction<WordDetail[]>>
 	) => {
-		setField((prevFields) => [
-			...prevFields,
-			{ id: `${prefix}-${prevFields.length + 1}`, value: '' },
-		]);
+		setField((prevFields) => [...prevFields, { id: nanoid(), value: '' }]);
 	};
 
 	const handleOriginalChange = (
 		event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 	) => {
-		console.log('TEST: ', event.target.value);
 		setOriginal(event.target.value.toLowerCase());
 	};
 
@@ -60,9 +58,9 @@ export const WordForm = () => {
 			synonyms,
 			translations,
 			examples,
+			creator: currentUser?.uid,
 		};
 
-		console.log('NEW_WORD: ', newWord);
 		addWord(newWord);
 		navigate({ to: '/' });
 	};
@@ -72,6 +70,7 @@ export const WordForm = () => {
 			<form className='word-form' onSubmit={submitForm}>
 				<Input
 					id='original'
+					label='Word'
 					placeholder='Word...'
 					value={original}
 					onChange={(event) => handleOriginalChange(event)}
@@ -81,6 +80,7 @@ export const WordForm = () => {
 					<Input
 						key={synonym.id}
 						id={synonym.id}
+						label='Synonym'
 						placeholder='Synonym...'
 						value={synonym.value}
 						onChange={(event) => handleInputChange(event, index, setSynonyms)}
@@ -88,14 +88,15 @@ export const WordForm = () => {
 				))}
 				<Button
 					type='button'
-					mod='btn--add btn--bordered'
-					onClick={() => handleAddField(setSynonyms, 'synonym')}
+					mod='add bordered'
+					onClick={() => handleAddField(setSynonyms)}
 				></Button>
 
 				{translations.map((translation, index) => (
 					<Input
 						key={translation.id}
 						id={translation.id}
+						label='Translation'
 						placeholder='Translation...'
 						value={translation.value}
 						onChange={(event) =>
@@ -105,8 +106,8 @@ export const WordForm = () => {
 				))}
 				<Button
 					type='button'
-					mod='btn--add btn--bordered'
-					onClick={() => handleAddField(setTranslations, 'translation')}
+					mod='add bordered'
+					onClick={() => handleAddField(setTranslations)}
 				></Button>
 
 				{examples.map((example, index) => (
@@ -114,6 +115,7 @@ export const WordForm = () => {
 						key={example.id}
 						type='textarea'
 						id={example.id}
+						label='Example'
 						placeholder='Example...'
 						value={example.value}
 						onChange={(event) => handleInputChange(event, index, setExamples)}
@@ -121,11 +123,11 @@ export const WordForm = () => {
 				))}
 				<Button
 					type='button'
-					mod='btn--add btn--bordered'
-					onClick={() => handleAddField(setExamples, 'example')}
+					mod='add bordered'
+					onClick={() => handleAddField(setExamples)}
 				></Button>
 
-				<Button type='submit' mod='btn--wide'>
+				<Button type='submit' mod='wide'>
 					Submit
 				</Button>
 			</form>

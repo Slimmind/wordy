@@ -9,9 +9,12 @@
 :root {
 	--color-theme: black;
   --color-white: white;
+  --color-white-transparent: rgba(255, 255, 255 , .3);
   --color-black: black;
-  --color-main: #2e8b57;
-  --color-main-transparent: rgba(46, 139, 87, 0.3);
+	--color-bg: rgb(171, 201, 199);
+  --color-main: rgb(15, 118, 110);
+  --color-main-transparent: rgba(15, 118, 110, 0.3);
+  --color-main-transparent-2: rgba(15, 118, 110, 0.75);
   --color-red: maroon;
   --color-red-transparent: rgba(128, 0, 0, 0.3);
   --color-blue: darkcyan;
@@ -21,15 +24,6 @@
 }
 
 html {
-  background-color: var(--color-theme);
-  background: var(--color-theme)
-    repeating-linear-gradient(
-      45deg,
-      var(--color-main-transparent),
-      var(--color-main-transparent) 10px,
-      var(--color-theme) 10px,
-      var(--color-theme) 20px
-    );
   font-family: "Kode Mono", monospace;
   font-optical-sizing: auto;
   font-style: normal;
@@ -42,8 +36,7 @@ html {
   flex-flow: column wrap;
   height: 100dvh;
   margin: 0;
-  background-image: linear-gradient(to right, var(--color-theme), transparent);
-  color: var(--color-main);
+  color: var(--color-white);
 }
 
 main {
@@ -60,7 +53,8 @@ main:has(>.internal-window) {
 }
 
 a {
-  color: var(--color-main);
+  color: inherit;
+	text-decoration: underline;
 }
 
 p {

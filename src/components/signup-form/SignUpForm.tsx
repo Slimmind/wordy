@@ -57,7 +57,7 @@ export const SignUpForm = () => {
 				<p>
 					Have an account? <Link to='/login'>Log In</Link>
 				</p>
-				<Button mod='btn--wide' type='submit' disabled={loading}>
+				<Button mod='wide' type='submit' disabled={loading}>
 					Sign Up
 				</Button>
 			</form>

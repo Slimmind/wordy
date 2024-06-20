@@ -4,6 +4,7 @@ import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { routeTree } from './routeTree.gen';
 import { FirestoreProvider } from './contexts/firestore.context';
 import { AuthProvider } from './contexts/auth.context';
+import { ThemeProvider } from './contexts/theme.context';
 import './index.css';
 
 if ('serviceWorker' in navigator) {
@@ -28,10 +29,12 @@ declare module '@tanstack/react-router' {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
-		<AuthProvider>
-			<FirestoreProvider>
-				<RouterProvider router={router} />
-			</FirestoreProvider>
-		</AuthProvider>
+		<ThemeProvider>
+			<AuthProvider>
+				<FirestoreProvider>
+					<RouterProvider router={router} />
+				</FirestoreProvider>
+			</AuthProvider>
+		</ThemeProvider>
 	</React.StrictMode>
 );

@@ -1,8 +1,15 @@
-.word__navigation {
-  padding: 10px 10px 20px 0;
+.letter__navigation {
+	padding-right: 10px;
+}
+.letter__navigation .block {
+	border-radius: 1.5rem;
 }
 
-.word__navigation-list {
+.letter__navigation .block li {
+	margin-bottom: 0;
+}
+
+.letter__navigation-list {
   display: flex;
   flex-wrap: nowrap;
   max-width: 100%;
@@ -10,11 +17,11 @@
   scroll-snap-type: x mandatory;
 }
 
-.word__navigation-list-item {
+.letter__navigation-list-item {
   scroll-snap-align: start;
 }
 
-.word__navigation-list-item a {
+.letter__navigation-list-item a {
   display: block;
   width: 32px;
   height: 32px;
@@ -27,7 +34,7 @@
   transition: background-color 0.3s;
 }
 
-.word__navigation-item a:hover {
+.letter__navigation-list-item a:active {
   background-color: var(--color-main-transparent);
   -webkit-backdrop-filter: blur(7px);
   backdrop-filter: blur(7px);
