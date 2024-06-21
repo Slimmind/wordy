@@ -4,6 +4,7 @@
   border: none;
   background-color: var(--color-main);
   border-radius: var(--radius-small);
+  box-shadow: 0 0 5px 0 var(--color-black-transparent);
   color: var(--color-white);
   cursor: pointer;
   font: inherit;
@@ -13,7 +14,8 @@
 }
 
 .btn--bordered,
-.btn--circle {
+.btn--circle,
+.btn--clean {
 	display: inline-block;
 	vertical-align: top;
 	width: 40px;
@@ -46,6 +48,11 @@
 .btn--bg {
 	background-color: var(--color-main-transparent);
 	border: none;
+}
+
+.btn--clean {
+	border: none;
+	background-color: transparent;
 }
 
 .btn--menu::before,

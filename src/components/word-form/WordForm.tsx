@@ -52,13 +52,14 @@ export const WordForm = () => {
 
 	const submitForm = (event: FormEvent) => {
 		event.preventDefault();
+    const userId = currentUser?.uid;
 		const newWord = {
 			original: original.toLowerCase(),
 			letter: original.charAt(0).toLowerCase(),
 			synonyms,
 			translations,
 			examples,
-			creator: currentUser?.uid,
+			owners: userId ? [userId] : [],
 		};
 
 		addWord(newWord);

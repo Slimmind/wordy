@@ -7,19 +7,20 @@
 }
 
 :root {
-	--color-theme: black;
   --color-white: white;
   --color-white-transparent: rgba(255, 255, 255 , .3);
   --color-black: black;
-	--color-bg: rgb(171, 201, 199);
-  --color-main: rgb(15, 118, 110);
+  --color-black-transparent: rgba(0, 0, 0, .3);
+	--color-bg: #abc9c7;
+	--color-bg-dark: rgb(30, 50, 50);
+  --color-main: #0f766e;
   --color-main-transparent: rgba(15, 118, 110, 0.3);
   --color-main-transparent-2: rgba(15, 118, 110, 0.75);
   --color-red: maroon;
   --color-red-transparent: rgba(128, 0, 0, 0.3);
-  --color-blue: darkcyan;
-  --color-blue-transparent: rgba(0, 139, 139, 0.3);
-  --radius-small: 4px;
+  --color-green: rgb(46, 139, 87);
+  --color-green-transparent: rgba(46, 139, 87, 0.3);
+  --radius-small: 8px;
 	--border-width: 4px;
 }
 
@@ -69,6 +70,11 @@ button {
   background-color: transparent;
   border: none;
   outline: none;
+}
+
+svg {
+	max-width: 100%;
+	max-height: 100%;
 }
 
 .title {

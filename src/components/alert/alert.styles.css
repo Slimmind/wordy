@@ -1,9 +1,14 @@
 .alert {
   position: relative;
-  margin-bottom: 20px;
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto 20px;
   padding: 20px;
-  border: var(--border-width) solid var(--color-main);
+  background-color: var(--color-green-transparent);
+  border: var(--border-width) solid var(--color-green);
   border-radius: var(--radius-small);
+  box-shadow: 0 0 5px 0 var(--color-black-transparent);
 	color: var(--color-white);
 }
 
@@ -22,16 +27,25 @@
   width: calc(100% + 40px);
   margin: -20px 0 20px -20px;
   padding: 10px 20px;
-  background-color: var(--color-main-transparent-2);
+  background-color: var(--color-green);
 	color: var(--color-white);
 	text-shadow: 2px 2px var(--color-white-transparent);
 }
 
 .alert--error {
+  background-color: var(--color-red-transparent);
   border-color: var(--color-red);
   color: var(--color-red);
 }
 
 .alert--error .alert__title {
-  background-color: var(--color-red-transparent);
+  background-color: var(--color-red);
+}
+
+.alert--global {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  transform: translate(-50%, -50%);
 }

@@ -10,7 +10,7 @@ export type WordType = {
 	synonyms: WordDetail[];
 	translations: WordDetail[];
 	examples: WordDetail[];
-	creator?: string;
+	owners?: string[];
 };
 
 export type SettingsType = {

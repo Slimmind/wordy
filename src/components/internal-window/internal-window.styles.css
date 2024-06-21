@@ -20,7 +20,7 @@
 	background-color: var(--color-main-transparent);
 	margin-bottom: 10px;
 	padding: 10px;
-	color: var(--color-main);
+	color: var(--color-white);
 	text-shadow: 2px 2px var(--color-white-transparent);
 }
 
@@ -52,8 +52,4 @@
 
 .internal-window .block {
 	background-color: var(--color-main-transparent-2);
-}
-
-.internal-window__back-btn {
-
 }

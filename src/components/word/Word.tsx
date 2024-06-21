@@ -8,7 +8,6 @@ type WordProps = {
 
 export const Word = ({ word }: WordProps) => {
 	const { id, original } = word;
-	// console.log('WORD: ', word);
 
 	return (
 		<li id={id} className='word'>

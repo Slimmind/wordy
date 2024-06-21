@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useFirestore } from '../../contexts/firestore.context';
-import InternalWindow from '../internal-window';
-import { WordType } from '../../utils/constants';
 import { Link, useNavigate, useParams } from '@tanstack/react-router';
+import { useFirestore } from '../../contexts/firestore.context';
+import { useAuth } from '../../contexts/auth.context';
+import { WordType } from '../../utils/constants';
+import InternalWindow from '../internal-window';
 import Block from '../block';
 import Button from '../button';
-import { useAuth } from '../../contexts/auth.context';
+import OwnCollection from '../own-collection';
 
 export const WordDetails = () => {
 	const navigate = useNavigate();
@@ -15,13 +16,20 @@ export const WordDetails = () => {
 		select: (params) => params.wordId,
 	});
 	const [word, setWord] = useState<WordType>();
+	const [isWordInOwnCollection, setIsWordInOwnCollection] =
+		useState<boolean>(false);
 	const { readWord, deleteWord } = useFirestore();
 
 	useEffect(() => {
 		const fetchWord = async () => {
 			const wordData = await readWord(wordId);
 			if (wordData) {
+				const owners = wordData.owners;
 				setWord(wordData);
+				if (owners && currentUser) {
+					const isOwner = owners.some((owner) => owner === currentUser.uid);
+					setIsWordInOwnCollection(isOwner);
+				}
 			}
 		};
 
@@ -60,6 +68,9 @@ export const WordDetails = () => {
 				{!!currentUser?.email && (
 					<footer className='internal-window__footer'>
 						<Button mod='circle delete' onClick={deleteHandler} />
+						{!isWordInOwnCollection && (
+							<OwnCollection user={currentUser} word={word} />
+						)}
 						<Link className='btn btn--circle btn--edit'></Link>
 					</footer>
 				)}

@@ -31,7 +31,12 @@ export const Search = () => {
 
 	return (
 		<InternalWindow title='Search'>
-			<Input type='search' id='search' onChange={handleInputChange} />
+			<Input
+				type='search'
+				id='search'
+				onChange={handleInputChange}
+				placeholder='Start typing the word...'
+			/>
 			{!!filteredWords.length && !!searchQuery && (
 				<ul>
 					{filteredWords.map((word) => (
