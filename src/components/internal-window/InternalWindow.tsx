@@ -22,20 +22,18 @@ export const InternalWindow = ({
 		<section
 			className={`internal-window ${mod && getMod('internal-window', mod)}`}
 		>
-			{backUrl ? (
-				<Link
-					to={backUrl}
-					className='internal-window__back-btn btn--circle btn--back'
-				/>
-			) : (
-				<Button mod='circle back' onClick={onBack} />
-			)}
 			<div className='internal-window__wrapper'>
-				{!!title && (
-					<header className='internal-window__header'>
-						<h2 className='internal-window__title'>{title}</h2>
-					</header>
-				)}
+				<header className='internal-window__header'>
+					{backUrl ? (
+						<Link
+							to={backUrl}
+							className='internal-window__back-btn btn--circle btn--back'
+						/>
+					) : (
+						<Button mod='circle back' onClick={onBack} />
+					)}
+					<h2 className='internal-window__title'>{title}</h2>
+				</header>
 				<div className='internal-window__content'>{children}</div>
 			</div>
 		</section>

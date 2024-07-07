@@ -17,11 +17,14 @@
 }
 
 .main-menu menu {
-	padding: 20px;
+	display: flex;
+	align-items: stretch;
+	padding: 5px;
 }
 
 .main-menu__item {
-	margin-bottom: 20px;
+	width: 50%;
+	margin: 5px;
 }
 
 .main-menu__item:last-of-type {
@@ -30,13 +33,12 @@
 
 .main-menu__item .btn--wide {
 	margin-bottom: 0;
+	text-align: center;
 }
 
-.main-menu__theme-switcher {
-	display: flex;
-}
-
-.main-menu__theme-switcher .btn {
-	width: 50%;
-	border-radius: 0;
+.main-menu__item .btn--wide svg {
+	position: static;
+	display: inline-block;
+	vertical-align: top;
+	transform: none;
 }

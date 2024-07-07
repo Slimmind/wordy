@@ -1,15 +1,22 @@
-export type WordDetail = {
-	id?: string;
+export type WordDetailType = {
+	id: string;
 	value?: string;
+};
+
+export type PhraseType = {
+	id?: string;
+	original: string;
+	translation: WordDetailType;
+	keyWords?: string[];
 };
 
 export type WordType = {
 	id?: string;
 	letter: string;
 	original: string;
-	synonyms: WordDetail[];
-	translations: WordDetail[];
-	examples: WordDetail[];
+	synonyms: WordDetailType[];
+	translations: WordDetailType[];
+	examples: WordDetailType[];
 	owners?: string[];
 };
 

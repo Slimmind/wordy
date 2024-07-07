@@ -2,6 +2,8 @@ import { Link } from '@tanstack/react-router';
 import './main-menu.styles.css';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/auth.context';
+import { PhrasesIcon } from '../../icons/phrases-icon';
+import { HeartIcon } from '../../icons/heart-icon';
 
 type MainMenuProps = {
 	visibility: boolean;
@@ -27,18 +29,20 @@ export const MainMenu = ({ visibility }: MainMenuProps) => {
 			<menu>
 				<li className='main-menu__item'>
 					<Link to='/phrases' className='btn btn--wide btn--bordered'>
-						Phrases
+						<PhrasesIcon />
+						<span className='btn__text'>Phrases</span>
 					</Link>
 				</li>
 				{!!currentUser && (
 					<li className='main-menu__item'>
-						{/* <Link
-							to={`/words/${currentUser.uid}`}
+						<Link
+							to={`/own-collection/$userId`}
 							params={{ userId: currentUser.uid }}
 							className='btn btn--wide btn--bordered'
 						>
-							Own Collection
-						</Link> */}
+							<HeartIcon />
+							<span className='btn__text'>Own Collection</span>
+						</Link>
 					</li>
 				)}
 			</menu>

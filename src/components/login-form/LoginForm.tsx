@@ -27,7 +27,7 @@ export const LoginForm = () => {
 
 	if (error) {
 		return (
-			<Alert type='error' title='Error!..'>
+			<Alert shown={!!error} type='error' title='Error!..'>
 				{error}
 			</Alert>
 		);

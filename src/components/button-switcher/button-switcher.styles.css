@@ -1,0 +1,15 @@
+.button-switcher {
+	margin-bottom: 20px;
+	border-radius: var(--radius-small);
+	box-shadow: 0 0 5px 0 var(--color-black-transparent);
+}
+
+.button-switcher .btn {
+	width: 50%;
+	border-radius: var(--radius-small) 0 0 var(--radius-small);
+	box-shadow: none;
+}
+
+.button-switcher .btn + .btn {
+	border-radius: 0 var(--radius-small) var(--radius-small) 0;
+}

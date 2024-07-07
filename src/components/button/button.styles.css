@@ -3,6 +3,7 @@
   padding: 10px;
   border: none;
   background-color: var(--color-main);
+	border: var(--border-width) solid var(--color-main);
   border-radius: var(--radius-small);
   box-shadow: 0 0 5px 0 var(--color-black-transparent);
   color: var(--color-white);
@@ -22,8 +23,14 @@
 	height: 40px;
 	padding: 0;
 	background-color: var(--color-bg);
-	border: var(--border-width) solid var(--color-main);
   overflow: hidden;
+}
+
+:where(.btn--bordered, .btn--circle, .btn--clean) svg {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .btn--circle {
@@ -34,7 +41,7 @@
 .btn--wide {
 	display: block;
 	width: 100%;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 	color: var(--color-white);
 	line-height: 32px;
 }
@@ -56,13 +63,13 @@
 }
 
 .btn--menu::before,
-.btn--add::before,
-.btn--delete::before,
+.btn--plus::before,
+.btn--minus::before,
+.btn--cross::before,
 .btn--back::before,
-.btn--edit::before,
-.btn--delete::after,
+.btn--cross::after,
 .btn--back::after,
-.btn--add::after {
+.btn--plus::after {
   content: "";
   position: absolute;
   top: calc(50% - 2px);
@@ -100,15 +107,15 @@
   transform: rotate(45deg);
 }
 
-.btn--add::after {
+.btn--plus::after {
   transform: rotate(90deg);
 }
 
-.btn--delete::before {
+.btn--cross::before {
 	transform: rotate(-45deg);
 }
 
-.btn--delete::after {
+.btn--cross::after {
 	transform: rotate(45deg);
 }
 
@@ -177,18 +184,6 @@
 	transform: rotate(-45deg) translate(-2px);
 }
 
-.btn--edit::before {
-	width: 16px;
-	transform: rotate(-45deg) translate(6px, 2px);
-}
-
-.btn--edit::after {
-	content: '';
-	position: absolute;
-	top: 10px;
-	left: 6px;
-	width: 16px;
-	height: 16px;
-	border: solid var(--color-main);
-	border-width: 0 0 var(--border-width) var(--border-width);
+.btn__text {
+	display: block;
 }

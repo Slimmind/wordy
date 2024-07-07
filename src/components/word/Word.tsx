@@ -11,7 +11,7 @@ export const Word = ({ word }: WordProps) => {
 
 	return (
 		<li id={id} className='word'>
-			<Link to={`/words/${id}`} params={{ wordId: id }}>
+			<Link to={`/words/$wordId`} params={{ wordId: id as string }}>
 				<strong>{original}</strong>
 			</Link>
 		</li>

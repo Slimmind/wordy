@@ -1,4 +1,7 @@
 .phrases {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 16px;
   max-height: 100%;
   list-style: decimal;
   list-style-position: inside;

@@ -1,18 +1,19 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useAuth } from '../../contexts/auth.context';
 import { Link } from '@tanstack/react-router';
 import { Button } from '../button/Button';
-import './footer.styles.css';
 import MainMenu from '../main-menu';
 import Block from '../block';
+import './footer.styles.css';
 
 export const Footer = () => {
 	const { currentUser } = useAuth();
 	const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
 
-	function switchMenuVisibility(): void {
-		setIsMenuOpened(!isMenuOpened);
-	}
+	const switchMenuVisibility = useCallback(() => {
+		setIsMenuOpened((prevState) => !prevState);
+	}, []);
+
 	return (
 		<footer className='main-footer'>
 			<MainMenu visibility={isMenuOpened} />
@@ -29,8 +30,8 @@ export const Footer = () => {
 				/>
 				{currentUser?.email && (
 					<Link
-						to='/add-word'
-						className='btn btn--circle btn--add'
+						to='/add-item'
+						className='btn btn--circle btn--plus'
 						aria-label='add word button'
 					/>
 				)}

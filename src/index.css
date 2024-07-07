@@ -25,11 +25,11 @@
 }
 
 html {
-  font-family: "Kode Mono", monospace;
-  font-optical-sizing: auto;
+  font-family: "Nunito", sans-serif;
   font-style: normal;
   font-size: 1.2rem;
   line-height: 1.2;
+  font-optical-sizing: auto;
 }
 
 #root {

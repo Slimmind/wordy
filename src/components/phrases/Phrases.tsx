@@ -1,26 +1,23 @@
-import React, { useMemo } from 'react';
-import InternalWindow from '../internal-window';
-import Block from '../block';
+import { useMemo } from 'react';
 import { useFirestore } from '../../contexts/firestore.context';
-import { WordDetail, WordType } from '../../utils/constants';
+import InternalWindow from '../internal-window';
+import { PhraseType, WordDetailType, WordType } from '../../utils/constants';
 import './phrases.styles.css';
+import { Phrase } from '../phrase/Phrase';
 
-export const Phrases: React.FC = () => {
-	const { words } = useFirestore();
+export const Phrases = () => {
+	const { phrases, words } = useFirestore();
 
-	const phrases = useMemo<WordDetail[]>(() => {
-		return words.flatMap((word: WordType) => word.examples);
-	}, [words]);
-
-	console.log('PHRASES: ', phrases);
+	const collection = useMemo<(PhraseType | WordDetailType)[]>(() => {
+		const wordExamples = words.flatMap((word: WordType) => word.examples);
+		return [...phrases, ...wordExamples];
+	}, [phrases, words]);
 
 	return (
 		<InternalWindow mod='phrases'>
 			<ul className='phrases'>
-				{phrases.map((phrase: WordDetail, idx: number) => (
-					<Block tag='li' key={idx}>
-						{phrase?.value}
-					</Block>
+				{collection.map((item: PhraseType | WordDetailType, idx: number) => (
+					<Phrase data={item} key={idx} />
 				))}
 			</ul>
 		</InternalWindow>

@@ -1,0 +1,44 @@
+.phrase {
+	position: relative;
+	margin-bottom: 10px;
+  padding: 10px;
+  background-color: var(--color-main-transparent);
+  border-radius: var(--radius-small);
+	list-style-position: inside;
+	-webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
+	color: var(--color-white);
+}
+
+.phrase--with-translation::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: 20px solid transparent;
+	border-top-color: var(--color-white);
+	border-right-color: var(--color-white);
+	border-radius: 0 var(--radius-small) 0 0;
+}
+
+.phrase--with-translation::after {
+	content: 't';
+	position: absolute;
+	top: 0;
+	right: 0;
+	color: var(--color-main);
+	padding: 2px 4px;
+}
+
+.phrase__translation {
+	max-height: 0;
+	overflow: hidden;
+}
+
+.phrase__translation--shown {
+	border-top: var(--border-width) solid var(--color-white-transparent);
+	margin-top: 10px;
+	padding-top: 10px;
+	opacity: 1;
+	max-height: 100%;
+}

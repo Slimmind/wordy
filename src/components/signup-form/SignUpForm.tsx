@@ -38,7 +38,9 @@ export const SignUpForm = () => {
 	return (
 		<InternalWindow title='Sign Up'>
 			<form onSubmit={handleSubmit}>
-				{error && <Alert type='error'>{error}</Alert>}
+				<Alert shown={!!error} type='error'>
+					{error}
+				</Alert>
 				<Input type='email' id='email' label='Email' ref={emailRef} required />
 				<Input
 					type='password'
