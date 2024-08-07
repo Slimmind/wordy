@@ -1,7 +1,8 @@
 .main-menu {
 	position: fixed;
 	bottom: 0;
-	width: calc(100% - 20px);
+	left: 0;
+	width: 100%;
 	background-color: var(--color-bg);
 	border-radius: 1rem;
 	transition: transform .2s, opacity .2s;
@@ -12,7 +13,7 @@
 
 .main-menu--visible {
 	opacity: 1;
-	transform: translateY(-90px);
+	transform: translateY(-60px);
   z-index: 1;
 }
 

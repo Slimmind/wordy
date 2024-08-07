@@ -9,7 +9,7 @@ import { EditIcon } from '../../icons/edit-icon';
 import InternalWindow from '../internal-window';
 import Block from '../block';
 import Button from '../button';
-import OwnCollection from '../own-collection';
+import OwnCollectionControl from '../own-collection/own-collection-control';
 
 type WordDetailsProps = {
 	wordId: string;
@@ -89,7 +89,7 @@ export const WordDetails = ({ wordId }: WordDetailsProps) => {
 					<Button mod='circle delete' onClick={deleteHandler}>
 						<DeleteIcon />
 					</Button>
-					<OwnCollection
+					<OwnCollectionControl
 						isInCollection={isWordInOwnCollection}
 						user={currentUser}
 						word={word}

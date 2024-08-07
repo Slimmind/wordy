@@ -20,12 +20,10 @@ type ThemeProviderProps = {
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 	const [theme, setTheme] = useState<string>(() => {
-		// Retrieve the initial theme value from localStorage or default to 'light'
 		return localStorage.getItem('appTheme') || 'light';
 	});
 
 	useEffect(() => {
-		// Update the localStorage whenever the theme changes
 		localStorage.setItem('appTheme', theme);
 	}, [theme]);
 
