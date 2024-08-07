@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { clsx } from 'clsx';
 import { PhraseType, WordDetailType } from '../../utils/constants';
+import Button from '../button';
 import './phrase.styles.css';
 
 type PhraseProps = {
@@ -20,14 +21,24 @@ export const Phrase = ({ data }: PhraseProps) => {
 	});
 
 	const handleTranslation = () => {
-		setIsTranslationShown(!isTranslationShown);
+		setIsTranslationShown(prev => !prev);
 	};
 
+  const btnActiveClass = isTranslationShown ? 'active' : '';
+
 	return 'original' in data ? (
-		<li className={phraseClasses} onClick={handleTranslation}>
+		<li className={phraseClasses}>
 			{data.original}
 			{data.translation && (
-				<div className={translationClasses}>{data.translation.value}</div>
+        <>
+          <Button
+            aria-label='expand phrase'
+            mod="expand"
+            extraClass={btnActiveClass}
+            onClick={handleTranslation}
+          />
+          <div className={translationClasses}>{data.translation.value}</div>
+        </>
 			)}
 		</li>
 	) : (

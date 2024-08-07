@@ -1,11 +1,8 @@
 .own-collection {
-  width: 40px;
-  height: 40px;
+
 }
 
-.own-collection .btn svg {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+.own-collection__item {
+	display: inline-block;
+	vertical-align: middle;
 }

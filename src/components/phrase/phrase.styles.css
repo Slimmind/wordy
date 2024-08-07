@@ -10,29 +10,14 @@
 	color: var(--color-white);
 }
 
-.phrase--with-translation::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	right: 0;
-	border: 20px solid transparent;
-	border-top-color: var(--color-white);
-	border-right-color: var(--color-white);
-	border-radius: 0 var(--radius-small) 0 0;
-}
-
-.phrase--with-translation::after {
-	content: 't';
-	position: absolute;
-	top: 0;
-	right: 0;
-	color: var(--color-main);
-	padding: 2px 4px;
+.phrase--with-translation {
+  padding-right: 35px;
 }
 
 .phrase__translation {
-	max-height: 0;
+  max-height: 0;
 	overflow: hidden;
+  transition: max-height .3s, padding .45s;
 }
 
 .phrase__translation--shown {
@@ -40,5 +25,11 @@
 	margin-top: 10px;
 	padding-top: 10px;
 	opacity: 1;
-	max-height: 100%;
+	max-height: 30vh;
+}
+
+.phrase .btn--expand {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }

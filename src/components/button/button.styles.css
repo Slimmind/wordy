@@ -187,3 +187,42 @@
 .btn__text {
 	display: block;
 }
+
+.btn--expand {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  background-color: var(--color-white-transparent);
+  border: 1px solid var(--color-white-transparent);
+  border-radius: 50%;
+}
+
+.btn--expand::before,
+.btn--expand::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  height: 2px;
+  background-color: var(--color-white);
+  border-radius: 2px;
+  transition: transform ease-in-out .3s;
+}
+
+.btn--expand::before {
+  left: 5px;
+  transform: rotate(45deg);
+}
+.btn--expand::after {
+  right: 5px;
+  transform: rotate(-45deg);
+}
+
+.btn--expand.active::before {
+  transform: rotate(-45deg) translate(1px,-1px);
+}
+
+.btn--expand.active::after {
+  transform: rotate(45deg)  translate(-1px,-1px);
+}
+

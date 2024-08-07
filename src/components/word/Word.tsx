@@ -1,9 +1,9 @@
 import { Link } from '@tanstack/react-router';
-import { WordType } from '../../utils/constants';
+import { PhraseType, WordType } from '../../utils/constants';
 import './word.styles.css';
 
 type WordProps = {
-	word: WordType;
+	word: WordType | PhraseType;
 };
 
 export const Word = ({ word }: WordProps) => {

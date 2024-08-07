@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFirestore } from '../../contexts/firestore.context';
 import { WordType } from '../../utils/constants';
 import Block from '../block';
@@ -10,36 +10,29 @@ type LetterNavigationProps = {
 
 export const LetterNavigation = ({ userId }: LetterNavigationProps) => {
 	const { words } = useFirestore();
-	const [collection, setCollection] = useState<WordType[]>(() => {
-		return userId
-			? words.filter((word) => word.owners?.includes(userId))
-			: words;
-	});
+	const [letters, setLetters] = useState<string[]>([]);
 
 	useEffect(() => {
-		setCollection(
-			userId ? words.filter((word) => word.owners?.includes(userId)) : words
-		);
+		const preparedWordCollection = userId
+			? words.filter((word) => word.owners?.includes(userId))
+			: words;
+		const arrayOfUniqLetters = [
+			...new Set(preparedWordCollection.map((word: WordType) => word.letter)),
+		].sort();
+		setLetters(arrayOfUniqLetters);
 	}, [words, userId]);
 
-	const letters = useMemo(
-		() => [...new Set(collection.map((word: WordType) => word.letter))].sort(),
-		[words]
-	);
-
 	return (
-		!!letters.length && (
-			<nav className='letter__navigation'>
-				<Block>
-					<ul className='letter__navigation-list'>
-						{letters.map((letter: string, idx: number) => (
-							<li key={idx} className='letter__navigation-list-item'>
-								<a href={`#${letter}`}>{letter}</a>
-							</li>
-						))}
-					</ul>
-				</Block>
-			</nav>
-		)
+		<nav className='letter__navigation'>
+			<Block>
+				<ul className='letter__navigation-list'>
+					{letters.map((letter: string, idx: number) => (
+						<li key={idx} className='letter__navigation-list-item'>
+							<a href={`#${letter}`}>{letter}</a>
+						</li>
+					))}
+				</ul>
+			</Block>
+		</nav>
 	);
 };

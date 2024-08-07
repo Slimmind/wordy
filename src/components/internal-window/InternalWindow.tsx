@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { Link, useRouter } from '@tanstack/react-router';
+import clsx from 'clsx';
 import getMod from '../../utils/get-mod';
 import './internal-window.styles.css';
 import Button from '../button';
@@ -18,10 +19,13 @@ export const InternalWindow = ({
 }: InternalWindowProps) => {
 	const router = useRouter();
 	const onBack = () => router.history.back();
+
+	const internalWindowClasses = clsx('internal-window', {
+		[getMod('internal-window', mod)]: mod,
+	});
+
 	return (
-		<section
-			className={`internal-window ${mod && getMod('internal-window', mod)}`}
-		>
+		<section className={internalWindowClasses}>
 			<div className='internal-window__wrapper'>
 				<header className='internal-window__header'>
 					{backUrl ? (
@@ -32,7 +36,7 @@ export const InternalWindow = ({
 					) : (
 						<Button mod='circle back' onClick={onBack} />
 					)}
-					<h2 className='internal-window__title'>{title}</h2>
+          {title && <h2 className='internal-window__title'>{title}</h2>}
 				</header>
 				<div className='internal-window__content'>{children}</div>
 			</div>
