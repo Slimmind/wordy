@@ -1,25 +1,33 @@
 import { useMemo } from 'react';
 import { useFirestore } from '../../contexts/firestore.context';
 import InternalWindow from '../internal-window';
-import { PhraseType, WordDetailType, WordType } from '../../utils/constants';
+import { ItemDetailType, ItemType, ItemTypes } from '../../utils/constants';
 import { Phrase } from '../phrase/Phrase';
 import './phrases.styles.css';
 
 export const Phrases = () => {
-	const { phrases, words } = useFirestore();
+  const { items } = useFirestore();
 
-	const collection = useMemo<(PhraseType | WordDetailType)[]>(() => {
-		const wordExamples = words.flatMap((word: WordType) => word.examples);
-		return [...phrases, ...wordExamples];
-	}, [phrases, words]);
+  const collection = useMemo(() => {
+    const wordExamples: ItemDetailType[] = items
+      .filter((item) => item.type === ItemTypes.WORD)
+      .flatMap((word: ItemType) => word.examples)
+      .filter((example): example is ItemDetailType => example !== undefined);
 
-	return (
-		<InternalWindow mod='phrases' title="Phrases">
-			<ul className='phrases'>
-				{collection.map((item: PhraseType | WordDetailType, idx: number) => (
-					<Phrase data={item} key={idx} />
-				))}
-			</ul>
-		</InternalWindow>
-	);
+    const phrases: ItemType[] = items.filter((item) => item.type === ItemTypes.PHRASE);
+
+    console.log('TEST: ', [...phrases, ...wordExamples]);
+    return [...phrases, ...wordExamples];
+
+  }, [items]);
+
+  return (
+    <InternalWindow mod="phrases" title="Phrases">
+      <ul className="phrases">
+        {collection.map((item: ItemType | ItemDetailType) => (
+          <Phrase data={item} key={item.id} />
+        ))}
+      </ul>
+    </InternalWindow>
+  );
 };

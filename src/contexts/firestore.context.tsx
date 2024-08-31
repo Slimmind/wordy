@@ -15,22 +15,14 @@ import {
 	getDoc,
 } from 'firebase/firestore';
 import db from '../firebase';
-import { PhraseType, WordType } from '../utils/constants';
+import { ItemType } from '../utils/constants';
 
 interface FirestoreContextType {
-	words: WordType[];
-	phrases: PhraseType[];
-	readWord: (wordId: string) => Promise<WordType | undefined>;
-	addWord: (word: WordType) => Promise<void>;
-	deleteWord: (wordId: string) => Promise<void>;
-	changeWord: (wordId: string, updatedWord: Partial<WordType>) => Promise<void>;
-	readPhrase: (phraseId: string) => Promise<PhraseType | undefined>;
-	addPhrase: (phrase: PhraseType) => Promise<void>;
-	deletePhrase: (phraseId: string) => Promise<void>;
-	changePhrase: (
-		phraseId: string,
-		updatedPhrase: Partial<PhraseType>
-	) => Promise<void>;
+	items: ItemType[];
+	readItem: (itemId: string) => Promise<ItemType | undefined>;
+	addItem: (word: ItemType) => Promise<void>;
+	deleteItem: (itemId: string) => Promise<void>;
+	changeItem: (itemId: string, updatedWord: Partial<ItemType>) => Promise<void>;
 }
 
 const FirestoreContext = createContext<FirestoreContextType | undefined>(
@@ -44,22 +36,15 @@ type FirestoreProviderProps = {
 export const FirestoreProvider: React.FC<FirestoreProviderProps> = ({
 	children,
 }) => {
-	const [words, setWords] = useState<WordType[]>([]);
-	const [phrases, setPhrases] = useState<PhraseType[]>([]);
+	const [items, setItems] = useState<ItemType[]>([]);
 
 	useEffect(() => {
-		const unsubscribeWords = onSnapshot(collection(db, 'words'), (snapshot) => {
-			setWords(
-				snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }) as WordType)
-			);
-		});
-
-		const unsubscribePhrases = onSnapshot(
-			collection(db, 'phrases'),
+		const unsubscribeWords = onSnapshot(
+			collection(db, 'vocabulary'),
 			(snapshot) => {
-				setPhrases(
+				setItems(
 					snapshot.docs.map(
-						(doc) => ({ id: doc.id, ...doc.data() }) as PhraseType
+						(doc) => ({ id: doc.id, ...doc.data() }) as ItemType
 					)
 				);
 			}
@@ -67,70 +52,39 @@ export const FirestoreProvider: React.FC<FirestoreProviderProps> = ({
 
 		return () => {
 			unsubscribeWords();
-			unsubscribePhrases();
 		};
 	}, []);
 
-	const readWord = async (wordId: string) => {
-		const wordRef = doc(db, 'words', wordId);
+	const readItem = async (itemId: string) => {
+		const wordRef = doc(db, 'vocabulary', itemId);
 		const wordSnapshot = await getDoc(wordRef);
 		if (wordSnapshot.exists()) {
-			return { id: wordSnapshot.id, ...wordSnapshot.data() } as WordType;
+			return { id: wordSnapshot.id, ...wordSnapshot.data() } as ItemType;
 		} else {
 			console.log('No such document!');
 		}
 	};
 
-	const addWord = async (word: WordType) => {
-		await addDoc(collection(db, 'words'), word);
+	const addItem = async (word: ItemType) => {
+		await addDoc(collection(db, 'vocabulary'), word);
 	};
 
-	const deleteWord = async (wordId: string) => {
-		await deleteDoc(doc(db, 'words', wordId));
+	const deleteItem = async (itemId: string) => {
+		await deleteDoc(doc(db, 'vocabulary', itemId));
 	};
 
-	const changeWord = async (wordId: string, updatedWord: Partial<WordType>) => {
-		await updateDoc(doc(db, 'words', wordId), updatedWord);
-	};
-
-	const readPhrase = async (phraseId: string) => {
-		const phraseRef = doc(db, 'phrases', phraseId);
-		const phraseSnapshot = await getDoc(phraseRef);
-		if (phraseSnapshot.exists()) {
-			return { id: phraseSnapshot.id, ...phraseSnapshot.data() } as PhraseType;
-		} else {
-			console.log('No such document!');
-		}
-	};
-
-	const addPhrase = async (phrase: PhraseType) => {
-		await addDoc(collection(db, 'phrases'), phrase);
-	};
-
-	const deletePhrase = async (phraseId: string) => {
-		await deleteDoc(doc(db, 'phrases', phraseId));
-	};
-
-	const changePhrase = async (
-		phraseId: string,
-		updatedPhrase: Partial<PhraseType>
-	) => {
-		await updateDoc(doc(db, 'phrases', phraseId), updatedPhrase);
+	const changeItem = async (itemId: string, updatedWord: Partial<ItemType>) => {
+		await updateDoc(doc(db, 'vocabulary', itemId), updatedWord);
 	};
 
 	return (
 		<FirestoreContext.Provider
 			value={{
-				words,
-				phrases,
-				readWord,
-				addWord,
-				deleteWord,
-				changeWord,
-				readPhrase,
-				addPhrase,
-				deletePhrase,
-				changePhrase,
+				items,
+				readItem,
+				addItem,
+				deleteItem,
+				changeItem,
 			}}
 		>
 			{children}

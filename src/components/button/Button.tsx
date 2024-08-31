@@ -2,28 +2,40 @@ import { ComponentPropsWithoutRef } from 'react';
 import getMod from '../../utils/get-mod';
 import './button.styles.css';
 
-type ButtonProps = ComponentPropsWithoutRef<'button'> & {
-	href?: never;
+type CommonProps = {
 	mod?: string;
-  extraClass?: string;
+	activeClass?: string;
 };
 
-type AnchorProps = ComponentPropsWithoutRef<'a'> & {
-	href?: string;
-	mod?: string;
-  extraClass?: string;
-};
+type ButtonProps = ComponentPropsWithoutRef<'button'> &
+	CommonProps & {
+		href?: never;
+	};
 
-function isAnchorProps(props: ButtonProps | AnchorProps): props is AnchorProps {
-	return 'href' in props;
-}
+type AnchorProps = ComponentPropsWithoutRef<'a'> &
+	CommonProps & {
+		href: string;
+	};
 
-export const Button = (props: ButtonProps | AnchorProps) => {
+type Props = ButtonProps | AnchorProps;
+
+const isAnchorProps = (props: Props): props is AnchorProps => 'href' in props;
+
+export const Button = (props: Props) => {
+	const { mod, activeClass, ...restProps } = props;
+	const className = `btn ${getMod('btn', mod)} ${activeClass}`;
+
 	if (isAnchorProps(props)) {
-		return <a className={`btn ${getMod('btn', props.mod)} ${props.extraClass}`} {...props}></a>;
+		const { href, ...anchorProps } = restProps as AnchorProps;
+		return <a className={className} href={href} {...anchorProps}></a>;
+	} else {
+		const { type, ...buttonProps } = restProps as ButtonProps;
+		return (
+			<button
+				className={className}
+				type={type || 'button'}
+				{...buttonProps}
+			></button>
+		);
 	}
-
-	return (
-		<button className={`btn ${getMod('btn', props.mod)} ${props.extraClass}`} {...props}></button>
-	);
 };

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { User } from 'firebase/auth';
 import { useFirestore } from '../../../contexts/firestore.context';
-import { WordType } from '../../../utils/constants';
+import { ItemType } from '../../../utils/constants';
 import { HeartIcon } from '../../../icons/heart-icon';
 import { BrokeHeartIcon } from '../../../icons/broken-heart-icon';
 import Alert from '../../alert';
@@ -10,27 +10,27 @@ import Button from '../../button';
 type OwnCollectionControlProps = {
 	isInCollection: boolean;
 	user: User;
-	word: WordType;
+	item: ItemType;
 };
 
 export const OwnCollectionControl = ({
 	isInCollection,
 	user,
-	word,
+	item,
 }: OwnCollectionControlProps) => {
-	const { changeWord } = useFirestore();
+	const { changeItem } = useFirestore();
 	const [isOwner, setIsOwner] = useState(isInCollection);
 	const [alertIsShown, setAlertIsShown] = useState(false);
 
 	const handleItemInOwnCollection = () => {
 		const owners = isInCollection
-			? word.owners?.filter((owner) => owner !== user.uid) || []
-			: [...(word.owners || []), user.uid];
+			? item.owners?.filter((owner) => owner !== user.uid) || []
+			: [...(item.owners || []), user.uid];
 
-		const updatedWord = { ...word, owners };
+		const updatedWord = { ...item, owners };
 
-		if (word.id) {
-			changeWord(word.id, updatedWord);
+		if (item.id) {
+			changeItem(item.id, updatedWord);
 			setAlertIsShown(true);
 			setIsOwner(!isOwner);
 		}
