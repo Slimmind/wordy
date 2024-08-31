@@ -1,5 +1,5 @@
-import { WordType } from './constants';
+import { ItemType } from './constants';
 
-export default function getLetters(words: WordType[]) {
-	return [...new Set(words.map((word: WordType) => word.letter))].sort();
+export default function getLetters(words: ItemType[]) {
+	return [...new Set(words.map((word: ItemType) => word.letter))].sort();
 }

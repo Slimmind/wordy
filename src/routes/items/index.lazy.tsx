@@ -2,7 +2,7 @@ import { createLazyFileRoute } from '@tanstack/react-router';
 import LetterNavigation from '../../components/letter-navigation';
 import Words from '../../components/words';
 
-export const Route = createLazyFileRoute('/words/')({
+export const Route = createLazyFileRoute('/items/')({
 	component: Index,
 });
 

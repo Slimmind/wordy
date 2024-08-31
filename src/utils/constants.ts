@@ -1,23 +1,26 @@
-export type WordDetailType = {
+export enum ItemTypes {
+  PHRASE = 'phrase',
+  WORD = 'word'
+}
+
+export const THEME_DARK = 'dark';
+export const THEME_LIGHT = 'light';
+
+export type ItemDetailType = {
 	id: string;
 	value?: string;
 };
 
-export type PhraseType = {
+export type ItemType = {
 	id?: string;
+  type: ItemTypes.PHRASE | ItemTypes.WORD;
+	letter?: string;
 	original: string;
-	translation: WordDetailType;
-	keyWords?: string[];
-};
-
-export type WordType = {
-	id?: string;
-	letter: string;
-	original: string;
-	synonyms: WordDetailType[];
-	translations: WordDetailType[];
-	examples: WordDetailType[];
+	synonyms?: ItemDetailType[];
+	translations: ItemDetailType[];
+	examples?: ItemDetailType[];
 	owners?: string[];
+  keyWords?: string[];
 };
 
 export type SettingsType = {
@@ -27,8 +30,6 @@ export type SettingsType = {
 
 export type AppDataType = {
 	settings: SettingsType;
-	words: WordType[];
+	words: ItemType[];
 };
 
-export const THEME_DARK = 'dark';
-export const THEME_LIGHT = 'light';

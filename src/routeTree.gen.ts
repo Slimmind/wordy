@@ -24,13 +24,13 @@ const ProfileLazyImport = createFileRoute('/profile')()
 const PhrasesLazyImport = createFileRoute('/phrases')()
 const LoginLazyImport = createFileRoute('/login')()
 const AddItemLazyImport = createFileRoute('/add-item')()
-const WordsIndexLazyImport = createFileRoute('/words/')()
 const OwnCollectionIndexLazyImport = createFileRoute('/own-collection/')()
-const WordsWordIdLazyImport = createFileRoute('/words/$wordId')()
+const ItemsIndexLazyImport = createFileRoute('/items/')()
 const OwnCollectionUserIdLazyImport = createFileRoute(
   '/own-collection/$userId',
 )()
-const EditWordIdLazyImport = createFileRoute('/edit/$wordId')()
+const ItemsItemIdLazyImport = createFileRoute('/items/$itemId')()
+const EditItemIdLazyImport = createFileRoute('/edit/$itemId')()
 
 // Create/Update Routes
 
@@ -76,11 +76,6 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const WordsIndexLazyRoute = WordsIndexLazyImport.update({
-  path: '/words/',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/words/index.lazy').then((d) => d.Route))
-
 const OwnCollectionIndexLazyRoute = OwnCollectionIndexLazyImport.update({
   path: '/own-collection/',
   getParentRoute: () => rootRoute,
@@ -88,10 +83,10 @@ const OwnCollectionIndexLazyRoute = OwnCollectionIndexLazyImport.update({
   import('./routes/own-collection/index.lazy').then((d) => d.Route),
 )
 
-const WordsWordIdLazyRoute = WordsWordIdLazyImport.update({
-  path: '/words/$wordId',
+const ItemsIndexLazyRoute = ItemsIndexLazyImport.update({
+  path: '/items/',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/words/$wordId.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/items/index.lazy').then((d) => d.Route))
 
 const OwnCollectionUserIdLazyRoute = OwnCollectionUserIdLazyImport.update({
   path: '/own-collection/$userId',
@@ -100,10 +95,15 @@ const OwnCollectionUserIdLazyRoute = OwnCollectionUserIdLazyImport.update({
   import('./routes/own-collection/$userId.lazy').then((d) => d.Route),
 )
 
-const EditWordIdLazyRoute = EditWordIdLazyImport.update({
-  path: '/edit/$wordId',
+const ItemsItemIdLazyRoute = ItemsItemIdLazyImport.update({
+  path: '/items/$itemId',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/edit.$wordId.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/items/$itemId.lazy').then((d) => d.Route))
+
+const EditItemIdLazyRoute = EditItemIdLazyImport.update({
+  path: '/edit/$itemId',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/edit.$itemId.lazy').then((d) => d.Route))
 
 // Populate the FileRoutesByPath interface
 
@@ -165,11 +165,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UpdateProfileLazyImport
       parentRoute: typeof rootRoute
     }
-    '/edit/$wordId': {
-      id: '/edit/$wordId'
-      path: '/edit/$wordId'
-      fullPath: '/edit/$wordId'
-      preLoaderRoute: typeof EditWordIdLazyImport
+    '/edit/$itemId': {
+      id: '/edit/$itemId'
+      path: '/edit/$itemId'
+      fullPath: '/edit/$itemId'
+      preLoaderRoute: typeof EditItemIdLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/items/$itemId': {
+      id: '/items/$itemId'
+      path: '/items/$itemId'
+      fullPath: '/items/$itemId'
+      preLoaderRoute: typeof ItemsItemIdLazyImport
       parentRoute: typeof rootRoute
     }
     '/own-collection/$userId': {
@@ -179,11 +186,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OwnCollectionUserIdLazyImport
       parentRoute: typeof rootRoute
     }
-    '/words/$wordId': {
-      id: '/words/$wordId'
-      path: '/words/$wordId'
-      fullPath: '/words/$wordId'
-      preLoaderRoute: typeof WordsWordIdLazyImport
+    '/items/': {
+      id: '/items/'
+      path: '/items'
+      fullPath: '/items'
+      preLoaderRoute: typeof ItemsIndexLazyImport
       parentRoute: typeof rootRoute
     }
     '/own-collection/': {
@@ -191,13 +198,6 @@ declare module '@tanstack/react-router' {
       path: '/own-collection'
       fullPath: '/own-collection'
       preLoaderRoute: typeof OwnCollectionIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/words/': {
-      id: '/words/'
-      path: '/words'
-      fullPath: '/words'
-      preLoaderRoute: typeof WordsIndexLazyImport
       parentRoute: typeof rootRoute
     }
   }
@@ -214,11 +214,11 @@ export const routeTree = rootRoute.addChildren({
   SearchLazyRoute,
   SignupLazyRoute,
   UpdateProfileLazyRoute,
-  EditWordIdLazyRoute,
+  EditItemIdLazyRoute,
+  ItemsItemIdLazyRoute,
   OwnCollectionUserIdLazyRoute,
-  WordsWordIdLazyRoute,
+  ItemsIndexLazyRoute,
   OwnCollectionIndexLazyRoute,
-  WordsIndexLazyRoute,
 })
 
 /* prettier-ignore-end */
@@ -237,11 +237,11 @@ export const routeTree = rootRoute.addChildren({
         "/search",
         "/signup",
         "/update-profile",
-        "/edit/$wordId",
+        "/edit/$itemId",
+        "/items/$itemId",
         "/own-collection/$userId",
-        "/words/$wordId",
-        "/own-collection/",
-        "/words/"
+        "/items/",
+        "/own-collection/"
       ]
     },
     "/": {
@@ -268,20 +268,20 @@ export const routeTree = rootRoute.addChildren({
     "/update-profile": {
       "filePath": "update-profile.lazy.tsx"
     },
-    "/edit/$wordId": {
-      "filePath": "edit.$wordId.lazy.tsx"
+    "/edit/$itemId": {
+      "filePath": "edit.$itemId.lazy.tsx"
+    },
+    "/items/$itemId": {
+      "filePath": "items/$itemId.lazy.tsx"
     },
     "/own-collection/$userId": {
       "filePath": "own-collection/$userId.lazy.tsx"
     },
-    "/words/$wordId": {
-      "filePath": "words/$wordId.lazy.tsx"
+    "/items/": {
+      "filePath": "items/index.lazy.tsx"
     },
     "/own-collection/": {
       "filePath": "own-collection/index.lazy.tsx"
-    },
-    "/words/": {
-      "filePath": "words/index.lazy.tsx"
     }
   }
 }

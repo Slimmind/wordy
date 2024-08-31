@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { Link, useNavigate } from '@tanstack/react-router';
 import { useFirestore } from '../../contexts/firestore.context';
 import { useAuth } from '../../contexts/auth.context';
-import { WordType } from '../../utils/constants';
+import { ItemType } from '../../utils/constants';
 import { checkIsOwner } from '../../utils/check-is-owner';
 import { DeleteIcon } from '../../icons/delete-icon';
 import { EditIcon } from '../../icons/edit-icon';
@@ -11,76 +11,76 @@ import Block from '../block';
 import Button from '../button';
 import OwnCollectionControl from '../own-collection/own-collection-control';
 
-type WordDetailsProps = {
-	wordId: string;
+type ItemDetailsProps = {
+	itemId: string;
 };
 
-export const WordDetails = ({ wordId }: WordDetailsProps) => {
+export const ItemDetails = ({ itemId }: ItemDetailsProps) => {
 	const navigate = useNavigate();
-	const { readWord, changeWord, deleteWord } = useFirestore();
+	const { readItem, changeItem, deleteItem } = useFirestore();
 	const { currentUser } = useAuth();
-	const [word, setWord] = useState<WordType>();
+	const [item, setItem] = useState<ItemType>();
 	const [isWordInOwnCollection, setIsWordInOwnCollection] =
 		useState<boolean>(false);
 
 	useEffect(() => {
 		const fetchWord = async () => {
-			const wordData = await readWord(wordId);
-			if (wordData) {
-				setWord(wordData);
+			const itemData = await readItem(itemId);
+			if (itemData) {
+				setItem(itemData);
 				if (currentUser) {
-					const isOwner = checkIsOwner(wordData.owners ?? [], currentUser.uid);
+					const isOwner = checkIsOwner(itemData.owners ?? [], currentUser.uid);
 					setIsWordInOwnCollection(isOwner);
 				}
 			}
 		};
 
 		fetchWord();
-	}, [wordId, readWord, currentUser]);
+	}, [itemId, readItem, currentUser]);
 
 	const deleteHandler = useCallback(() => {
     console.log('TEST');
 		if (
-			word &&
+			item &&
 			currentUser &&
-			checkIsOwner(word.owners ?? [], currentUser.uid)
+			checkIsOwner(item.owners ?? [], currentUser.uid)
 		) {
-			const updatedOwnersList = word.owners?.filter(
+			const updatedOwnersList = item.owners?.filter(
 				(owner) => owner !== currentUser.uid
 			);
-			const updatedWord = { ...word, owners: updatedOwnersList };
+			const updatedItem = { ...item, owners: updatedOwnersList };
 			console.log('CHANGE');
-			changeWord(wordId, updatedWord);
+			changeItem(itemId, updatedItem);
 		} else {
 			console.log('DELETE');
-			deleteWord(wordId);
+			deleteItem(itemId);
 			navigate({ to: '/' });
 		}
-	}, [word, currentUser, changeWord, deleteWord, navigate, wordId]);
+	}, [item, currentUser, changeItem, deleteItem, navigate, itemId]);
 
-	if (!word) {
+	if (!item) {
 		return <InternalWindow title='Loading...' />;
 	}
 
 	return (
-		<InternalWindow mod='word-details' title={word.original}>
-			{!!word.translations.length && (
+		<InternalWindow mod='word-details' title={item.original}>
+			{!!item.translations.length && (
 				<Block tag='ul' title='Translations:'>
-					{word.translations.map((translation) => (
+					{item.translations.map((translation) => (
 						<li key={translation.id}>{translation.value}</li>
 					))}
 				</Block>
 			)}
-			{!!word.synonyms.length && (
+			{item.synonyms && item.synonyms.length > 0 && (
 				<Block tag='ul' title='Synonyms:'>
-					{word.synonyms.map((synonym) => (
+					{item.synonyms.map((synonym) => (
 						<li key={synonym.id}>{synonym.value}</li>
 					))}
 				</Block>
 			)}
-			{!!word.examples.length && (
+			{item.examples && item.examples.length > 0 && (
 				<Block tag='ol' title='Examples:'>
-					{word.examples.map((example) => (
+					{item.examples.map((example) => (
 						<li key={example.id}>{example.value}</li>
 					))}
 				</Block>
@@ -93,11 +93,11 @@ export const WordDetails = ({ wordId }: WordDetailsProps) => {
 					<OwnCollectionControl
 						isInCollection={isWordInOwnCollection}
 						user={currentUser}
-						word={word}
+						item={item}
 					/>
 					<Link
-						to={`/edit/${wordId}`}
-						params={{ wordId: wordId }}
+						to={`/edit/${itemId}`}
+						params={{ itemId: itemId }}
 						className='btn btn--circle btn--edit'
 					>
 						<EditIcon />

@@ -1,36 +1,35 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useFirestore } from '../../contexts/firestore.context';
-import { WordType } from '../../utils/constants';
-import './words.styles.css';
+import { ItemType, ItemTypes } from '../../utils/constants';
 import WordGroup from '../word-group';
+import './words.styles.css';
 
 type WordsProps = {
-	userId?: string;
+  userId?: string;
 };
 
 export const Words = ({ userId }: WordsProps) => {
-	const { words } = useFirestore();
-	const [collection, setCollection] = useState<WordType[]>([]);
+  const { items } = useFirestore();
 
-	useEffect(() => {
-		setCollection(
-			userId ? words.filter((word) => word.owners?.includes(userId)) : words
-		);
-	}, [words, userId]);
+  const collection = useMemo(() => {
+    const words = items.filter((item) => item.type === ItemTypes.WORD);
+    return userId ? words.filter((word) => word.owners?.includes(userId)) : words;
+  }, [items, userId]);
 
-	const letters = useMemo(() => {
-		return [...new Set(collection.map((word) => word.letter))].sort();
-	}, [collection]);
+  const letters = useMemo(() => {
+    return [...new Set(collection.map((word) => word.letter))].sort();
+  }, [collection]);
 
-	return (
-		<ul className='words'>
-			{letters.map((letter: string, idx: number) => (
-				<WordGroup
-					key={idx}
-					group={collection.filter((word: WordType) => word.letter === letter)}
-					letter={letter}
-				/>
-			))}
-		</ul>
-	);
+  return (
+    <ul className='words'>
+      {letters.map((letter) => (
+        <WordGroup
+          key={letter}
+          group={collection.filter((word: ItemType) => word.letter === letter)}
+          letter={letter as string}
+        />
+      ))}
+    </ul>
+  );
 };
+

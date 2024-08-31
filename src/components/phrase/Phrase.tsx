@@ -1,19 +1,21 @@
 import { useState } from 'react';
 import { clsx } from 'clsx';
-import { PhraseType, WordDetailType } from '../../utils/constants';
+import { ItemType, ItemDetailType } from '../../utils/constants';
 import Button from '../button';
 import './phrase.styles.css';
+import { Link } from '@tanstack/react-router';
 
 type PhraseProps = {
-	data: PhraseType | WordDetailType;
+	data: ItemType | ItemDetailType;
 };
 
 export const Phrase = ({ data }: PhraseProps) => {
 	const [isTranslationShown, setIsTranslationShown] = useState(false);
 	const isPhraseType = 'original' in data;
+  const hasTranslations = isPhraseType && data.translations?.length > 0;
 
 	const phraseClasses = clsx('phrase', {
-		'phrase--with-translation': isPhraseType && data.translation,
+		'phrase--with-translation': isPhraseType && hasTranslations,
 	});
 
 	const translationClasses = clsx('phrase__translation', {
@@ -28,20 +30,34 @@ export const Phrase = ({ data }: PhraseProps) => {
 
 	return 'original' in data ? (
 		<li className={phraseClasses}>
-			{data.original}
-			{data.translation && (
-        <>
+      <header className='phrase__header'>
+        <Link to={`/items/$itemId`} params={{ itemId: data.id as string }} className='phrase__link'>
+          {data.original}
+        </Link>
+        {hasTranslations && (
           <Button
             aria-label='expand phrase'
             mod="expand"
-            extraClass={btnActiveClass}
+            activeClass={btnActiveClass}
             onClick={handleTranslation}
           />
-          <div className={translationClasses}>{data.translation.value}</div>
-        </>
-			)}
+        )}
+      </header>
+      <div className="phrase__body">
+        {hasTranslations && (
+          <>
+            <div className={translationClasses}>
+              {data.translations.map((translation) => <p key={translation.id}>{translation.value}</p>)}
+            </div>
+          </>
+        )}
+      </div>
 		</li>
 	) : (
-		<li className='phrase'>{data.value}</li>
+		<li className='phrase'>
+      {/* <Link to={`/items/$itemId`} params={{ itemId: data.id as string }} className='phrase__link'> */}
+        {data.value}
+			{/* </Link> */}
+    </li>
 	);
 };

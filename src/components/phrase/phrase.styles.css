@@ -10,8 +10,19 @@
 	color: var(--color-white);
 }
 
-.phrase--with-translation {
+.phrase::marker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: red;
+}
+
+.phrase--with-translation .phrase__header {
   padding-right: 35px;
+}
+
+.phrase__header {
+  position: relative;
 }
 
 .phrase__translation {
@@ -28,8 +39,20 @@
 	max-height: 30vh;
 }
 
+.phrase__translation p {
+  margin: 0;
+}
+
+.phrase__translation p + p {
+  padding-top: 10px;
+}
+
+.phrase__link {
+  text-decoration: none;
+}
+
 .phrase .btn--expand {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 0;
+  right: 0;
 }

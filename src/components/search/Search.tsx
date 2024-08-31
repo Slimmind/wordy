@@ -1,12 +1,12 @@
 import { ChangeEvent, useMemo, useState } from 'react';
 import { useFirestore } from '../../contexts/firestore.context';
-import { type WordType } from '../../utils/constants';
+import { ItemTypes, type ItemType } from '../../utils/constants';
 import Input from '../input';
 import InternalWindow from '../internal-window';
 import Word from '../word';
 
 export const Search = () => {
-	const { words } = useFirestore();
+	const { items } = useFirestore();
 	const [searchQuery, setSearchQuery] = useState<string>('');
 
 	const handleInputChange = (
@@ -17,16 +17,18 @@ export const Search = () => {
 		}
 	};
 
-	const filteredWords = useMemo(
+	const filteredItems = useMemo(
 		() =>
-			words.filter(
-				({ original, translations }: WordType) =>
-					original.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
-					translations.find(({ value }) =>
-						value?.startsWith(searchQuery.toLocaleLowerCase())
-					)
-			),
-		[searchQuery, words]
+			items
+				.filter((item) => item.type === ItemTypes.WORD)
+				.filter(
+					({ original, translations }: ItemType) =>
+						original.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
+						translations.find(({ value }) =>
+							value?.startsWith(searchQuery.toLocaleLowerCase())
+						)
+				),
+		[searchQuery, items]
 	);
 
 	return (
@@ -37,10 +39,10 @@ export const Search = () => {
 				onChange={handleInputChange}
 				placeholder='Start typing the word...'
 			/>
-			{!!filteredWords.length && !!searchQuery && (
+			{!!filteredItems.length && !!searchQuery && (
 				<ul>
-					{filteredWords.map((word) => (
-						<Word key={word.id} word={word} />
+					{filteredItems.map((item) => (
+						<Word key={item.id} word={item} />
 					))}
 				</ul>
 			)}

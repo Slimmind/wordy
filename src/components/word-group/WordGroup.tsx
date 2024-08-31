@@ -1,9 +1,9 @@
-import { WordType } from '../../utils/constants';
+import { ItemType } from '../../utils/constants';
 import { Word } from '../word/Word';
 import './word-group.styles.css';
 
 type WordGroupProps = {
-  group: WordType[];
+  group: ItemType[];
   letter: string;
 }
 
@@ -12,7 +12,7 @@ export const WordGroup = ({ group, letter }: WordGroupProps) => {
     <li className="word__group-wrap">
 			<ul id={letter} className="word__group" data-letter={letter}>
         {
-          group.map((word: WordType) => <Word key={word.id} word={word}/>)
+          group.map((word: ItemType) => <Word key={word.id} word={word}/>)
         }
       </ul>
     </li>
