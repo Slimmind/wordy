@@ -1,51 +1,68 @@
-import { ChangeEvent, useMemo, useState } from 'react';
-import { useFirestore } from '../../contexts/firestore.context';
-import { ItemTypes, type ItemType } from '../../utils/constants';
-import Input from '../input';
-import InternalWindow from '../internal-window';
-import Word from '../word';
+import { ChangeEvent, useState, useMemo, lazy } from "react";
+import { useFirestore } from "../../contexts/firestore.context";
+import { ItemType, ItemTypes } from "../../utils/constants";
+
+const Input = lazy(() => import("../input"));
+const InternalWindow = lazy(() => import("../internal-window"));
+const Word = lazy(() => import("../word"));
 
 export const Search = () => {
-	const { items } = useFirestore();
-	const [searchQuery, setSearchQuery] = useState<string>('');
+  const { items } = useFirestore();
+  const [searchInputValue, setSearchInputValue] = useState<string>("");
+  const [searchResults, setSearchResults] = useState<ItemType[]>([]);
 
-	const handleInputChange = (
-		event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-	): void => {
-		if (event.target.value.length > 1) {
-			setSearchQuery(event.target.value);
-		}
-	};
+  const words = useMemo(
+    () => items.filter((item) => item.type === ItemTypes.WORD),
+    [items],
+  );
+  const phrases = useMemo(
+    () => items.filter((item) => item.type === ItemTypes.PHRASE),
+    [items],
+  );
 
-	const filteredItems = useMemo(
-		() =>
-			items
-				.filter((item) => item.type === ItemTypes.WORD)
-				.filter(
-					({ original, translations }: ItemType) =>
-						original.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
-						translations.find(({ value }) =>
-							value?.startsWith(searchQuery.toLocaleLowerCase())
-						)
-				),
-		[searchQuery, items]
-	);
+  const filterWords = (query: string) => {
+    return words.filter(({ original }) =>
+      original.toLowerCase().startsWith(query),
+    );
+  };
 
-	return (
-		<InternalWindow title='Search'>
-			<Input
-				type='search'
-				id='search'
-				onChange={handleInputChange}
-				placeholder='Start typing the word...'
-			/>
-			{!!filteredItems.length && !!searchQuery && (
-				<ul>
-					{filteredItems.map((item) => (
-						<Word key={item.id} word={item} />
-					))}
-				</ul>
-			)}
-		</InternalWindow>
-	);
+  const filterPhrases = (query: string) => {
+    return phrases.filter(({ original }) =>
+      original.split(" ").some((word) => word.toLowerCase().startsWith(query)),
+    );
+  };
+
+  const handleInputChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ): void => {
+    const searchQuery = event.target.value.toLowerCase();
+    if (!searchQuery) {
+      setSearchResults([]);
+      return;
+    }
+
+    const filteredWords = filterWords(searchQuery);
+    const filteredPhrases = filterPhrases(searchQuery);
+
+    setSearchInputValue(searchQuery);
+    setSearchResults([...filteredWords, ...filteredPhrases]);
+  };
+
+  return (
+    <InternalWindow title="Search">
+      <Input
+        type="search"
+        id="search"
+        onChange={handleInputChange}
+        placeholder="Start typing the word..."
+      />
+      {searchResults.length > 0 && (
+        <ul>
+          {searchResults.map((item) => (
+            <Word key={item.id} word={item} searchQuery={searchInputValue} />
+          ))}
+        </ul>
+      )}
+    </InternalWindow>
+  );
 };

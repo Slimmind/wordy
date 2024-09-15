@@ -1,9 +1,9 @@
-import React, {
+import {
 	createContext,
 	useContext,
-	ReactNode,
 	useEffect,
 	useState,
+	PropsWithChildren,
 } from 'react';
 import {
 	collection,
@@ -29,13 +29,7 @@ const FirestoreContext = createContext<FirestoreContextType | undefined>(
 	undefined
 );
 
-type FirestoreProviderProps = {
-	children: ReactNode;
-};
-
-export const FirestoreProvider: React.FC<FirestoreProviderProps> = ({
-	children,
-}) => {
+export const FirestoreProvider = ({ children }: PropsWithChildren) => {
 	const [items, setItems] = useState<ItemType[]>([]);
 
 	useEffect(() => {

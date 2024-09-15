@@ -1,14 +1,16 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState, lazy } from 'react';
 import { nanoid } from 'nanoid';
 import { useNavigate, useParams } from '@tanstack/react-router';
 import { useAuth } from '../../contexts/auth.context';
 import { useFirestore } from '../../contexts/firestore.context';
 import { ItemType, ItemDetailType, ItemTypes } from '../../utils/constants';
-import InternalWindow from '../internal-window';
-import Button from '../button';
-import Input from '../input';
 import ButtonSwitcher from '../button-switcher';
 import './item-form.styles.css';
+
+const InternalWindow = lazy(() => import('../internal-window'));
+const Button = lazy(() => import('../button'));
+const Input = lazy(() => import('../input'));
+// const ButtonSwitcher = lazy(() => import('../button-switcher'));
 
 export const ItemForm = () => {
 	const { items, addItem, changeItem } = useFirestore();

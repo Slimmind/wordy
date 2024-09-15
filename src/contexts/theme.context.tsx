@@ -1,9 +1,9 @@
-import React, {
+import {
 	createContext,
 	useContext,
 	useState,
 	useEffect,
-	ReactNode,
+	PropsWithChildren,
 } from 'react';
 
 interface ThemeContextType {
@@ -14,11 +14,7 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-type ThemeProviderProps = {
-	children: ReactNode;
-};
-
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
+export const ThemeProvider = ({ children }: PropsWithChildren) => {
 	const [theme, setTheme] = useState<string>(() => {
 		return localStorage.getItem('appTheme') || 'light';
 	});

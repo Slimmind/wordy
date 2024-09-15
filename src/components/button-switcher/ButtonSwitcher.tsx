@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
-import Button from '../button';
+import { useState, useEffect, lazy } from 'react';
+import { ItemTypes } from '../../utils/constants';
 import './button-switcher.styles.css';
+
+const Button = lazy(() => import('../button'));
 
 type ButtonSwitcherProps<T> = {
 	firstLabel: string;
@@ -8,7 +10,7 @@ type ButtonSwitcherProps<T> = {
 	firstValue: T;
 	secondValue: T;
 	defaultValue?: T;
-	setValue: (value: T) => void;
+	setValue: (value: T | ItemTypes.WORD | ItemTypes.PHRASE) => void;
 };
 
 export const ButtonSwitcher = <T,>({

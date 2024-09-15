@@ -1,9 +1,9 @@
-import React, {
+import {
 	createContext,
 	useContext,
 	useState,
 	useEffect,
-	ReactNode,
+	PropsWithChildren,
 } from 'react';
 import { auth } from '../firebase';
 import {
@@ -25,10 +25,6 @@ type AuthContextType = {
 	logout: () => Promise<void>;
 };
 
-type AuthProviderProps = {
-	children: ReactNode;
-};
-
 // Create the context
 const AuthContext = createContext<AuthContextType>(null!);
 
@@ -36,7 +32,7 @@ const AuthContext = createContext<AuthContextType>(null!);
 export const useAuth = () => useContext(AuthContext);
 
 // Auth provider component
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+export const AuthProvider = ({ children }: PropsWithChildren) => {
 	const [currentUser, setCurrentUser] = useState<User | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 
