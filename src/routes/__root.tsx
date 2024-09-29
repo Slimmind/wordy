@@ -1,14 +1,17 @@
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import { createRootRoute, Outlet } from '@tanstack/react-router';
+import SplashScreen from '../components/splash-screen';
 
 const Layout = lazy(() => import('../components/Layout'));
 
 export const Route = createRootRoute({
 	component: () => (
-		<Layout>
-			<main>
-				<Outlet />
-			</main>
-		</Layout>
+		<Suspense fallback={<SplashScreen />}>
+			<Layout>
+				<main>
+					<Outlet />
+				</main>
+			</Layout>
+		</Suspense>
 	),
 });

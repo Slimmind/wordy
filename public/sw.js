@@ -1,51 +1,80 @@
 // Cache version
 const CACHE_NAME = 'wordy-cache-v1';
 
-// Files to cache
+// Files to cache initially
 const urlsToCache = [
 	'/',
 	'/index.html',
-	'/static/js/bundle.js',
-	'/static/css/main.css',
 	'/manifest.json',
-	// Add any other static assets that need to be cached
+	'/images/bg.png',
+	// Add any other static assets that need to be cached initially
 ];
 
 // Install service worker and cache static assets
 self.addEventListener('install', (event) => {
 	event.waitUntil(
-		caches.open(CACHE_NAME).then((cache) => {
-			return cache.addAll(urlsToCache);
-		})
+		(async () => {
+			const cache = await caches.open(CACHE_NAME);
+			try {
+				// Cache all the specified files
+				await cache.addAll(urlsToCache);
+				console.log('Initial assets cached successfully');
+			} catch (error) {
+				console.error('Failed to cache initial assets during install', error);
+			}
+		})()
 	);
+	self.skipWaiting(); // Activate worker immediately
 });
 
 // Activate service worker and remove old caches
 self.addEventListener('activate', (event) => {
-	const cacheWhitelist = [CACHE_NAME];
 	event.waitUntil(
-		caches.keys().then((cacheNames) => {
-			return Promise.all(
+		(async () => {
+			const cacheNames = await caches.keys();
+			// Remove caches not present in whitelist
+			await Promise.all(
 				cacheNames.map((cacheName) => {
-					if (cacheWhitelist.indexOf(cacheName) === -1) {
+					if (cacheName !== CACHE_NAME) {
+						console.log(`Deleting old cache: ${cacheName}`);
 						return caches.delete(cacheName);
 					}
 				})
 			);
-		})
+			self.clients.claim(); // Take control of all open clients immediately
+		})()
 	);
 });
 
-// Fetch cached assets or network fallback
+// Fetch cached assets or network fallback and cache /assets dynamically
 self.addEventListener('fetch', (event) => {
 	event.respondWith(
-		caches.match(event.request).then((response) => {
-			// Cache hit - return response
-			if (response) {
-				return response;
+		(async () => {
+			const cache = await caches.open(CACHE_NAME);
+			const cachedResponse = await caches.match(event.request);
+
+			if (cachedResponse) {
+				// Return cached response if found
+				return cachedResponse;
 			}
-			// Network fallback
-			return fetch(event.request);
-		})
+
+			try {
+				// Fetch from the network
+				const networkResponse = await fetch(event.request);
+
+				// Check if the request is for an asset (dynamically cache it)
+				if (event.request.url.includes('/assets/')) {
+					// Cache the new asset
+					cache.put(event.request, networkResponse.clone());
+					console.log(`Caching new asset: ${event.request.url}`);
+				}
+
+				return networkResponse;
+			} catch (error) {
+				console.error('Fetch failed; returning fallback if available', error);
+				// Return a fallback page or asset if needed
+				return caches.match('/offline.html');
+			}
+		})()
 	);
 });
