@@ -16,7 +16,14 @@ export const Header = () => {
       <ThemeSwitcher />
       <div className="main-header__auth">
         {currentUser?.email ? (
-          <Link to="/profile" className="btn btn--circle btn--profile"></Link>
+          <Link to="/profile" className="main-header__auth-link">
+            {currentUser.displayName && (
+              <div className="main-header__profile-name">
+                {currentUser.displayName}
+              </div>
+            )}
+            <div className="btn btn--circle btn--profile"></div>
+          </Link>
         ) : (
           <Link to="/login">Sign In</Link>
         )}

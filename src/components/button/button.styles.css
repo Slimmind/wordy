@@ -19,6 +19,7 @@
 .btn--clean {
 	display: inline-block;
 	vertical-align: top;
+	flex-shrink: 0;
 	width: 40px;
 	height: 40px;
 	padding: 0;
@@ -225,4 +226,3 @@
 .btn--expand.active::after {
   transform: rotate(45deg)  translate(-1px,-1px);
 }
-

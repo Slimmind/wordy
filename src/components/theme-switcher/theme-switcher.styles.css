@@ -1,7 +1,10 @@
 .theme-switcher {
-	position: relative;
+	position: absolute;
+	top: 5px;
+	left: 50%;
 	width: 60px;
 	height: 40px;
+	transform: translateX(-50%);
 }
 
 .theme-switcher::before {

@@ -10,6 +10,7 @@ import {
 	GoogleAuthProvider,
 	signInWithPopup,
 	createUserWithEmailAndPassword,
+	updateProfile,
 	signInWithEmailAndPassword,
 	signOut,
 	User,
@@ -20,7 +21,11 @@ import {
 type AuthContextType = {
 	currentUser: User | null;
 	login: (email: string, password: string) => Promise<UserCredential>;
-	signup: (email: string, password: string) => Promise<UserCredential>;
+	signup: (
+		name: string,
+		email: string,
+		password: string
+	) => Promise<UserCredential>;
 	loginWithGoogle: () => Promise<UserCredential>;
 	logout: () => Promise<void>;
 };
@@ -45,8 +50,27 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 		return unsubscribe;
 	}, []);
 
-	const signup = (email: string, password: string) => {
-		return createUserWithEmailAndPassword(auth, email, password);
+	const signup = async (name: string, email: string, password: string) => {
+		try {
+			const userCredential = await createUserWithEmailAndPassword(
+				auth,
+				email,
+				password
+			);
+			const user = userCredential.user;
+
+			if (user) {
+				await updateProfile(user, {
+					displayName: name,
+				});
+				console.log('User profile updated with displayName:', name);
+			}
+
+			return userCredential;
+		} catch (error) {
+			console.error('Error during sign up:', error);
+			throw error;
+		}
 	};
 
 	const login = (email: string, password: string) => {

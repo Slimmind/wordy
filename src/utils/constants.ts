@@ -10,6 +10,7 @@ export type ItemDetailType = {
 	id: string;
 	value?: string;
 	wordId?: string;
+	translations?: ItemDetailType[];
 };
 
 export type ItemType = {
