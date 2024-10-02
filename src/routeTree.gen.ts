@@ -17,7 +17,6 @@ import { Route as IndexImport } from './routes/index'
 
 // Create Virtual Routes
 
-const UpdateProfileLazyImport = createFileRoute('/update-profile')()
 const SignupLazyImport = createFileRoute('/signup')()
 const SearchLazyImport = createFileRoute('/search')()
 const ProfileLazyImport = createFileRoute('/profile')()
@@ -33,13 +32,6 @@ const ItemsItemIdLazyImport = createFileRoute('/items/$itemId')()
 const EditItemIdLazyImport = createFileRoute('/edit/$itemId')()
 
 // Create/Update Routes
-
-const UpdateProfileLazyRoute = UpdateProfileLazyImport.update({
-  path: '/update-profile',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/update-profile.lazy').then((d) => d.Route),
-)
 
 const SignupLazyRoute = SignupLazyImport.update({
   path: '/signup',
@@ -158,13 +150,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignupLazyImport
       parentRoute: typeof rootRoute
     }
-    '/update-profile': {
-      id: '/update-profile'
-      path: '/update-profile'
-      fullPath: '/update-profile'
-      preLoaderRoute: typeof UpdateProfileLazyImport
-      parentRoute: typeof rootRoute
-    }
     '/edit/$itemId': {
       id: '/edit/$itemId'
       path: '/edit/$itemId'
@@ -213,7 +198,6 @@ export const routeTree = rootRoute.addChildren({
   ProfileLazyRoute,
   SearchLazyRoute,
   SignupLazyRoute,
-  UpdateProfileLazyRoute,
   EditItemIdLazyRoute,
   ItemsItemIdLazyRoute,
   OwnCollectionUserIdLazyRoute,
@@ -236,7 +220,6 @@ export const routeTree = rootRoute.addChildren({
         "/profile",
         "/search",
         "/signup",
-        "/update-profile",
         "/edit/$itemId",
         "/items/$itemId",
         "/own-collection/$userId",
@@ -264,9 +247,6 @@ export const routeTree = rootRoute.addChildren({
     },
     "/signup": {
       "filePath": "signup.lazy.tsx"
-    },
-    "/update-profile": {
-      "filePath": "update-profile.lazy.tsx"
     },
     "/edit/$itemId": {
       "filePath": "edit.$itemId.lazy.tsx"

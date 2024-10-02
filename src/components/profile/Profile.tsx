@@ -1,5 +1,5 @@
 import { useState, lazy } from 'react';
-import { Link, useNavigate } from '@tanstack/react-router';
+import { useNavigate } from '@tanstack/react-router';
 import { useAuth } from '../../contexts/auth.context';
 import './profile.styles.css';
 
@@ -40,9 +40,6 @@ export const Profile = () => {
 				<strong>Email: </strong>
 				{currentUser?.email}
 			</Block>
-			<Link to='/update-profile' className='btn btn--wide'>
-				Update Profile
-			</Link>
 			<Button mod='bordered wide' onClick={handleLogOut}>
 				Log Out
 			</Button>

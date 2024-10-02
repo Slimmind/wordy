@@ -10,7 +10,6 @@ import './item-form.styles.css';
 const InternalWindow = lazy(() => import('../internal-window'));
 const Button = lazy(() => import('../button'));
 const Input = lazy(() => import('../input'));
-// const ButtonSwitcher = lazy(() => import('../button-switcher'));
 
 export const ItemForm = () => {
 	const { items, addItem, changeItem } = useFirestore();
@@ -73,13 +72,15 @@ export const ItemForm = () => {
 		setField: React.Dispatch<React.SetStateAction<ItemDetailType[]>>,
 		label: string,
 		placeholder: string,
-		inputType: 'text' | 'textarea' = 'text'
+		inputType: 'text' | 'textarea' = 'text',
+		inputName: string
 	) =>
 		fields.map((field, index) => (
 			<Input
 				key={field.id}
 				id={field.id}
 				type={inputType}
+				name={fields.length > 1 ? `${inputName}-${index + 1}` : inputName}
 				label={fields.length > 1 ? `${label}-${index + 1}` : label}
 				placeholder={placeholder}
 				value={field.value}
@@ -163,6 +164,7 @@ export const ItemForm = () => {
 			<form onSubmit={submitForm}>
 				<Input
 					id='original'
+					name='original'
 					label={formView === ItemTypes.WORD ? 'Word' : ItemTypes.PHRASE}
 					placeholder={`${formView === ItemTypes.WORD ? 'Word' : ItemTypes.PHRASE}...`}
 					value={original}
@@ -171,19 +173,29 @@ export const ItemForm = () => {
 				/>
 				{formView === ItemTypes.WORD ? (
 					<>
-						{renderFields(synonyms, setSynonyms, 'Synonym', 'Synonym...')}
+						{renderFields(
+							synonyms,
+							setSynonyms,
+							'Synonym',
+							'Synonym...',
+							'text',
+							'synonym'
+						)}
 						{renderFields(
 							translations,
 							setTranslations,
 							'Translation',
-							'Translation...'
+							'Translation...',
+							'text',
+							'translation'
 						)}
 						{renderFields(
 							examples,
 							setExamples,
 							'Example',
 							'Example...',
-							'textarea'
+							'textarea',
+							'examples'
 						)}
 					</>
 				) : (
@@ -192,7 +204,8 @@ export const ItemForm = () => {
 						setTranslations,
 						'Translation',
 						'Translation...',
-						'textarea'
+						'textarea',
+						'translation'
 					)
 				)}
 				<Button type='submit' mod='wide'>
