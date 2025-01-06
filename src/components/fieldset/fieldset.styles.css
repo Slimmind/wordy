@@ -1,0 +1,18 @@
+fieldset {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: var(--color-main-transparent);
+  border: var(--border-width) solid var(--color-main);
+  border-radius: var(--radius-small);
+}
+
+fieldset .input:last-of-type {
+  margin-bottom: 0;
+}
+
+legend {
+  padding: 5px 10px;
+  background-color: var(--color-main);
+  border-radius: 1rem;
+  color: var(--color-white);
+}

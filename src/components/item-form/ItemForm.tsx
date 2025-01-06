@@ -8,6 +8,7 @@ import ButtonSwitcher from '../button-switcher';
 import './item-form.styles.css';
 
 const InternalWindow = lazy(() => import('../internal-window'));
+const Fieldset = lazy(() => import('../fieldset'));
 const Button = lazy(() => import('../button'));
 const Input = lazy(() => import('../input'));
 
@@ -74,8 +75,8 @@ export const ItemForm = () => {
 		placeholder: string,
 		inputType: 'text' | 'textarea' = 'text',
 		inputName: string
-	) =>
-		fields.map((field, index) => (
+	) => {
+		const renderInput = (field: ItemDetailType, index: number) => (
 			<Input
 				key={field.id}
 				id={field.id}
@@ -94,7 +95,16 @@ export const ItemForm = () => {
 					}
 				/>
 			</Input>
-		));
+		);
+
+		return fields.length > 1 ? (
+			<Fieldset title={label}>
+				<>{fields.map((field, index) => renderInput(field, index))}</>
+			</Fieldset>
+		) : (
+			renderInput(fields[0], 0)
+		);
+	};
 
 	const submitForm = (event: FormEvent) => {
 		event.preventDefault();

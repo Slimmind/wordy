@@ -7,7 +7,7 @@ import React, {
 import clsx from "clsx";
 import "./input.styles.css";
 
-type InputProps = {
+export type InputProps = {
   label?: string;
   id?: string;
   type?: string;
