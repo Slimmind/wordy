@@ -4,7 +4,6 @@
   background-color: var(--color-main-transparent);
   border-radius: var(--radius-small);
 	list-style-position: inside;
-	-webkit-backdrop-filter: blur(7px);
   backdrop-filter: blur(7px);
 	color: var(--color-white);
 	/* box-shadow: 0 0 5px 0 var(--color-dark); */

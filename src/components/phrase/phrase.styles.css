@@ -3,10 +3,9 @@
 	margin-bottom: 10px;
   padding: 10px;
   background-color: var(--color-main-transparent);
+  border: 1px solid var(--color-main-transparent);
   border-radius: var(--radius-small);
 	list-style-position: inside;
-	-webkit-backdrop-filter: blur(7px);
-  backdrop-filter: blur(7px);
 	color: var(--color-white);
 }
 
@@ -45,6 +44,10 @@
 
 .phrase__translation p + p {
   padding-top: 10px;
+}
+
+.phrase__link-wrap {
+  margin-bottom: 10px;
 }
 
 .phrase__link {

@@ -82,7 +82,7 @@ export const ItemForm = () => {
 				id={field.id}
 				type={inputType}
 				name={fields.length > 1 ? `${inputName}-${index + 1}` : inputName}
-				label={fields.length > 1 ? `${label}-${index + 1}` : label}
+				// label={fields.length > 1 ? `${label}-${index + 1}` : label}
 				placeholder={placeholder}
 				value={field.value}
 				onChange={(event) => handleFieldChange(event, index, setField)}
@@ -175,8 +175,8 @@ export const ItemForm = () => {
 				<Input
 					id='original'
 					name='original'
-					label={formView === ItemTypes.WORD ? 'Word' : ItemTypes.PHRASE}
-					placeholder={`${formView === ItemTypes.WORD ? 'Word' : ItemTypes.PHRASE}...`}
+					// label={formView === ItemTypes.WORD ? 'Word' : ItemTypes.PHRASE}
+					placeholder={`${formView === ItemTypes.WORD ? 'Word' : 'Phrase'}...`}
 					value={original}
 					onChange={handleOriginalChange}
 					type={formView === ItemTypes.PHRASE ? 'textarea' : 'text'}

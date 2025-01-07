@@ -14,6 +14,11 @@
 	text-decoration: none;
 }
 
+.btn[disabled] {
+  opacity: .3;
+  pointer-events: none;
+}
+
 .btn--bordered,
 .btn--circle,
 .btn--clean {
@@ -225,4 +230,31 @@
 
 .btn--expand.active::after {
   transform: rotate(45deg)  translate(-1px,-1px);
+}
+
+.btn--listen {
+  padding: 5px 5px 5px 30px;
+  border-radius: var(--radius-main);
+  font-size: 12px;
+}
+
+.btn--listen::before {
+  content: '';
+  position: absolute;
+  top: calc(50% - 10px);
+  left: 4px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-white);
+  border-radius: 50%;
+}
+
+.btn--listen::after {
+  content: '';
+  position: absolute;
+  top: calc(50% - 5px);
+  left: 11px;
+  border: solid transparent;
+  border-width: 5px 5px 5px 9px;
+  border-left-color: var(--color-white)
 }
