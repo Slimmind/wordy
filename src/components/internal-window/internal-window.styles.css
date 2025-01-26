@@ -4,6 +4,26 @@
   overflow: hidden;
 }
 
+.internal-window--magic::before,
+.internal-window--magic::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 10px);
+  height: 100%;
+  border-radius: 1rem;
+  opacity: .5;
+}
+
+.internal-window--magic::before {
+  animation: magic 10s linear infinite forwards;
+}
+
+.internal-window--magic::after {
+  animation: magic 20s linear infinite forwards;
+}
+
 .internal-window__wrapper {
   display: flex;
   flex-direction: column;
