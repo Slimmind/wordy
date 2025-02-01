@@ -29,6 +29,7 @@ const OwnCollectionUserIdLazyImport = createFileRoute(
   '/own-collection/$userId',
 )()
 const ItemsItemIdLazyImport = createFileRoute('/items/$itemId')()
+const ExtendItemIdLazyImport = createFileRoute('/extend/$itemId')()
 const EditItemIdLazyImport = createFileRoute('/edit/$itemId')()
 
 // Create/Update Routes
@@ -103,6 +104,14 @@ const ItemsItemIdLazyRoute = ItemsItemIdLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/items/$itemId.lazy').then((d) => d.Route))
 
+const ExtendItemIdLazyRoute = ExtendItemIdLazyImport.update({
+  id: '/extend/$itemId',
+  path: '/extend/$itemId',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/extend.$itemId.lazy').then((d) => d.Route),
+)
+
 const EditItemIdLazyRoute = EditItemIdLazyImport.update({
   id: '/edit/$itemId',
   path: '/edit/$itemId',
@@ -169,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EditItemIdLazyImport
       parentRoute: typeof rootRoute
     }
+    '/extend/$itemId': {
+      id: '/extend/$itemId'
+      path: '/extend/$itemId'
+      fullPath: '/extend/$itemId'
+      preLoaderRoute: typeof ExtendItemIdLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/items/$itemId': {
       id: '/items/$itemId'
       path: '/items/$itemId'
@@ -211,6 +227,7 @@ export interface FileRoutesByFullPath {
   '/search': typeof SearchLazyRoute
   '/signup': typeof SignupLazyRoute
   '/edit/$itemId': typeof EditItemIdLazyRoute
+  '/extend/$itemId': typeof ExtendItemIdLazyRoute
   '/items/$itemId': typeof ItemsItemIdLazyRoute
   '/own-collection/$userId': typeof OwnCollectionUserIdLazyRoute
   '/items': typeof ItemsIndexLazyRoute
@@ -226,6 +243,7 @@ export interface FileRoutesByTo {
   '/search': typeof SearchLazyRoute
   '/signup': typeof SignupLazyRoute
   '/edit/$itemId': typeof EditItemIdLazyRoute
+  '/extend/$itemId': typeof ExtendItemIdLazyRoute
   '/items/$itemId': typeof ItemsItemIdLazyRoute
   '/own-collection/$userId': typeof OwnCollectionUserIdLazyRoute
   '/items': typeof ItemsIndexLazyRoute
@@ -242,6 +260,7 @@ export interface FileRoutesById {
   '/search': typeof SearchLazyRoute
   '/signup': typeof SignupLazyRoute
   '/edit/$itemId': typeof EditItemIdLazyRoute
+  '/extend/$itemId': typeof ExtendItemIdLazyRoute
   '/items/$itemId': typeof ItemsItemIdLazyRoute
   '/own-collection/$userId': typeof OwnCollectionUserIdLazyRoute
   '/items/': typeof ItemsIndexLazyRoute
@@ -259,6 +278,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/signup'
     | '/edit/$itemId'
+    | '/extend/$itemId'
     | '/items/$itemId'
     | '/own-collection/$userId'
     | '/items'
@@ -273,6 +293,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/signup'
     | '/edit/$itemId'
+    | '/extend/$itemId'
     | '/items/$itemId'
     | '/own-collection/$userId'
     | '/items'
@@ -287,6 +308,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/signup'
     | '/edit/$itemId'
+    | '/extend/$itemId'
     | '/items/$itemId'
     | '/own-collection/$userId'
     | '/items/'
@@ -303,6 +325,7 @@ export interface RootRouteChildren {
   SearchLazyRoute: typeof SearchLazyRoute
   SignupLazyRoute: typeof SignupLazyRoute
   EditItemIdLazyRoute: typeof EditItemIdLazyRoute
+  ExtendItemIdLazyRoute: typeof ExtendItemIdLazyRoute
   ItemsItemIdLazyRoute: typeof ItemsItemIdLazyRoute
   OwnCollectionUserIdLazyRoute: typeof OwnCollectionUserIdLazyRoute
   ItemsIndexLazyRoute: typeof ItemsIndexLazyRoute
@@ -318,6 +341,7 @@ const rootRouteChildren: RootRouteChildren = {
   SearchLazyRoute: SearchLazyRoute,
   SignupLazyRoute: SignupLazyRoute,
   EditItemIdLazyRoute: EditItemIdLazyRoute,
+  ExtendItemIdLazyRoute: ExtendItemIdLazyRoute,
   ItemsItemIdLazyRoute: ItemsItemIdLazyRoute,
   OwnCollectionUserIdLazyRoute: OwnCollectionUserIdLazyRoute,
   ItemsIndexLazyRoute: ItemsIndexLazyRoute,
@@ -342,6 +366,7 @@ export const routeTree = rootRoute
         "/search",
         "/signup",
         "/edit/$itemId",
+        "/extend/$itemId",
         "/items/$itemId",
         "/own-collection/$userId",
         "/items/",
@@ -371,6 +396,9 @@ export const routeTree = rootRoute
     },
     "/edit/$itemId": {
       "filePath": "edit.$itemId.lazy.tsx"
+    },
+    "/extend/$itemId": {
+      "filePath": "extend.$itemId.lazy.tsx"
     },
     "/items/$itemId": {
       "filePath": "items/$itemId.lazy.tsx"
