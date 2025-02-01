@@ -4,6 +4,7 @@
   margin: 5px;
   background-color: var(--color-main-transparent-2);
   border-radius: 1.5rem;
+  box-shadow: var(--shadow);
 }
 
 .word a {

@@ -4,9 +4,7 @@
   background-color: var(--color-main-transparent);
   border-radius: var(--radius-small);
 	list-style-position: inside;
-  backdrop-filter: blur(7px);
 	color: var(--color-white);
-	/* box-shadow: 0 0 5px 0 var(--color-dark); */
 }
 
 .block:last-child:not(:only-child) {
@@ -15,6 +13,7 @@
 
 .block__title {
   margin-bottom: 10px;
+  padding-bottom: 10px;
   border-bottom: 4px solid var(--color-white-transparent);
   font-weight: 700;
 }

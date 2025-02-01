@@ -7,8 +7,8 @@
   margin-right: 10px;
   padding: 5px;
   background-color: var(--color-main-transparent);
-  -webkit-backdrop-filter: blur(7px);
-  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: blur(var(--blur));
   border-radius: 1rem;
   scroll-snap-align: start;
 }
@@ -16,6 +16,8 @@
 .word__group {
   display: flex;
   flex-wrap: wrap;
+  max-height: 100%;
+  overflow-y: auto;
 }
 
 .word__group::before {

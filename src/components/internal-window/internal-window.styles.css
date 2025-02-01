@@ -1,6 +1,8 @@
 .internal-window {
   position: relative;
+  max-width: var(--max-window-width);
   height: 100%;
+  margin: 0 auto;
   overflow: hidden;
 }
 
@@ -11,8 +13,9 @@
   margin-right: 10px;
   border-radius: 1rem;
   background-color: var(--color-main-transparent);
-  -webkit-backdrop-filter: blur(7px);
-  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: blur(var(--blur));
+  box-shadow: var(--shadow);
   overflow: hidden;
 }
 

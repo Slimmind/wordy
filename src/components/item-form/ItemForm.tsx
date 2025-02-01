@@ -4,6 +4,7 @@ import { useNavigate, useParams } from '@tanstack/react-router';
 import { useAuth } from '../../contexts/auth.context';
 import { useFirestore } from '../../contexts/firestore.context';
 import { ItemType, ItemDetailType, ItemTypes } from '../../utils/constants';
+import { extendItem } from '../../utils/extend-item';
 import ButtonSwitcher from '../button-switcher';
 import './item-form.styles.css';
 
@@ -11,30 +12,40 @@ const InternalWindow = lazy(() => import('../internal-window'));
 const Fieldset = lazy(() => import('../fieldset'));
 const Button = lazy(() => import('../button'));
 const Input = lazy(() => import('../input'));
+const AiIcon = lazy(() => import('../../icons/ai-icon'));
 
 export const ItemForm = () => {
 	const { items, addItem, changeItem } = useFirestore();
 	const { currentUser } = useAuth();
 	const { itemId } = useParams({ strict: false });
 	const navigate = useNavigate();
+	const [isLoading, setIsLoading] = useState(false);
+	const [isMagicComplete, setIsMagicComplete] = useState(false);
+	const [error, setError] = useState('');
 
 	const currentItem = items.find((item) => item.id === itemId);
-	const initializeFields = (arr: ItemDetailType[] = []): ItemDetailType[] =>
-		arr.length > 0 ? arr : [{ id: nanoid(), value: '' }];
+	const initializeFields = (items?: ItemDetailType[]): ItemDetailType[] => {
+		if (!items || items.length === 0) return [{ id: nanoid(), value: '' }];
+		return items.map((item) => ({
+			...item,
+			id: item.id || crypto.randomUUID(),
+		}));
+	};
+
+	const [translations, setTranslations] = useState<ItemDetailType[]>(
+		initializeFields(currentItem?.translations) || [{ id: nanoid(), value: '' }]
+	);
+	const [synonyms, setSynonyms] = useState<ItemDetailType[]>(
+		initializeFields(currentItem?.synonyms) || [{ id: nanoid(), value: '' }]
+	);
+	const [examples, setExamples] = useState<ItemDetailType[]>(
+		initializeFields(currentItem?.examples) || [{ id: nanoid(), value: '' }]
+	);
 
 	const [formView, setFormView] = useState<ItemTypes.WORD | ItemTypes.PHRASE>(
 		currentItem ? currentItem.type : ItemTypes.WORD
 	);
 	const [original, setOriginal] = useState<string>(currentItem?.original ?? '');
-	const [synonyms, setSynonyms] = useState<ItemDetailType[]>(
-		initializeFields(currentItem?.synonyms)
-	);
-	const [translations, setTranslations] = useState<ItemDetailType[]>(
-		initializeFields(currentItem?.translations)
-	);
-	const [examples, setExamples] = useState<ItemDetailType[]>(
-		initializeFields(currentItem?.examples)
-	);
 
 	const handleFieldChange = (
 		event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -76,13 +87,16 @@ export const ItemForm = () => {
 		inputType: 'text' | 'textarea' = 'text',
 		inputName: string
 	) => {
+		if (!fields || fields.length === 0) {
+			fields = [{ id: nanoid(), value: '' }];
+		}
+
 		const renderInput = (field: ItemDetailType, index: number) => (
 			<Input
 				key={field.id}
 				id={field.id}
 				type={inputType}
 				name={fields.length > 1 ? `${inputName}-${index + 1}` : inputName}
-				// label={fields.length > 1 ? `${label}-${index + 1}` : label}
 				placeholder={placeholder}
 				value={field.value}
 				onChange={(event) => handleFieldChange(event, index, setField)}
@@ -160,8 +174,55 @@ export const ItemForm = () => {
 		setExamples(initializeFields());
 	};
 
+	const handleMagicClick = async () => {
+		if (!original || isLoading) return;
+
+		setIsLoading(true);
+		setError('');
+
+		try {
+			const tempItem: ItemType = {
+				type: formView,
+				original: original.toLowerCase(),
+				letter: original.charAt(0).toLowerCase(),
+				translations: [],
+				synonyms: [],
+				examples: [],
+			};
+
+			const missingParts = {
+				original,
+				canBeExtended: true,
+				translations: {
+					missingQuantity: 3,
+					existing: [],
+				},
+				synonyms: {
+					missingQuantity: 3,
+					existing: [],
+				},
+				examples: [],
+			};
+
+			const extendedItem = await extendItem(tempItem, missingParts);
+
+			setTranslations(initializeFields(extendedItem.translations));
+			setSynonyms(initializeFields(extendedItem.synonyms));
+			setExamples(initializeFields(extendedItem.examples));
+			setIsMagicComplete(true);
+		} catch (error) {
+			console.error('Error extending item:', error);
+			setError('Failed to extend item');
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
 	return (
-		<InternalWindow title={`${itemId ? 'Edit' : 'Add'} ${formView}`}>
+		<InternalWindow
+			title={`${itemId ? 'Edit' : 'Add'} ${formView}`}
+			mod='item-form'
+		>
 			{!itemId && (
 				<ButtonSwitcher
 					firstLabel='Word'
@@ -175,12 +236,13 @@ export const ItemForm = () => {
 				<Input
 					id='original'
 					name='original'
-					// label={formView === ItemTypes.WORD ? 'Word' : ItemTypes.PHRASE}
 					placeholder={`${formView === ItemTypes.WORD ? 'Word' : 'Phrase'}...`}
 					value={original}
 					onChange={handleOriginalChange}
 					type={formView === ItemTypes.PHRASE ? 'textarea' : 'text'}
+					disabled={isLoading}
 				/>
+				{error && <div className='item-form__error'>{error}</div>}
 				{formView === ItemTypes.WORD ? (
 					<>
 						{renderFields(
@@ -205,22 +267,26 @@ export const ItemForm = () => {
 							'Example',
 							'Example...',
 							'textarea',
-							'examples'
+							'example'
 						)}
 					</>
-				) : (
-					renderFields(
-						translations,
-						setTranslations,
-						'Translation',
-						'Translation...',
-						'textarea',
-						'translation'
-					)
-				)}
-				<Button type='submit' mod='wide'>
-					{itemId ? 'Save Changes' : 'Submit'}
-				</Button>
+				) : null}
+				<>
+					{!isMagicComplete && (
+						<Button
+							type='button'
+							mod='wide bordered magic'
+							onClick={handleMagicClick}
+							disabled={isLoading}
+						>
+							<AiIcon />
+							{isLoading ? 'Loading...' : 'Magic'}
+						</Button>
+					)}
+					<Button mod='wide' type='submit' disabled={isLoading || !original}>
+						{itemId ? 'Save' : 'Add'}
+					</Button>
+				</>
 			</form>
 		</InternalWindow>
 	);

@@ -5,6 +5,9 @@
 .main-footer .block {
 	display: flex;
   justify-content: space-between;
-	margin-bottom: 0;
+  max-width: var(--max-window-width);
+	margin: 0 auto;
+  backdrop-filter: blur(var(--blur));
 	border-radius: 1.5rem;
+  box-shadow: var(--shadow);
 }

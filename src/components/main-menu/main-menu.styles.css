@@ -6,11 +6,12 @@
 	justify-content: flex-end;
   left: 0;
   width: 100%;
+  max-width: var(--max-window-width);
   height: calc(100dvh - 110px);
   max-height: calc(100dvh - 110px);
   background-color: var(--color-main-transparent-2);
-  -webkit-backdrop-filter: blur(7px);
-  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: blur(var(--blur));
   border-radius: 1rem;
   transition:
     transform 0.2s,

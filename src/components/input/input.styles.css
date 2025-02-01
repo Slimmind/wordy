@@ -10,10 +10,11 @@ input,
 textarea {
   display: block;
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   background-color: var(--color-bg);
-  border: var(--border-width) solid var(--color-main);
+  border: 2px solid var(--color-main);
   border-radius: var(--radius-small);
+  box-shadow: var(--shadow);
   color: var(--color-main);
   font-family: monospace;
   font-size: 18px;
@@ -28,7 +29,7 @@ textarea::placeholder {
 }
 
 textarea {
-  min-height: 110px;
+  min-height: 70px;
 }
 
 label {
