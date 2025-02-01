@@ -5,7 +5,7 @@
   background-color: var(--color-main);
 	border: var(--border-width) solid var(--color-main);
   border-radius: var(--radius-small);
-  box-shadow: 0 0 5px 0 var(--color-black-transparent);
+  box-shadow: var(--shadow);
   color: var(--color-white);
   cursor: pointer;
   font: inherit;
@@ -32,7 +32,7 @@
   overflow: hidden;
 }
 
-:where(.btn--bordered, .btn--circle, .btn--clean) svg {
+:where(.btn--circle, .btn--clean) svg {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -55,7 +55,15 @@
 .btn--bordered {
 	height: auto;
 	padding: 10px;
+  background-color: var(--color-white-transparent);
 	color: var(--color-main);
+  text-shadow: 0 0 2px var(--color-white);
+}
+
+.btn--bordered svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
 }
 
 .btn--bg {
