@@ -74,7 +74,7 @@ export const SignUpForm = ({ userId = '' }: SignUpFormProps) => {
 				<Input
 					type='text'
 					id='name'
-					label='Name'
+					placeholder='Name'
 					name='name'
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
@@ -86,7 +86,7 @@ export const SignUpForm = ({ userId = '' }: SignUpFormProps) => {
 				<Input
 					type='email'
 					id='email'
-					label='Email'
+					placeholder='Email'
 					name='email'
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
@@ -100,7 +100,7 @@ export const SignUpForm = ({ userId = '' }: SignUpFormProps) => {
 				<Input
 					type='password'
 					id='password'
-					label='Password'
+					placeholder='Password'
 					name='password'
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
@@ -114,7 +114,7 @@ export const SignUpForm = ({ userId = '' }: SignUpFormProps) => {
 				<Input
 					type='password'
 					id='passwordConfirmation'
-					label='Password Confirmation'
+					placeholder='Password Confirmation'
 					name='confirmPassword'
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}

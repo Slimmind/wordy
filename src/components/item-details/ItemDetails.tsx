@@ -4,6 +4,7 @@ import { useFirestore } from '../../contexts/firestore.context';
 import { useAuth } from '../../contexts/auth.context';
 import { ItemType } from '../../utils/constants';
 import { checkIsOwner } from '../../utils/check-is-owner';
+import { checkItemForExtending } from '../../utils/check-item-for-extending';
 
 const DeleteIcon = lazy(() => import('../../icons/delete-icon'));
 const EditIcon = lazy(() => import('../../icons/edit-icon'));
@@ -31,6 +32,7 @@ export const ItemDetails = ({ itemId }: ItemDetailsProps) => {
 			const itemData = await readItem(itemId);
 			if (itemData) {
 				setItem(itemData);
+				console.log('EXTENDING: ', checkItemForExtending(itemData));
 				if (currentUser) {
 					const isOwner = checkIsOwner(itemData.owners ?? [], currentUser.uid);
 					setIsWordInOwnCollection(isOwner);

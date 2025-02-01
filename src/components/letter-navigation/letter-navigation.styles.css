@@ -1,22 +1,25 @@
 .letter__navigation {
+  max-width: var(--max-window-width);
   height: 52px;
-  margin-bottom: 10px;
-	padding-right: 10px;
+  margin: 0 auto 10px;
+  padding-right: 10px;
 }
 .letter__navigation .block {
   margin: 0;
-	border-radius: 1.5rem;
+  border-radius: 1.5rem;
+  backdrop-filter: blur(var(--blur));
+  box-shadow: var(--shadow);
 }
 
 .letter__navigation .block li {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .letter__navigation-list {
   display: flex;
   flex-wrap: nowrap;
   max-width: 100%;
-  overflow-x: scroll;
+  overflow-x: auto;
   scroll-snap-type: x mandatory;
 }
 
@@ -28,9 +31,9 @@
   display: block;
   width: 32px;
   height: 32px;
-  padding: 5px 20px;
   border-radius: 50%;
   color: var(--color-main);
+  font-size: 25px;
   font-weight: 700;
   text-align: center;
   text-decoration: none;
@@ -39,6 +42,6 @@
 
 .letter__navigation-list-item a:active {
   background-color: var(--color-main-transparent);
-  -webkit-backdrop-filter: blur(7px);
-  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: blur(var(--blur));
 }

@@ -57,7 +57,7 @@ export const LoginForm = () => {
         <Input
           type="email"
           id="email"
-          label="Email"
+          placeholder="Email"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.email}
@@ -70,7 +70,7 @@ export const LoginForm = () => {
         <Input
           type="password"
           id="password"
-          label="Password"
+          placeholder="Password"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
