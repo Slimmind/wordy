@@ -15,10 +15,10 @@ const Input = lazy(() => import('../input'));
 const AiIcon = lazy(() => import('../../icons/ai-icon'));
 
 export const ItemForm = () => {
+	const navigate = useNavigate();
 	const { items, addItem, changeItem } = useFirestore();
 	const { currentUser } = useAuth();
 	const { itemId } = useParams({ strict: false });
-	const navigate = useNavigate();
 	const [isLoading, setIsLoading] = useState(false);
 	const [isMagicComplete, setIsMagicComplete] = useState(false);
 	const [error, setError] = useState('');
@@ -99,15 +99,25 @@ export const ItemForm = () => {
 				name={fields.length > 1 ? `${inputName}-${index + 1}` : inputName}
 				placeholder={placeholder}
 				value={field.value}
+				disabled={isLoading}
 				onChange={(event) => handleFieldChange(event, index, setField)}
 			>
-				<Button
-					type='button'
-					mod={index === 0 ? 'plus' : 'minus'}
-					onClick={() =>
-						index === 0 ? addField(setField) : removeField(setField, field.id)
-					}
-				/>
+				{fields.length > 1 && (
+					<Button
+						type='button'
+						mod='minus'
+						disabled={isLoading}
+						onClick={() => removeField(setField, field.id)}
+					/>
+				)}
+				{index === fields.length - 1 && (
+					<Button
+						type='button'
+						mod='plus'
+						disabled={isLoading}
+						onClick={() => addField(setField)}
+					/>
+				)}
 			</Input>
 		);
 
@@ -223,7 +233,7 @@ export const ItemForm = () => {
 			title={`${itemId ? 'Edit' : 'Add'} ${formView}`}
 			mod='item-form'
 		>
-			{!itemId && (
+			{!itemId && !original && (
 				<ButtonSwitcher
 					firstLabel='Word'
 					secondLabel='Phrase'
@@ -242,6 +252,14 @@ export const ItemForm = () => {
 					type={formView === ItemTypes.PHRASE ? 'textarea' : 'text'}
 					disabled={isLoading}
 				/>
+				{renderFields(
+					translations,
+					setTranslations,
+					'Translation',
+					'Translation...',
+					formView === ItemTypes.PHRASE ? 'textarea' : 'text',
+					'translation'
+				)}
 				{error && <div className='item-form__error'>{error}</div>}
 				{formView === ItemTypes.WORD ? (
 					<>
@@ -254,14 +272,6 @@ export const ItemForm = () => {
 							'synonym'
 						)}
 						{renderFields(
-							translations,
-							setTranslations,
-							'Translation',
-							'Translation...',
-							'text',
-							'translation'
-						)}
-						{renderFields(
 							examples,
 							setExamples,
 							'Example',
@@ -271,22 +281,21 @@ export const ItemForm = () => {
 						)}
 					</>
 				) : null}
-				<>
-					{!isMagicComplete && (
+				<div className='item-form__controls'>
+					<Button mod='wide' type='submit' disabled={isLoading || !original}>
+						{itemId ? 'Save' : 'Add'}
+					</Button>
+					{!isMagicComplete && original && (
 						<Button
 							type='button'
-							mod='wide bordered magic'
+							mod='circle magic'
 							onClick={handleMagicClick}
 							disabled={isLoading}
 						>
 							<AiIcon />
-							{isLoading ? 'Loading...' : 'Magic'}
 						</Button>
 					)}
-					<Button mod='wide' type='submit' disabled={isLoading || !original}>
-						{itemId ? 'Save' : 'Add'}
-					</Button>
-				</>
+				</div>
 			</form>
 		</InternalWindow>
 	);

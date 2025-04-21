@@ -1,15 +1,16 @@
 .btn {
   position: relative;
-  padding: 10px;
+  padding: 5px 10px;
   border: none;
   background-color: var(--color-main);
 	border: var(--border-width) solid var(--color-main);
-  border-radius: var(--radius-small);
+  border-radius: var(--radius-main);
   box-shadow: var(--shadow);
   color: var(--color-white);
   cursor: pointer;
   font: inherit;
 	font-weight: bold;
+  line-height: 22px;
 	text-align: center;
 	text-decoration: none;
 }
@@ -47,14 +48,12 @@
 .btn--wide {
 	display: block;
 	width: 100%;
-  /* margin-bottom: 20px; */
 	color: var(--color-white);
-	line-height: 32px;
 }
 
 .btn--bordered {
 	height: auto;
-	padding: 10px;
+  padding: 5px 10px;
   background-color: var(--color-white-transparent);
 	color: var(--color-main);
   text-shadow: 0 0 2px var(--color-white);

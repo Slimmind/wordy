@@ -53,14 +53,14 @@ export type MissingParts = {
 	original: string;
 	canBeExtended: boolean;
 	translations?: {
-		missingQuantity: number;
-		existing: string[];
+		missingQuantity?: number;
+		existing?: string[];
 	};
 	synonyms?: {
 		missingQuantity: number;
 		existing: string[];
 	};
-	examples: ItemDetailType[];
+	examples?: ItemDetailType[];
 };
 
 export type ExtendResponse = {
@@ -70,4 +70,9 @@ export type ExtendResponse = {
 		value: string;
 		translation: string;
 	}>;
+};
+
+export type MissingPartInfo = {
+	missingQuantity: number;
+	existing: string[];
 };

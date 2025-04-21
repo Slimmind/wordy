@@ -25,18 +25,20 @@
 
 .letter__navigation-list-item {
   scroll-snap-align: start;
+  margin-inline: 10px;
 }
 
 .letter__navigation-list-item a {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 32px;
   height: 32px;
-  padding: 5px 20px;
   border-radius: 50%;
   color: var(--color-main);
   font-weight: 700;
-  text-align: center;
   text-decoration: none;
+  text-shadow: 0 0 1px var(--color-white);
   transition: background-color 0.3s;
 }
 

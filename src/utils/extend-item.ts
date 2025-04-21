@@ -115,7 +115,7 @@ export const extendItem = async (
 	missingParts: MissingParts
 ): Promise<ItemType> => {
 	try {
-		const prompt = createPrompt(missingParts);
+		const prompt = createPrompt(missingParts, item.type);
 		const newData = await sendPromptToAPI(prompt);
 		return updateItemWithNewData(item, newData);
 	} catch (error) {

@@ -1,9 +1,9 @@
 import { useState, lazy } from 'react';
 import { clsx } from 'clsx';
 import { ItemType, ItemDetailType } from '../../utils/constants';
-import './phrase.styles.css';
 import { Link } from '@tanstack/react-router';
 import { useTts } from 'tts-react';
+import './phrase.styles.css';
 
 const Button = lazy(() => import('../button'));
 
@@ -14,10 +14,10 @@ type PhraseProps = {
 export const Phrase = ({ data }: PhraseProps) => {
 	const [isTranslationShown, setIsTranslationShown] = useState(false);
 	const isPhraseType = 'original' in data;
-	const hasTranslations = isPhraseType && data.translations?.length > 0;
+	const hasTranslations = data.translations && data.translations.length > 0;
 
 	const phraseClasses = clsx('phrase', {
-		'phrase--with-translation': isPhraseType && hasTranslations,
+		'phrase--with-translation': hasTranslations,
 	});
 
 	const translationClasses = clsx('phrase__translation', {
@@ -35,7 +35,7 @@ export const Phrase = ({ data }: PhraseProps) => {
 		markTextAsSpoken: false,
 	});
 
-	return 'original' in data ? (
+	return (
 		<li className={phraseClasses}>
 			<header className='phrase__header'>
 				<p className='phrase__link-wrap'>
@@ -65,7 +65,7 @@ export const Phrase = ({ data }: PhraseProps) => {
 				</Button>
 			</header>
 			<div className='phrase__body'>
-				{hasTranslations && (
+				{data.translations && (
 					<>
 						<div className={translationClasses}>
 							{data.translations.map((translation) => (
@@ -75,26 +75,6 @@ export const Phrase = ({ data }: PhraseProps) => {
 					</>
 				)}
 			</div>
-		</li>
-	) : (
-		<li className='phrase'>
-			<p className='phrase__link-wrap'>
-				<Link
-					to={`/items/$itemId`}
-					params={{ itemId: data.wordId as string }}
-					className='phrase__link'
-				>
-					{ttsChildren}
-				</Link>
-			</p>
-			<Button
-				aria-label='listen to the phrase'
-				mod='listen'
-				disabled={state.isPlaying}
-				onClick={play}
-			>
-				Listen
-			</Button>
 		</li>
 	);
 };

@@ -1,15 +1,17 @@
 .button-switcher {
 	margin-bottom: 20px;
-	border-radius: var(--radius-small);
+	border-radius: var(--radius-main);
 	box-shadow: 0 0 5px 0 var(--color-black-transparent);
 }
 
 .button-switcher .btn {
 	width: 50%;
-	border-radius: var(--radius-small) 0 0 var(--radius-small);
+  min-height: 40px;
+	border-radius: var(--radius-main) 0 0 var(--radius-main);
+  border-width: 2px;
 	box-shadow: none;
 }
 
 .button-switcher .btn + .btn {
-	border-radius: 0 var(--radius-small) var(--radius-small) 0;
+	border-radius: 0 var(--radius-main) var(--radius-main) 0;
 }

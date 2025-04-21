@@ -6,17 +6,8 @@ import {
 	ItemTypes,
 	MissingParts,
 	ItemDetailType,
+	MissingPartInfo,
 } from './constants';
-
-type MissingPartInfo = {
-	missingQuantity: number;
-	existing: string[];
-};
-
-type MissingPartsOfWord = {
-	translations: MissingPartInfo;
-	synonyms: MissingPartInfo;
-};
 
 /**
  * Вычисляет количество недостающих элементов
@@ -49,10 +40,7 @@ const createMissingPartInfo = (
 const createExamplesWithTranslations = (
 	examples: ItemDetailType[]
 ): ItemDetailType[] => {
-	const examplesQuantity = Math.max(
-		examples.length,
-		desiredAmountOfExamples
-	);
+	const examplesQuantity = Math.max(examples.length, desiredAmountOfExamples);
 
 	return Array.from({ length: examplesQuantity }, (_, index) => {
 		const existingExample = examples[index];
@@ -76,10 +64,12 @@ const createExamplesWithTranslations = (
  */
 const canItemBeExtended = (
 	missingTranslations: number,
-	missingSynonyms: number,
-	missingExamples: number
+	missingSynonyms?: number,
+	missingExamples?: number
 ): boolean =>
-	missingTranslations > 0 || missingSynonyms > 0 || missingExamples > 0;
+	(missingSynonyms && missingSynonyms > 0) ||
+	(missingExamples && missingExamples > 0) ||
+	missingTranslations > 0;
 
 /**
  * Проверяет элемент на возможность расширения и возвращает информацию о недостающих частях
@@ -91,19 +81,26 @@ export const checkItemForExtending = (item: ItemType): MissingParts => {
 	const missingSynonyms = calculateMissingQuantity(synonyms.length);
 	const missingExamples = calculateMissingExamplesQuantity(examples.length);
 
-	const missingPartsOfWord: MissingPartsOfWord = {
+	const missingPartsOfWord = {
 		translations: createMissingPartInfo(translations, translations.length),
 		synonyms: createMissingPartInfo(synonyms, synonyms.length),
+		examples: createExamplesWithTranslations(examples),
 	};
+
+	const missingPartsOfPhrase = {
+		translations: createMissingPartInfo(translations, translations.length),
+	};
+
+	const canBeExtended =
+		item.type === ItemTypes.WORD
+			? canItemBeExtended(missingTranslations, missingSynonyms, missingExamples)
+			: canItemBeExtended(missingTranslations);
 
 	return {
 		original,
-		canBeExtended: canItemBeExtended(
-			missingTranslations,
-			missingSynonyms,
-			missingExamples
-		),
-		...(item.type === ItemTypes.WORD && missingPartsOfWord),
-		examples: createExamplesWithTranslations(examples),
+		canBeExtended,
+		...(item.type === ItemTypes.WORD
+			? missingPartsOfWord
+			: missingPartsOfPhrase),
 	};
 };

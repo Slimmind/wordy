@@ -20,7 +20,7 @@
   --color-red-transparent: rgba(128, 0, 0, 0.3);
   --color-green: rgb(46, 139, 87);
   --color-green-transparent: rgba(46, 139, 87, 0.3);
-  --radius-main: 16px;
+  --radius-main: 1.5rem;
   --radius-small: 8px;
 	--border-width: 4px;
   --blur: 10px;
@@ -38,7 +38,7 @@ html {
 }
 
 body {
-	background: var(--color-bg) url("./assets/bg.png") no-repeat 50% 50% / contain;
+	background: var(--color-bg);
 }
 
 #root {

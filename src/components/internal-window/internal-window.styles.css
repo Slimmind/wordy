@@ -15,7 +15,6 @@
   background-color: var(--color-main-transparent);
   -webkit-backdrop-filter: blur(var(--blur));
   backdrop-filter: blur(var(--blur));
-  box-shadow: var(--shadow);
   overflow: hidden;
 }
 
