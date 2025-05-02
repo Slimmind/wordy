@@ -27,6 +27,7 @@
   --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   --max-window-width: 760px;
   --max-panel-width: 480px;
+  --timing-function: ease-out;
 }
 
 html {

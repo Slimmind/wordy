@@ -7,7 +7,7 @@
   margin-right: 10px;
   padding: 5px;
   background-color: var(--color-main-transparent);
-  -webkit-backdrop-filter: blur(var(--blur));
+
   backdrop-filter: blur(var(--blur));
   border-radius: 1rem;
   scroll-snap-align: start;

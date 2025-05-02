@@ -7,25 +7,27 @@
   left: 0;
   width: 100%;
   max-width: var(--max-window-width);
-  height: calc(100dvh - 110px);
-  max-height: calc(100dvh - 110px);
-  background-color: var(--color-main-transparent-2);
-  -webkit-backdrop-filter: blur(var(--blur));
-  backdrop-filter: blur(var(--blur));
-  border-radius: 1rem;
+  height: calc(50dvh - 100px);
+  max-height: calc(50dvh - 100px);
+  background-color: var(--color-main);
+  border-radius: 50% 50% 0 0;
+  filter: blur(10px);
   transition:
-    transform 0.2s,
-    opacity 0.2s;
+    border-radius .3s var(--timing-function),
+    transform 0.3s var(--timing-function),
+    opacity 0.3s var(--timing-function) .1s,
+    filter .3s var(--timing-function);
   opacity: 0;
-  box-shadow: 0 0 10px 0 var(--color-bg-dark);
   pointer-events: none;
   overflow: auto;
   z-index: -1;
 }
 
 .main-menu--visible {
+  border-radius: var(--radius-main) var(--radius-main) 0 0;
+  filter: blur(0);
   opacity: 1;
-  transform: translateY(-60px);
+  transform: translateY(-50px);
   pointer-events: all;
   z-index: 1;
 }

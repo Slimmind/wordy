@@ -1,5 +1,6 @@
 .main-footer {
   padding: 10px;
+  transition: padding .4s;
 }
 
 .main-footer .block {
@@ -10,4 +11,14 @@
   backdrop-filter: blur(var(--blur));
 	border-radius: 1.5rem;
   box-shadow: var(--shadow);
+  transition: background-color .2s var(--timing-function), border-radius .2s var(--timing-function);
+}
+
+.main-footer--active {
+  padding: 0;
+}
+
+.main-footer--active .block {
+  background-color: var(--color-main);
+  border-radius: 0 0 var(--radius-main) var(--radius-main);
 }
