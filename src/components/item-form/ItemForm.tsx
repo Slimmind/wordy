@@ -6,19 +6,19 @@ import { useFirestore } from '../../contexts/firestore.context';
 import { ItemType, ItemDetailType, ItemTypes } from '../../utils/constants';
 import { extendItem } from '../../utils/extend-item';
 import ButtonSwitcher from '../button-switcher';
+import Input from '../input';
 import './item-form.styles.css';
 
 const InternalWindow = lazy(() => import('../internal-window'));
 const Fieldset = lazy(() => import('../fieldset'));
 const Button = lazy(() => import('../button'));
-const Input = lazy(() => import('../input'));
 const AiIcon = lazy(() => import('../../icons/ai-icon'));
 
 export const ItemForm = () => {
 	const navigate = useNavigate();
 	const { items, addItem, changeItem } = useFirestore();
 	const { currentUser } = useAuth();
-	const { itemId } = useParams({ strict: false });
+	const { searchQuery, itemId } = useParams({ strict: false });
 	const [isLoading, setIsLoading] = useState(false);
 	const [isMagicComplete, setIsMagicComplete] = useState(false);
 	const [error, setError] = useState('');
@@ -45,7 +45,9 @@ export const ItemForm = () => {
 	const [formView, setFormView] = useState<ItemTypes.WORD | ItemTypes.PHRASE>(
 		currentItem ? currentItem.type : ItemTypes.WORD
 	);
-	const [original, setOriginal] = useState<string>(currentItem?.original ?? '');
+	const [original, setOriginal] = useState<string>(
+		(currentItem?.original || searchQuery) ?? ''
+	);
 
 	const handleFieldChange = (
 		event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,

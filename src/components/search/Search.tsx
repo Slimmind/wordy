@@ -1,15 +1,19 @@
-import { ChangeEvent, useState, useMemo, lazy } from 'react';
+import { lazy, ChangeEvent, useState, useMemo, useCallback } from 'react';
 import { useFirestore } from '../../contexts/firestore.context';
 import { ItemType, ItemTypes } from '../../utils/constants';
+import { Link } from '@tanstack/react-router';
+import { debounce } from '../../utils/debounce';
+import Input from '../input';
+import InternalWindow from '../internal-window';
+import Word from '../word';
 
-const Input = lazy(() => import('../input'));
-const InternalWindow = lazy(() => import('../internal-window'));
-const Word = lazy(() => import('../word'));
+const Button = lazy(() => import('../button'));
 
 export const Search = () => {
 	const { items } = useFirestore();
 	const [searchInputValue, setSearchInputValue] = useState<string>('');
 	const [searchResults, setSearchResults] = useState<ItemType[]>([]);
+	const [displayValue, setDisplayValue] = useState<string>('');
 
 	const words = useMemo(
 		() => items.filter((item) => item.type === ItemTypes.WORD),
@@ -20,39 +24,55 @@ export const Search = () => {
 		[items]
 	);
 
-	const filterWords = (query: string) => {
-		return words.filter(({ original }) =>
-			original.toLowerCase().startsWith(query)
-		);
-	};
+	const filterWords = useCallback(
+		(query: string) => {
+			return words.filter(({ original }) =>
+				original.toLowerCase().startsWith(query)
+			);
+		},
+		[words]
+	);
 
-	const filterPhrases = (query: string) => {
-		return phrases.filter(({ original }) =>
-			original.split(' ').some((word) => word.toLowerCase().startsWith(query))
-		);
-	};
+	const filterPhrases = useCallback(
+		(query: string) => {
+			return phrases.filter(({ original }) =>
+				original.split(' ').some((word) => word.toLowerCase().startsWith(query))
+			);
+		},
+		[phrases]
+	);
 
-	const handleInputChange = (
-		event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-	): void => {
-		const searchQuery = event.target.value.toLowerCase();
-		if (!searchQuery) {
-			setSearchResults([]);
-			return;
-		}
+	const updateSearchResults = useCallback(
+		debounce((query: string) => {
+			if (query.length > 0) {
+				const filteredWords = filterWords(query);
+				const filteredPhrases = filterPhrases(query);
+				setSearchResults([...filteredWords, ...filteredPhrases]);
+			} else {
+				setSearchResults([]);
+			}
+		}, 300),
+		[filterWords, filterPhrases]
+	);
 
-		const filteredWords = filterWords(searchQuery);
-		const filteredPhrases = filterPhrases(searchQuery);
-
-		setSearchInputValue(searchQuery);
-		setSearchResults([...filteredWords, ...filteredPhrases]);
-	};
+	const handleInputChange = useCallback(
+		(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+			const value = event.target.value;
+			setDisplayValue(value); // Мгновенное обновление отображаемого значения
+			const searchQuery = value.toLowerCase();
+			setSearchInputValue(searchQuery);
+			updateSearchResults(searchQuery);
+		},
+		[updateSearchResults]
+	);
 
 	return (
 		<InternalWindow title='Search'>
 			<Input
+				key='search-input'
 				type='search'
 				id='search'
+				value={displayValue}
 				onChange={handleInputChange}
 				placeholder='Start typing the word...'
 				autoFocus
@@ -63,6 +83,21 @@ export const Search = () => {
 						<Word key={item.id} word={item} searchQuery={searchInputValue} />
 					))}
 				</ul>
+			)}
+			{searchInputValue && searchResults.length === 0 && (
+				<>
+					<p>Ой!.. Такого слова еще нет в списке :(</p>
+					<p>
+						Хотите{' '}
+						<Link
+							to='/add-item/$searchQuery'
+							params={{ searchQuery: searchInputValue }}
+						>
+							<Button>добавить</Button>
+						</Link>{' '}
+						его?
+					</p>
+				</>
 			)}
 		</InternalWindow>
 	);
