@@ -32,10 +32,10 @@ export const InternalWindow = ({
 					{backUrl ? (
 						<Link
 							to={backUrl}
-							className='internal-window__back-btn btn--circle btn--back'
+							className='internal-window__back-btn btn--circle btn--back btn--arrow-left'
 						/>
 					) : (
-						<Button mod='circle back' onClick={onBack} />
+						<Button mod='circle back arrow-left' onClick={onBack} />
 					)}
 					{title && <h2 className='internal-window__title'>{title}</h2>}
 				</header>

@@ -78,9 +78,11 @@
 .btn--plus::before,
 .btn--minus::before,
 .btn--cross::before,
-.btn--back::before,
+.btn--arrow-left::before,
+.btn--arrow-right::before,
 .btn--cross::after,
-.btn--back::after,
+.btn--arrow-left::after,
+.btn--arrow-right::after,
 .btn--plus::after {
   content: "";
   position: absolute;
@@ -184,16 +186,30 @@
   left: 0;
 }
 
-.btn--back::before {
+.btn--arrow-left::before {
 	left: 8px;
 	transform-origin: left;
 	transform: rotate(45deg) translate(-2px);
 }
 
-.btn--back::after {
+.btn--arrow-left::after {
 	left: 8px;
 	transform-origin: left;
 	transform: rotate(-45deg) translate(-2px);
+}
+
+.btn--arrow-right::before {
+  left: auto;
+	right: 8px;
+	transform-origin: right;
+	transform: rotate(-45deg) translate(2px);
+}
+
+.btn--arrow-right::after {
+  left: auto;
+	right: 8px;
+	transform-origin: right;
+	transform: rotate(45deg) translate(2px);
 }
 
 .btn__text {
