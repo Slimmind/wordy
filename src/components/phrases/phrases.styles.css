@@ -3,6 +3,17 @@
 	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 
+.phrases__pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.phrases__pagination .btn {
+  margin-inline: 10px;
+}
+
 .phrase:last-of-type {
   margin-bottom: 0;
 }
