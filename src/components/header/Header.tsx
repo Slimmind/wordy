@@ -1,12 +1,13 @@
 import { lazy } from "react";
 import { Link } from "@tanstack/react-router";
-import { useAuth } from "../../contexts/auth.context";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 import "./header.styles.css";
 
 const ThemeSwitcher = lazy(() => import("../theme-switcher"));
 
 export const Header = () => {
-  const { currentUser } = useAuth();
+  const currentUser = useSelector((state: RootState) => state.auth.currentUser);
 
   return (
     <header className="main-header">

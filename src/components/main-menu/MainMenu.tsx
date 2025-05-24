@@ -1,7 +1,8 @@
 import { Link } from '@tanstack/react-router';
-import './main-menu.styles.css';
 import { useState, lazy } from 'react';
-import { useAuth } from '../../contexts/auth.context';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import './main-menu.styles.css';
 
 type MainMenuProps = {
 	openMenuHandler: (isOpen: boolean) => void;
@@ -12,7 +13,7 @@ const PhrasesIcon = lazy(() => import('../../icons/phrases-icon'));
 const HeartIcon = lazy(() => import('../../icons/heart-icon'));
 
 export const MainMenu = ({ openMenuHandler }: MainMenuProps) => {
-	const { currentUser } = useAuth();
+	const currentUser = useSelector((state: RootState) => state.auth.currentUser);
 	const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
 
 	const hideMenu = () => {

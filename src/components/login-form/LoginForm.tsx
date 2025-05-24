@@ -1,16 +1,18 @@
 import { lazy } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import InternalWindow from "../internal-window";
-import { useAuth } from "../../contexts/auth.context";
 import { useFormik, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { ValidationMessages } from "../../utils/constants";
+import { useDispatch } from "react-redux";
+import { login } from "../../store/auth";
+import { AppDispatch } from "../../store/store";
 
 const Input = lazy(() => import("../input"));
 const Button = lazy(() => import("../button"));
 
 export const LoginForm = () => {
-  const { login } = useAuth();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const validationSchema = Yup.object({
@@ -22,34 +24,32 @@ export const LoginForm = () => {
       .min(8, ValidationMessages.PASSWORD),
   });
 
+  interface FormValues {
+    email: string;
+    password: string;
+  }
+
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     validationSchema,
-    onSubmit: handleFormSubmit,
-  });
-
-  interface FormValues {
-    email: string;
-    password: string;
-  }
-
-  async function handleFormSubmit(
-    values: FormValues,
-    formikHelpers: FormikHelpers<FormValues>,
-  ) {
-    console.log("FORM_DATA: ", values);
-
-    try {
-      await login(values.email, values.password);
-      navigate({ to: "/" });
-      formikHelpers.resetForm();
-    } catch (err) {
-      console.log("Error", err);
+    onSubmit: async (
+      values: FormValues,
+      formikHelpers: FormikHelpers<FormValues>
+    ) => {
+      try {
+        // ✅ Теперь передаём объект, как ожидает thunk
+        await dispatch(login(values));
+        navigate({ to: "/" });
+        formikHelpers.resetForm();
+      } catch (err) {
+        console.log("Error", err);
+        formikHelpers.setFieldError("password", "Invalid email or password");
+      }
     }
-  }
+  });
 
   return (
     <InternalWindow title="Log In">
