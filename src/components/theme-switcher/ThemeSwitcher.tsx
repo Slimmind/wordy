@@ -1,17 +1,23 @@
 import { lazy } from 'react';
-import { useTheme } from '../../contexts/theme.context';
 import { THEME_DARK, THEME_LIGHT } from '../../utils/constants';
+import { useDispatch,  useSelector } from 'react-redux';
+import { changeTheme } from '../../store/theme';
+import { AppDispatch, RootState } from '../../store/store';
+
 import './theme-switcher.styles.css';
 
 const MoonIcon = lazy(() => import('../../icons/moon-icon'));
 const SunIcon = lazy(() => import('../../icons/sun-icon'));
 
 export const ThemeSwitcher = () => {
-	const { theme, changeTheme } = useTheme();
-	const toggleTheme = (): void => {
-		const newTheme = theme === THEME_LIGHT ? THEME_DARK : THEME_LIGHT;
-		changeTheme(newTheme);
-	};
+  const dispatch = useDispatch<AppDispatch>();
+  const theme = useSelector((state: RootState) => state.theme.theme);
+
+  const toggleTheme = () => {
+    const newTheme = theme === THEME_LIGHT ? THEME_DARK : THEME_LIGHT;
+    dispatch(changeTheme(newTheme));
+  }
+
 	return (
 		<div
 			role='button'

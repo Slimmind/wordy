@@ -1,6 +1,8 @@
-import { useMemo, lazy, useState, useRef } from 'react';
-import { useFirestore } from '../../contexts/firestore.context';
+import { useMemo, lazy, useState, useRef, useEffect } from 'react';
 import { ItemType, ItemTypes } from '../../utils/constants';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '../../store/store';
+import { listenToItems } from '../../store/firebase';
 import './phrases.styles.css';
 
 const Phrase = lazy(() => import('../phrase'));
@@ -8,37 +10,53 @@ const InternalWindow = lazy(() => import('../internal-window'));
 const Button = lazy(() => import('../button'));
 
 export const Phrases = () => {
-	const { items } = useFirestore();
+  console.log('Redux state:', useSelector((state: RootState) => state.firestore));
+  const dispatch = useDispatch<AppDispatch>();
+  const { items, loading, error } = useSelector((state: RootState) => state.firestore);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
-
   const phrasesRef = useRef<HTMLUListElement>(null);
 
-	const collection = useMemo(() => {
-		const wordExamples = items
-			.filter(
-				(item) =>
-					item.type === 'word' && item.examples && item.examples.length > 0
-			)
-			.flatMap((item) =>
-				item.examples
-					? item.examples.map((example) => ({
-							value: example.value,
-							id: example.id,
-							wordId: item.id,
-							translations: example.translations,
-						}))
-					: []
-			);
+  useEffect(() => {
+    dispatch(listenToItems());
+  
+  // Firestore сам управляет подпиской, явная отписка не всегда нужна
+  return () => {
+    // Можно оставить пустым или добавить действие для очистки
+  };
+}, [dispatch]);
 
-		console.log('EXAMPLES: ', wordExamples);
+  useEffect(() => {
+    console.log('Current items:', items);
+    console.log('Loading state:', loading);
+    console.log('Error state:', error);
+  }, [items, loading, error]);
 
-		const phrases: ItemType[] = items.filter(
-			(item) => item.type === ItemTypes.PHRASE
-		);
+  const collection = useMemo(() => {
+    if (!items) return [];
+    
+    const wordExamples = items
+      .filter(
+        (item) =>
+          item.type === 'word' && item.examples && item.examples.length > 0
+      )
+      .flatMap((item) =>
+        item.examples
+          ? item.examples.map((example) => ({
+              value: example.value,
+              id: example.id,
+              wordId: item.id,
+              translations: example.translations,
+            }))
+          : []
+      );
 
-		return [...phrases, ...wordExamples];
-	}, [items]);
+    const phrases: ItemType[] = items.filter(
+      (item) => item.type === ItemTypes.PHRASE
+    );
+
+    return [...phrases, ...wordExamples];
+  }, [items]);
 
   const paginatedCollection = useMemo(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -57,8 +75,11 @@ export const Phrases = () => {
     }
   };
 
-	return (
-		<InternalWindow mod='phrases' title='Phrases'>
+  if (loading) return <div>Loading phrases...</div>;
+  if (error) return <div>Error loading phrases: {error}</div>;
+
+  return (
+    <InternalWindow mod='phrases' title='Phrases'>
       <ul className='phrases' ref={phrasesRef}>
         {paginatedCollection.map((item) => (
           <Phrase data={item} key={item.id} />
@@ -80,5 +101,5 @@ export const Phrases = () => {
         />
       </div>
     </InternalWindow>
-	);
+  );
 };

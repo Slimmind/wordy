@@ -1,6 +1,8 @@
 import { useEffect, useState, lazy } from "react";
-import { useFirestore } from "../../contexts/firestore.context";
 import { ItemType } from "../../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store/store";
+import { listenToItems } from "../../store/firebase";
 import "./own-collection.styles.css";
 
 const InternalWindow = lazy(() => import("../internal-window"));
@@ -11,7 +13,13 @@ type OwnCollectionProps = {
 };
 
 export const OwnCollection = ({ userId }: OwnCollectionProps) => {
-  const { items } = useFirestore();
+  const dispatch = useDispatch<AppDispatch>();
+  const { items } = useSelector((state: RootState) => state.firestore);
+  
+  useEffect(() => {
+    const unsubscribe = dispatch(listenToItems());
+    return () => unsubscribe();
+  }, [dispatch]);
   const [userCollection, setUserCollection] = useState<ItemType[]>([]);
 
   useEffect(() => {

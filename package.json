@@ -10,6 +10,7 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"@reduxjs/toolkit": "^2.8.2",
 		"@tanstack/react-router": "^1.31.20",
 		"clsx": "^2.1.1",
 		"dotenv": "^16.4.5",
@@ -19,6 +20,7 @@
 		"openai": "^4.89.0",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
+		"react-redux": "^9.2.0",
 		"tts-react": "^4.0.0",
 		"yup": "^1.4.0"
 	},

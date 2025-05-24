@@ -1,14 +1,15 @@
 import { lazy, useState } from 'react';
 import clsx from 'clsx';
-import { useAuth } from '../../contexts/auth.context';
 import { Link } from '@tanstack/react-router';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 import './footer.styles.css';
 
 const MainMenu = lazy(() => import('../main-menu'));
 const Block = lazy(() => import('../block'));
 
 export const Footer = () => {
-	const { currentUser } = useAuth();
+	const currentUser = useSelector((state: RootState) => state.auth.currentUser);
 	const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
 	const classes = clsx('main-footer', { 'main-footer--active': isMenuOpened });
 
