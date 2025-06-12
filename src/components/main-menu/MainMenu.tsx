@@ -11,6 +11,7 @@ type MainMenuProps = {
 const Button = lazy(() => import('../button'));
 const PhrasesIcon = lazy(() => import('../../icons/phrases-icon'));
 const HeartIcon = lazy(() => import('../../icons/heart-icon'));
+const ThemeSwitcher = lazy(() => import('../theme-switcher'));
 
 export const MainMenu = ({ openMenuHandler }: MainMenuProps) => {
 	const currentUser = useSelector((state: RootState) => state.auth.currentUser);
@@ -48,6 +49,9 @@ export const MainMenu = ({ openMenuHandler }: MainMenuProps) => {
 							<span className='btn__text'>Phrases</span>
 						</Link>
 					</li>
+          <li className='main-menu__item'>
+            <ThemeSwitcher />
+          </li>
 					{!!currentUser && (
 						<li className='main-menu__item'>
 							<Link

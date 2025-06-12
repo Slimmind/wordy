@@ -1,10 +1,7 @@
-import { lazy } from "react";
 import { Link } from "@tanstack/react-router";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import "./header.styles.css";
-
-const ThemeSwitcher = lazy(() => import("../theme-switcher"));
 
 export const Header = () => {
   const currentUser = useSelector((state: RootState) => state.auth.currentUser);
@@ -14,7 +11,7 @@ export const Header = () => {
       <Link to="/">
         <h1 className="main-header__logo">FoxyWord</h1>
       </Link>
-      <ThemeSwitcher />
+      
       <div className="main-header__auth">
         {currentUser?.email ? (
           <Link to="/profile" className="main-header__auth-link">
