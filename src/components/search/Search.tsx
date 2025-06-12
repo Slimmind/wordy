@@ -1,119 +1,81 @@
-import { lazy, ChangeEvent, useState, useMemo, useCallback, useEffect } from 'react';
-import { ItemType, ItemTypes } from '../../utils/constants';
+// src/components/search/index.tsx
+import { lazy, ChangeEvent, useState, useEffect } from 'react';
 import { Link } from '@tanstack/react-router';
-import { debounce } from '../../utils/debounce';
 import Input from '../input';
 import InternalWindow from '../internal-window';
 import Word from '../word';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../store/store';
 import { listenToItems } from '../../store/firebase';
+import Skeleton from '../skeleton';
+import { useSearch } from './useSearch';
 
 const Button = lazy(() => import('../button'));
 
 export const Search = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const { items, loading, error } = useSelector((state: RootState) => state.firestore);
-  const [searchInputValue, setSearchInputValue] = useState<string>('');
-  const [searchResults, setSearchResults] = useState<ItemType[]>([]);
-  const [displayValue, setDisplayValue] = useState<string>('');
+	const dispatch = useDispatch<AppDispatch>();
+	const { loading, error } = useSelector((state: RootState) => state.firestore);
+	const { searchResults, updateSearchResults } = useSearch();
 
-  useEffect(() => {
-  const unsubscribe = dispatch(listenToItems());
-  
-  return () => {
-    unsubscribe(); // Вызываем функцию отписки
-  };
-}, [dispatch]);
+	const [displayValue, setDisplayValue] = useState<string>('');
 
-  const words = useMemo(
-    () => items.filter((item) => item.type === ItemTypes.WORD),
-    [items]
-  );
+	// Подписка на данные из Firebase
+	useEffect(() => {
+		const unsubscribe = dispatch(listenToItems());
+		return () => {
+			unsubscribe();
+		};
+	}, [dispatch]);
 
-  const phrases = useMemo(
-    () => items.filter((item) => item.type === ItemTypes.PHRASE),
-    [items]
-  );
+	// Запуск поиска при изменении displayValue
+	useEffect(() => {
+		if (displayValue.length > 1) {
+			updateSearchResults(displayValue);
+		}
+	}, [displayValue, updateSearchResults]);
 
-  const filterWords = useCallback(
-    (query: string) => {
-      return words.filter(({ original }) =>
-        original.toLowerCase().startsWith(query)
-      );
-    },
-    [words]
-  );
+	const handleInputChange = (
+		event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) => {
+		const value = event.target.value.toLowerCase();
+		setDisplayValue(value);
+	};
 
-  const filterPhrases = useCallback(
-    (query: string) => {
-      return phrases.filter(({ original }) =>
-        original.split(' ').some((word) => word.toLowerCase().startsWith(query))
-      );
-    },
-    [phrases]
-  );
+	if (loading) return <Skeleton delay={1000} />;
+	if (error) return <div>Error: {error}</div>;
 
-  const updateSearchResults = useCallback(
-    debounce((query: string) => {
-      if (query.length > 0) {
-        const filteredWords = filterWords(query);
-        const filteredPhrases = filterPhrases(query);
-        setSearchResults([...filteredWords, ...filteredPhrases]);
-      } else {
-        setSearchResults([]);
-      }
-    }, 300),
-    [filterWords, filterPhrases]
-  );
-
-  const handleInputChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-      const value = event.target.value;
-      setDisplayValue(value);
-      const searchQuery = value.toLowerCase();
-      setSearchInputValue(searchQuery);
-      updateSearchResults(searchQuery);
-    },
-    [updateSearchResults]
-  );
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-
-  return (
-    <InternalWindow title='Search'>
-      <Input
-        key='search-input'
-        type='search'
-        id='search'
-        value={displayValue}
-        onChange={handleInputChange}
-        placeholder='Start typing the word...'
-        autoFocus
-      />
-      {searchResults.length > 0 && (
-        <ul>
-          {searchResults.map((item) => (
-            <Word key={item.id} word={item} searchQuery={searchInputValue} />
-          ))}
-        </ul>
-      )}
-      {searchInputValue && searchResults.length === 0 && (
-        <>
-          <p>Ой!.. Такого слова еще нет в списке :(</p>
-          <p>
-            Хотите{' '}
-            <Link
-              to='/add-item/$searchQuery'
-              params={{ searchQuery: searchInputValue }}
-            >
-              <Button>добавить</Button>
-            </Link>{' '}
-            его?
-          </p>
-        </>
-      )}
-    </InternalWindow>
-  );
+	return (
+		<InternalWindow title='Search'>
+			<Input
+				type='search'
+				id='search'
+				value={displayValue}
+				onChange={handleInputChange}
+				placeholder='Start typing the word...'
+				autoFocus
+			/>
+			{searchResults.length > 0 && (
+				<ul>
+					{searchResults.map((item) => (
+						<Word key={item.id} word={item} searchQuery={displayValue} />
+					))}
+				</ul>
+			)}
+			{displayValue && searchResults.length === 0 && (
+				<>
+					<p>Ой!.. Такого слова еще нет в списке :(</p>
+					<p>
+						Хотите{' '}
+						<Link
+							to='/add-item/$searchQuery'
+							params={{ searchQuery: displayValue }}
+						>
+							<Button>добавить</Button>
+						</Link>{' '}
+						его?
+					</p>
+				</>
+			)}
+		</InternalWindow>
+	);
 };
