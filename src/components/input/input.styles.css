@@ -12,7 +12,7 @@ textarea {
   width: 100%;
   padding: 12px;
   background-color: var(--color-bg);
-  border: 2px solid var(--color-main);
+  border: var(--border-width) solid var(--color-main);
   border-radius: var(--radius-small);
   box-shadow: var(--shadow);
   color: var(--color-main);

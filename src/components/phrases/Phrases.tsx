@@ -75,7 +75,6 @@ export const Phrases = () => {
     }
   };
 
-  if (loading) return <div>Loading phrases...</div>;
   if (error) return <div>Error loading phrases: {error}</div>;
 
   return (

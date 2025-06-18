@@ -97,11 +97,9 @@ export const ItemDetails = ({ itemId }: ItemDetailsProps) => {
   useEffect(() => {
     if (item && currentUser) {
       const isOwner = checkIsOwner(item.owners ?? [], currentUser.uid);
-      setIsWordInOwnCollection(isOwner);
-    }
-
-    if (item) {
       const missingParts = checkItemForExtending(item);
+      
+      setIsWordInOwnCollection(isOwner);
       setIsExtendable(missingParts.canBeExtended);
     }
   }, [item, currentUser]);

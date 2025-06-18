@@ -1,6 +1,6 @@
 .btn {
   position: relative;
-  padding: 5px 10px;
+  padding: 10px;
   border: none;
   background-color: var(--color-main);
 	border: var(--border-width) solid var(--color-main);
@@ -10,7 +10,7 @@
   cursor: pointer;
   font: inherit;
 	font-weight: bold;
-  line-height: 22px;
+  line-height: 1.2;
 	text-align: center;
 	text-decoration: none;
 }
@@ -86,23 +86,23 @@
 .btn--plus::after {
   content: "";
   position: absolute;
-  top: calc(50% - 2px);
+  top: calc(50% - 1px);
   left: calc(50% - 10px);
   width: 20px;
-  height: 4px;
+  height: var(--border-width);
   background-color: var(--color-main);
-  border-radius: 2px;
+  border-radius: var(--border-width);
 }
 
 .btn--menu::before {
-  box-shadow: 0 6px 0 0 var(--color-main), 0 -6px 0 0 var(--color-main);
+  box-shadow: 0 7px 0 0 var(--color-main), 0 -7px 0 0 var(--color-main);
 }
 
 .btn--search::before {
   content: "";
   position: absolute;
-  top: 5px;
-  left: 5px;
+  top: 8px;
+  left: 8px;
   width: 20px;
   height: 20px;
   border: var(--border-width) solid var(--color-main);
@@ -112,10 +112,10 @@
 .btn--search::after {
   content: "";
   position: absolute;
-  bottom: 8px;
-  right: 6px;
-  width: 8px;
-  height: 4px;
+  bottom: 9px;
+  right: 7px;
+  width: 5px;
+  height: var(--border-width);
   background-color: var(--color-main);
   border-radius: 2px;
   transform: rotate(45deg);
@@ -164,7 +164,6 @@
   left: 50%;
   border: var(--border-width) solid var(--color-main);
   border-radius: 50%;
-  /* background-color: var(--color-main); */
   transform: translateX(-50%);
 }
 
@@ -189,27 +188,27 @@
 .btn--arrow-left::before {
 	left: 8px;
 	transform-origin: left;
-	transform: rotate(45deg) translate(-2px);
+	transform: rotate(45deg) translate(-1px);
 }
 
 .btn--arrow-left::after {
 	left: 8px;
 	transform-origin: left;
-	transform: rotate(-45deg) translate(-2px);
+	transform: rotate(-45deg) translate(-1px);
 }
 
 .btn--arrow-right::before {
   left: auto;
 	right: 8px;
 	transform-origin: right;
-	transform: rotate(-45deg) translate(2px);
+	transform: rotate(-45deg) translate(1px);
 }
 
 .btn--arrow-right::after {
   left: auto;
 	right: 8px;
 	transform-origin: right;
-	transform: rotate(45deg) translate(2px);
+	transform: rotate(45deg) translate(1px);
 }
 
 .btn__text {
