@@ -2,15 +2,15 @@
   display: inline-block;
   vertical-align: top;
   flex-shrink: 0;
-  width: 80vw;
+  width: calc(80vw + 5px);
   max-width: 414px;
-  margin-right: 10px;
+  margin-left: 10px;
   padding: 5px;
   background-color: var(--color-main-transparent);
 
   backdrop-filter: blur(var(--blur));
   border-radius: 1rem;
-  scroll-snap-align: start;
+  scroll-snap-align: center;
 }
 
 .word__group {

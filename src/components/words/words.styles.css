@@ -3,6 +3,7 @@
   flex-wrap: nowrap;
   height: calc(100% - 64px);
   max-height: calc(100% - 64px);
+  padding-right: 10px;
   overflow-x: scroll;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;

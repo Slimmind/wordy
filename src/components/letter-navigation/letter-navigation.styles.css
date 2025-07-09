@@ -1,8 +1,8 @@
 .letter__navigation {
+  width: calc(100% - 20px);
   max-width: var(--max-window-width);
   height: 52px;
   margin: 0 auto 10px;
-	padding-right: 10px;
 }
 .letter__navigation .block {
   margin: 0;
