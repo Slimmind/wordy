@@ -76,9 +76,11 @@ label + .input__wrap textarea {
 }
 
 .input--invalid label + .input__wrap input,
-.input--invalid label + .input__wrap textarea {
+.input--invalid .input__wrap input,
+.input--invalid label + .input__wrap textarea,
+.input--invalid + .input__wrap textarea {
   border-color: var(--color-red);
-  border-radius: 0 var(--radius-small) 0 0;
+  border-radius: var(--radius-small) var(--radius-small) 0 0;
   color: var(--color-red);
 }
 

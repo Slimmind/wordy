@@ -21,15 +21,15 @@ export const presettingAI =
 
 export type ItemDetailType = {
 	id: string;
-	value?: string;
+	value: string;
 	wordId?: string;
 	translations?: ItemDetailType[];
 };
 
 export type ItemType = {
-	id?: string;
+	id: string;
 	type: ItemTypes.PHRASE | ItemTypes.WORD;
-	letter?: string;
+	letter: string;
 	original: string;
 	synonyms?: ItemDetailType[];
 	translations: ItemDetailType[];

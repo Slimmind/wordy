@@ -1,8 +1,7 @@
 import { useEffect, useState, lazy } from "react";
 import { ItemType, ItemTypes } from "../../utils/constants";
-import { AppDispatch, RootState } from "../../store/store";
-import { useDispatch, useSelector } from "react-redux";
-import { listenToItems } from "../../store/firebase";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 import "./letter-navigation.styles.css";
 
 const Block = lazy(() => import("../block"));
@@ -12,13 +11,7 @@ type LetterNavigationProps = {
 };
 
 export const LetterNavigation = ({ userId }: LetterNavigationProps) => {
-  const dispatch = useDispatch<AppDispatch>();
   const { items } = useSelector((state: RootState) => state.firestore);
-  
-  useEffect(() => {
-    const unsubscribe = dispatch(listenToItems());
-    return () => unsubscribe();
-  }, [dispatch]);
   const [letters, setLetters] = useState<string[]>([]);
 
   useEffect(() => {
@@ -40,8 +33,8 @@ export const LetterNavigation = ({ userId }: LetterNavigationProps) => {
     <nav className="letter__navigation">
       <Block>
         <ul className="letter__navigation-list">
-          {letters.map((letter, idx) => (
-            <li key={idx} className="letter__navigation-list-item">
+          {letters.map((letter) => (
+            <li key={letter} className="letter__navigation-list-item">
               <a href={`#${letter}`}>{letter}</a>
             </li>
           ))}

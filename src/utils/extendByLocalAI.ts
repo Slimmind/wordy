@@ -4,7 +4,7 @@ export const extendByLocalAI = async (
 	prompt: string
 ): Promise<ExtendResponse> => {
 	try {
-		const response = await fetch('https://192.168.0.185:3000/ask', {
+		const response = await fetch(import.meta.env.VITE_LOCAL_AI_URL, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
