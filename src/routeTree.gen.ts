@@ -10,240 +10,96 @@
 
 import { createFileRoute } from '@tanstack/react-router'
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as IndexRouteImport } from './routes/index'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
-
-// Create Virtual Routes
-
-const SignupLazyImport = createFileRoute('/signup')()
-const SearchLazyImport = createFileRoute('/search')()
-const ProfileLazyImport = createFileRoute('/profile')()
-const PhrasesLazyImport = createFileRoute('/phrases')()
-const LoginLazyImport = createFileRoute('/login')()
-const AddItemLazyImport = createFileRoute('/add-item')()
-const OwnCollectionIndexLazyImport = createFileRoute('/own-collection/')()
-const ItemsIndexLazyImport = createFileRoute('/items/')()
-const OwnCollectionUserIdLazyImport = createFileRoute(
+const SignupLazyRouteImport = createFileRoute('/signup')()
+const SearchLazyRouteImport = createFileRoute('/search')()
+const ProfileLazyRouteImport = createFileRoute('/profile')()
+const PhrasesLazyRouteImport = createFileRoute('/phrases')()
+const LoginLazyRouteImport = createFileRoute('/login')()
+const AddItemLazyRouteImport = createFileRoute('/add-item')()
+const OwnCollectionIndexLazyRouteImport = createFileRoute('/own-collection/')()
+const ItemsIndexLazyRouteImport = createFileRoute('/items/')()
+const OwnCollectionUserIdLazyRouteImport = createFileRoute(
   '/own-collection/$userId',
 )()
-const ItemsItemIdLazyImport = createFileRoute('/items/$itemId')()
-const ExtendItemIdLazyImport = createFileRoute('/extend/$itemId')()
-const EditItemIdLazyImport = createFileRoute('/edit/$itemId')()
-const AddItemSearchQueryLazyImport = createFileRoute('/add-item/$searchQuery')()
+const ItemsItemIdLazyRouteImport = createFileRoute('/items/$itemId')()
+const EditItemIdLazyRouteImport = createFileRoute('/edit/$itemId')()
+const AddItemSearchQueryLazyRouteImport = createFileRoute(
+  '/add-item/$searchQuery',
+)()
 
-// Create/Update Routes
-
-const SignupLazyRoute = SignupLazyImport.update({
+const SignupLazyRoute = SignupLazyRouteImport.update({
   id: '/signup',
   path: '/signup',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/signup.lazy').then((d) => d.Route))
-
-const SearchLazyRoute = SearchLazyImport.update({
+const SearchLazyRoute = SearchLazyRouteImport.update({
   id: '/search',
   path: '/search',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/search.lazy').then((d) => d.Route))
-
-const ProfileLazyRoute = ProfileLazyImport.update({
+const ProfileLazyRoute = ProfileLazyRouteImport.update({
   id: '/profile',
   path: '/profile',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/profile.lazy').then((d) => d.Route))
-
-const PhrasesLazyRoute = PhrasesLazyImport.update({
+const PhrasesLazyRoute = PhrasesLazyRouteImport.update({
   id: '/phrases',
   path: '/phrases',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/phrases.lazy').then((d) => d.Route))
-
-const LoginLazyRoute = LoginLazyImport.update({
+const LoginLazyRoute = LoginLazyRouteImport.update({
   id: '/login',
   path: '/login',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/login.lazy').then((d) => d.Route))
-
-const AddItemLazyRoute = AddItemLazyImport.update({
+const AddItemLazyRoute = AddItemLazyRouteImport.update({
   id: '/add-item',
   path: '/add-item',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/add-item.lazy').then((d) => d.Route))
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const OwnCollectionIndexLazyRoute = OwnCollectionIndexLazyImport.update({
+const OwnCollectionIndexLazyRoute = OwnCollectionIndexLazyRouteImport.update({
   id: '/own-collection/',
   path: '/own-collection/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any).lazy(() =>
   import('./routes/own-collection/index.lazy').then((d) => d.Route),
 )
-
-const ItemsIndexLazyRoute = ItemsIndexLazyImport.update({
+const ItemsIndexLazyRoute = ItemsIndexLazyRouteImport.update({
   id: '/items/',
   path: '/items/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/items/index.lazy').then((d) => d.Route))
-
-const OwnCollectionUserIdLazyRoute = OwnCollectionUserIdLazyImport.update({
+const OwnCollectionUserIdLazyRoute = OwnCollectionUserIdLazyRouteImport.update({
   id: '/own-collection/$userId',
   path: '/own-collection/$userId',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any).lazy(() =>
   import('./routes/own-collection/$userId.lazy').then((d) => d.Route),
 )
-
-const ItemsItemIdLazyRoute = ItemsItemIdLazyImport.update({
+const ItemsItemIdLazyRoute = ItemsItemIdLazyRouteImport.update({
   id: '/items/$itemId',
   path: '/items/$itemId',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/items/$itemId.lazy').then((d) => d.Route))
-
-const ExtendItemIdLazyRoute = ExtendItemIdLazyImport.update({
-  id: '/extend/$itemId',
-  path: '/extend/$itemId',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/extend.$itemId.lazy').then((d) => d.Route),
-)
-
-const EditItemIdLazyRoute = EditItemIdLazyImport.update({
+const EditItemIdLazyRoute = EditItemIdLazyRouteImport.update({
   id: '/edit/$itemId',
   path: '/edit/$itemId',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/edit.$itemId.lazy').then((d) => d.Route))
-
-const AddItemSearchQueryLazyRoute = AddItemSearchQueryLazyImport.update({
+const AddItemSearchQueryLazyRoute = AddItemSearchQueryLazyRouteImport.update({
   id: '/$searchQuery',
   path: '/$searchQuery',
   getParentRoute: () => AddItemLazyRoute,
 } as any).lazy(() =>
   import('./routes/add-item.$searchQuery.lazy').then((d) => d.Route),
-)
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/add-item': {
-      id: '/add-item'
-      path: '/add-item'
-      fullPath: '/add-item'
-      preLoaderRoute: typeof AddItemLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/phrases': {
-      id: '/phrases'
-      path: '/phrases'
-      fullPath: '/phrases'
-      preLoaderRoute: typeof PhrasesLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/profile': {
-      id: '/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof ProfileLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/search': {
-      id: '/search'
-      path: '/search'
-      fullPath: '/search'
-      preLoaderRoute: typeof SearchLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/signup': {
-      id: '/signup'
-      path: '/signup'
-      fullPath: '/signup'
-      preLoaderRoute: typeof SignupLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/add-item/$searchQuery': {
-      id: '/add-item/$searchQuery'
-      path: '/$searchQuery'
-      fullPath: '/add-item/$searchQuery'
-      preLoaderRoute: typeof AddItemSearchQueryLazyImport
-      parentRoute: typeof AddItemLazyImport
-    }
-    '/edit/$itemId': {
-      id: '/edit/$itemId'
-      path: '/edit/$itemId'
-      fullPath: '/edit/$itemId'
-      preLoaderRoute: typeof EditItemIdLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/extend/$itemId': {
-      id: '/extend/$itemId'
-      path: '/extend/$itemId'
-      fullPath: '/extend/$itemId'
-      preLoaderRoute: typeof ExtendItemIdLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/items/$itemId': {
-      id: '/items/$itemId'
-      path: '/items/$itemId'
-      fullPath: '/items/$itemId'
-      preLoaderRoute: typeof ItemsItemIdLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/own-collection/$userId': {
-      id: '/own-collection/$userId'
-      path: '/own-collection/$userId'
-      fullPath: '/own-collection/$userId'
-      preLoaderRoute: typeof OwnCollectionUserIdLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/items/': {
-      id: '/items/'
-      path: '/items'
-      fullPath: '/items'
-      preLoaderRoute: typeof ItemsIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/own-collection/': {
-      id: '/own-collection/'
-      path: '/own-collection'
-      fullPath: '/own-collection'
-      preLoaderRoute: typeof OwnCollectionIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
-  }
-}
-
-// Create and export the route tree
-
-interface AddItemLazyRouteChildren {
-  AddItemSearchQueryLazyRoute: typeof AddItemSearchQueryLazyRoute
-}
-
-const AddItemLazyRouteChildren: AddItemLazyRouteChildren = {
-  AddItemSearchQueryLazyRoute: AddItemSearchQueryLazyRoute,
-}
-
-const AddItemLazyRouteWithChildren = AddItemLazyRoute._addFileChildren(
-  AddItemLazyRouteChildren,
 )
 
 export interface FileRoutesByFullPath {
@@ -256,13 +112,11 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupLazyRoute
   '/add-item/$searchQuery': typeof AddItemSearchQueryLazyRoute
   '/edit/$itemId': typeof EditItemIdLazyRoute
-  '/extend/$itemId': typeof ExtendItemIdLazyRoute
   '/items/$itemId': typeof ItemsItemIdLazyRoute
   '/own-collection/$userId': typeof OwnCollectionUserIdLazyRoute
   '/items': typeof ItemsIndexLazyRoute
   '/own-collection': typeof OwnCollectionIndexLazyRoute
 }
-
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/add-item': typeof AddItemLazyRouteWithChildren
@@ -273,15 +127,13 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupLazyRoute
   '/add-item/$searchQuery': typeof AddItemSearchQueryLazyRoute
   '/edit/$itemId': typeof EditItemIdLazyRoute
-  '/extend/$itemId': typeof ExtendItemIdLazyRoute
   '/items/$itemId': typeof ItemsItemIdLazyRoute
   '/own-collection/$userId': typeof OwnCollectionUserIdLazyRoute
   '/items': typeof ItemsIndexLazyRoute
   '/own-collection': typeof OwnCollectionIndexLazyRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/add-item': typeof AddItemLazyRouteWithChildren
   '/login': typeof LoginLazyRoute
@@ -291,13 +143,11 @@ export interface FileRoutesById {
   '/signup': typeof SignupLazyRoute
   '/add-item/$searchQuery': typeof AddItemSearchQueryLazyRoute
   '/edit/$itemId': typeof EditItemIdLazyRoute
-  '/extend/$itemId': typeof ExtendItemIdLazyRoute
   '/items/$itemId': typeof ItemsItemIdLazyRoute
   '/own-collection/$userId': typeof OwnCollectionUserIdLazyRoute
   '/items/': typeof ItemsIndexLazyRoute
   '/own-collection/': typeof OwnCollectionIndexLazyRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
@@ -310,7 +160,6 @@ export interface FileRouteTypes {
     | '/signup'
     | '/add-item/$searchQuery'
     | '/edit/$itemId'
-    | '/extend/$itemId'
     | '/items/$itemId'
     | '/own-collection/$userId'
     | '/items'
@@ -326,7 +175,6 @@ export interface FileRouteTypes {
     | '/signup'
     | '/add-item/$searchQuery'
     | '/edit/$itemId'
-    | '/extend/$itemId'
     | '/items/$itemId'
     | '/own-collection/$userId'
     | '/items'
@@ -342,14 +190,12 @@ export interface FileRouteTypes {
     | '/signup'
     | '/add-item/$searchQuery'
     | '/edit/$itemId'
-    | '/extend/$itemId'
     | '/items/$itemId'
     | '/own-collection/$userId'
     | '/items/'
     | '/own-collection/'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AddItemLazyRoute: typeof AddItemLazyRouteWithChildren
@@ -359,12 +205,119 @@ export interface RootRouteChildren {
   SearchLazyRoute: typeof SearchLazyRoute
   SignupLazyRoute: typeof SignupLazyRoute
   EditItemIdLazyRoute: typeof EditItemIdLazyRoute
-  ExtendItemIdLazyRoute: typeof ExtendItemIdLazyRoute
   ItemsItemIdLazyRoute: typeof ItemsItemIdLazyRoute
   OwnCollectionUserIdLazyRoute: typeof OwnCollectionUserIdLazyRoute
   ItemsIndexLazyRoute: typeof ItemsIndexLazyRoute
   OwnCollectionIndexLazyRoute: typeof OwnCollectionIndexLazyRoute
 }
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/phrases': {
+      id: '/phrases'
+      path: '/phrases'
+      fullPath: '/phrases'
+      preLoaderRoute: typeof PhrasesLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/add-item': {
+      id: '/add-item'
+      path: '/add-item'
+      fullPath: '/add-item'
+      preLoaderRoute: typeof AddItemLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/own-collection/': {
+      id: '/own-collection/'
+      path: '/own-collection'
+      fullPath: '/own-collection'
+      preLoaderRoute: typeof OwnCollectionIndexLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/items/': {
+      id: '/items/'
+      path: '/items'
+      fullPath: '/items'
+      preLoaderRoute: typeof ItemsIndexLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/own-collection/$userId': {
+      id: '/own-collection/$userId'
+      path: '/own-collection/$userId'
+      fullPath: '/own-collection/$userId'
+      preLoaderRoute: typeof OwnCollectionUserIdLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/items/$itemId': {
+      id: '/items/$itemId'
+      path: '/items/$itemId'
+      fullPath: '/items/$itemId'
+      preLoaderRoute: typeof ItemsItemIdLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/edit/$itemId': {
+      id: '/edit/$itemId'
+      path: '/edit/$itemId'
+      fullPath: '/edit/$itemId'
+      preLoaderRoute: typeof EditItemIdLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/add-item/$searchQuery': {
+      id: '/add-item/$searchQuery'
+      path: '/$searchQuery'
+      fullPath: '/add-item/$searchQuery'
+      preLoaderRoute: typeof AddItemSearchQueryLazyRouteImport
+      parentRoute: typeof AddItemLazyRoute
+    }
+  }
+}
+
+interface AddItemLazyRouteChildren {
+  AddItemSearchQueryLazyRoute: typeof AddItemSearchQueryLazyRoute
+}
+
+const AddItemLazyRouteChildren: AddItemLazyRouteChildren = {
+  AddItemSearchQueryLazyRoute: AddItemSearchQueryLazyRoute,
+}
+
+const AddItemLazyRouteWithChildren = AddItemLazyRoute._addFileChildren(
+  AddItemLazyRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -375,84 +328,11 @@ const rootRouteChildren: RootRouteChildren = {
   SearchLazyRoute: SearchLazyRoute,
   SignupLazyRoute: SignupLazyRoute,
   EditItemIdLazyRoute: EditItemIdLazyRoute,
-  ExtendItemIdLazyRoute: ExtendItemIdLazyRoute,
   ItemsItemIdLazyRoute: ItemsItemIdLazyRoute,
   OwnCollectionUserIdLazyRoute: OwnCollectionUserIdLazyRoute,
   ItemsIndexLazyRoute: ItemsIndexLazyRoute,
   OwnCollectionIndexLazyRoute: OwnCollectionIndexLazyRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/add-item",
-        "/login",
-        "/phrases",
-        "/profile",
-        "/search",
-        "/signup",
-        "/edit/$itemId",
-        "/extend/$itemId",
-        "/items/$itemId",
-        "/own-collection/$userId",
-        "/items/",
-        "/own-collection/"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/add-item": {
-      "filePath": "add-item.lazy.tsx",
-      "children": [
-        "/add-item/$searchQuery"
-      ]
-    },
-    "/login": {
-      "filePath": "login.lazy.tsx"
-    },
-    "/phrases": {
-      "filePath": "phrases.lazy.tsx"
-    },
-    "/profile": {
-      "filePath": "profile.lazy.tsx"
-    },
-    "/search": {
-      "filePath": "search.lazy.tsx"
-    },
-    "/signup": {
-      "filePath": "signup.lazy.tsx"
-    },
-    "/add-item/$searchQuery": {
-      "filePath": "add-item.$searchQuery.lazy.tsx",
-      "parent": "/add-item"
-    },
-    "/edit/$itemId": {
-      "filePath": "edit.$itemId.lazy.tsx"
-    },
-    "/extend/$itemId": {
-      "filePath": "extend.$itemId.lazy.tsx"
-    },
-    "/items/$itemId": {
-      "filePath": "items/$itemId.lazy.tsx"
-    },
-    "/own-collection/$userId": {
-      "filePath": "own-collection/$userId.lazy.tsx"
-    },
-    "/items/": {
-      "filePath": "items/index.lazy.tsx"
-    },
-    "/own-collection/": {
-      "filePath": "own-collection/index.lazy.tsx"
-    }
-  }
-}
-ROUTE_MANIFEST_END */

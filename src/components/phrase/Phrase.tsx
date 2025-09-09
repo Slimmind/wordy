@@ -35,6 +35,12 @@ export const Phrase = ({ data }: PhraseProps) => {
 		markTextAsSpoken: false,
 	});
 
+	const capitalizedTtsChildren = Array.isArray(ttsChildren)
+		? ttsChildren.map(item => typeof item === 'string' ? item.charAt(0).toUpperCase() + item.slice(1) : item)
+		: typeof ttsChildren === 'string'
+			? ttsChildren.charAt(0).toUpperCase() + ttsChildren.slice(1)
+			: ttsChildren;
+
 	return (
 		<li className={phraseClasses}>
 			<header className='phrase__header'>
@@ -44,7 +50,7 @@ export const Phrase = ({ data }: PhraseProps) => {
 						params={{ itemId: data.id as string }}
 						className='phrase__link'
 					>
-						{ttsChildren}
+						{capitalizedTtsChildren}
 					</Link>
 				</p>
 				{hasTranslations && (
