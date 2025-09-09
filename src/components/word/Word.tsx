@@ -8,6 +8,12 @@ type WordProps = {
 };
 
 export const Word = ({ word, searchQuery }: WordProps) => {
+	// Проверяем, что у слова есть все необходимые поля
+	if (!word.original) {
+		console.error('Word is missing required "original" field:', word);
+		return null;
+	}
+	
 	const { id, original } = word;
 
 	const highlightText = (text: string, query?: string) => {
@@ -29,9 +35,13 @@ export const Word = ({ word, searchQuery }: WordProps) => {
 
 	return (
 		<li id={id} className='word'>
-			<Link to={`/items/$itemId`} params={{ itemId: id as string }}>
+			{id ? (
+				<Link to={`/items/$itemId`} params={{ itemId: id }}>
+					<strong>{highlightText(original, searchQuery)}</strong>
+				</Link>
+			) : (
 				<strong>{highlightText(original, searchQuery)}</strong>
-			</Link>
+			)}
 		</li>
 	);
 };

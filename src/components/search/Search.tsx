@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useEffect } from 'react';
+import { ChangeEvent, useState, useEffect, useDeferredValue } from 'react';
 import { Link } from '@tanstack/react-router';
 import Input from '../input';
 import InternalWindow from '../internal-window';
@@ -15,6 +15,7 @@ export const Search = () => {
   const { searchResults, updateSearchResults } = useSearch();
 
   const [displayValue, setDisplayValue] = useState<string>('');
+  const deferredDisplayValue = useDeferredValue(displayValue);
 
   // Подписка на данные из Firebase
   useEffect(() => {
@@ -51,7 +52,7 @@ export const Search = () => {
       {searchResults.length > 0 && (
         <ul>
           {searchResults.map((item) => (
-            <Word key={item.id} word={item} searchQuery={displayValue} />
+            <Word key={item.id} word={item} searchQuery={deferredDisplayValue} />
           ))}
         </ul>
       )}
@@ -62,7 +63,7 @@ export const Search = () => {
             Хотите{' '}
             <Link
               to='/add-item/$searchQuery'
-              params={{ searchQuery: displayValue }}
+              params={{ searchQuery: deferredDisplayValue }}
             >
               <Button>добавить</Button>
             </Link>{' '}
