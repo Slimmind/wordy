@@ -1,8 +1,7 @@
-import { useMemo, lazy, useEffect } from 'react';
+import { useMemo, lazy } from 'react';
 import { ItemType, ItemTypes } from '../../utils/constants';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../store/store';
-import { listenToItems } from '../../store/firebase';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 import './words.styles.css';
 
 type WordsProps = {
@@ -12,23 +11,36 @@ type WordsProps = {
 const WordGroup = lazy(() => import('../word-group'));
 
 export const Words = ({ userId }: WordsProps) => {
-	const dispatch = useDispatch<AppDispatch>();
-  const { items } = useSelector((state: RootState) => state.firestore);
-  
-  useEffect(() => {
-    const unsubscribe = dispatch(listenToItems());
-    return () => unsubscribe();
-  }, [dispatch]);
+	const { items } = useSelector((state: RootState) => state.firestore);
+
+	// Проверяем, что у всех элементов есть необходимые поля
+	const validItems = items.filter((item) => {
+		if (!item.id) {
+			console.error('Item is missing required "id" field:', item);
+			return false;
+		}
+		if (!item.original) {
+			console.error('Item is missing required "original" field:', item);
+			return false;
+		}
+		return true;
+	});
 
 	const collection = useMemo(() => {
-		const words = items.filter((item) => item.type === ItemTypes.WORD);
+		const words = validItems.filter((item) => item.type === ItemTypes.WORD);
 		return userId
 			? words.filter((word) => word.owners?.includes(userId))
 			: words;
-	}, [items, userId]);
+	}, [validItems, userId]);
 
 	const letters = useMemo(() => {
-		return [...new Set(collection.map((word) => word.letter))].sort();
+		return [
+			...new Set(
+				collection
+					.map((word) => word.letter)
+					.filter((letter): letter is string => !!letter)
+			),
+		].sort();
 	}, [collection]);
 
 	return (

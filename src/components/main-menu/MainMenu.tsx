@@ -42,6 +42,7 @@ export const MainMenu = ({ openMenuHandler }: MainMenuProps) => {
 				className={`main-menu ${isMenuOpened ? 'main-menu--visible' : ''}`}
 				onClick={clickHandler}
 			>
+				<ThemeSwitcher />
 				<menu>
 					<li className='main-menu__item'>
 						<Link to='/phrases' className='btn btn--wide btn--bordered'>
@@ -49,9 +50,6 @@ export const MainMenu = ({ openMenuHandler }: MainMenuProps) => {
 							<span className='btn__text'>Phrases</span>
 						</Link>
 					</li>
-          <li className='main-menu__item'>
-            <ThemeSwitcher />
-          </li>
 					{!!currentUser && (
 						<li className='main-menu__item'>
 							<Link
