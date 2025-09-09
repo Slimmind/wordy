@@ -32,7 +32,7 @@ type ItemListProps = {
 const ItemList = ({ items }: ItemListProps) => (
   <>
     {items.map((item) => (
-      <li key={item.id}>{item.value}</li>
+      <li key={item.id}>{item.value || ''}</li>
     ))}
   </>
 );
@@ -90,6 +90,11 @@ export const ItemDetails = ({ itemId }: ItemDetailsProps) => {
   
   // Находим текущий элемент
   const item = items.find((item) => item.id === itemId);
+  
+  // Проверяем, что у элемента есть все необходимые поля
+  if (item && (!item.original || !item.translations)) {
+    console.error('Item is missing required fields:', item);
+  }
 
   const [isWordInOwnCollection, setIsWordInOwnCollection] = useState(false);
   const [isExtendable, setIsExtendable] = useState(false);
