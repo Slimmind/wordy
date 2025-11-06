@@ -3,6 +3,7 @@ import { useState, lazy } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import './main-menu.styles.css';
+import GamesIcon from '../../icons/games-icon';
 
 type MainMenuProps = {
 	openMenuHandler: (isOpen: boolean) => void;
@@ -48,6 +49,12 @@ export const MainMenu = ({ openMenuHandler }: MainMenuProps) => {
 						<Link to='/phrases' className='btn btn--wide btn--bordered'>
 							<PhrasesIcon />
 							<span className='btn__text'>Phrases</span>
+						</Link>
+					</li>
+					<li className='main-menu__item'>
+						<Link to='/game-center' className='btn btn--wide btn--bordered'>
+							<GamesIcon />
+							<span className='btn__text'>Game Center</span>
 						</Link>
 					</li>
 					{!!currentUser && (
