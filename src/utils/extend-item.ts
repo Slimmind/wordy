@@ -6,14 +6,15 @@ import {
 	desiredAmountOfItemDetails,
 } from './constants';
 import { createPrompt } from './create-prompt';
-import { extendByOpenAI } from './extendByOpenAI';
+import { extendByGeminiAI } from './extendByGeminiAI';
+// import { extendByOpenAI } from './extendByOpenAI';
 
 /**
  * Отправляет промпт на API и получает ответ
  */
 const sendPromptToAPI = async (prompt: string): Promise<ExtendResponse> => {
 	try {
-		return await extendByOpenAI(prompt);
+		return await extendByGeminiAI(prompt);
 	} catch (error) {
 		console.error('Error sending prompt to API:', error);
 		throw error;
