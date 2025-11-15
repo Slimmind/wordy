@@ -13,7 +13,7 @@ textarea {
   padding: 12px;
   background-color: var(--color-bg);
   border: var(--border-width) solid var(--color-main);
-  border-radius: var(--radius-small);
+  border-radius: var(--radius-main);
   box-shadow: var(--shadow);
   color: var(--color-main);
   font-family: monospace;

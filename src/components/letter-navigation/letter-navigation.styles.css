@@ -5,6 +5,7 @@
   margin: 0 auto 10px;
 }
 .letter__navigation .block {
+  height: 100%;
   margin: 0;
 	border-radius: 1.5rem;
   backdrop-filter: blur(var(--blur));
