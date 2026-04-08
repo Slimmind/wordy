@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react';
-import getMod from '../../utils/get-mod';
+import getMod from '../../utils/helpers/get-mod';
 import './button.styles.css';
 
 type CommonProps = {

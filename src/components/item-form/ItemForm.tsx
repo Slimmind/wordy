@@ -4,8 +4,10 @@ import { useAppDispatch } from '../../store/hooks';
 import { nanoid } from 'nanoid';
 import { useNavigate, useParams } from '@tanstack/react-router';
 
-import { ItemType, ItemDetailType, ItemTypes } from '../../utils/constants';
-import { extendItem } from '../../utils/extend-item';
+import { ItemDetailType, ItemTypes } from '../../utils/constants';
+import type { ItemType as ItemTypeZod } from '../../schemas/item.schema';
+import type { CreateItemInput } from '../../store/firebase';
+import { extendItem } from '../../ai/extend';
 
 import ButtonSwitcher from '../button-switcher';
 import Input from '../input';
@@ -47,20 +49,20 @@ export const ItemForm = () => {
 	};
 
 	const [translations, setTranslations] = useState<ItemDetailType[]>(
-		initializeFields(currentItem?.translations)
+		initializeFields(currentItem?.translations),
 	);
 	const [synonyms, setSynonyms] = useState<ItemDetailType[]>(
-		initializeFields(currentItem?.synonyms)
+		initializeFields(currentItem?.synonyms),
 	);
 	const [examples, setExamples] = useState<ItemDetailType[]>(
-		initializeFields(currentItem?.examples)
+		initializeFields(currentItem?.examples),
 	);
 
 	const [formView, setFormView] = useState<ItemTypes.WORD | ItemTypes.PHRASE>(
-		currentItem ? currentItem.type : ItemTypes.WORD
+		currentItem ? currentItem.type : ItemTypes.WORD,
 	);
 	const [original, setOriginal] = useState<string>(
-		(currentItem?.original || searchQuery) ?? ''
+		(currentItem?.original || searchQuery) ?? '',
 	);
 
 	// Effect to update form when currentItem changes
@@ -77,31 +79,31 @@ export const ItemForm = () => {
 	const handleFieldChange = (
 		event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
 		index: number,
-		setField: React.Dispatch<React.SetStateAction<ItemDetailType[]>>
+		setField: React.Dispatch<React.SetStateAction<ItemDetailType[]>>,
 	) => {
 		const { value } = event.target;
 		setField((prevFields) =>
-			prevFields.map((field, i) => (i === index ? { ...field, value } : field))
+			prevFields.map((field, i) => (i === index ? { ...field, value } : field)),
 		);
 	};
 
 	const addField = (
-		setField: React.Dispatch<React.SetStateAction<ItemDetailType[]>>
+		setField: React.Dispatch<React.SetStateAction<ItemDetailType[]>>,
 	) => {
 		setField((prevFields) => [...prevFields, { id: nanoid(), value: '' }]);
 	};
 
 	const removeField = (
 		setField: React.Dispatch<React.SetStateAction<ItemDetailType[]>>,
-		fieldId: string
+		fieldId: string,
 	) => {
 		setField((prevFields) =>
-			prevFields.filter((field) => field.id !== fieldId)
+			prevFields.filter((field) => field.id !== fieldId),
 		);
 	};
 
 	const handleOriginalChange = (
-		event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+		event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
 	) => {
 		setOriginal(event.target.value.toLowerCase());
 	};
@@ -112,7 +114,7 @@ export const ItemForm = () => {
 		label: string,
 		placeholder: string,
 		inputType: 'text' | 'textarea' = 'text',
-		inputName: string
+		inputName: string,
 	) => {
 		// Ensure we have at least one field
 		const safeFields =
@@ -184,12 +186,11 @@ export const ItemForm = () => {
 
 		try {
 			if (itemId) {
-				// For updates, we only send the changed fields
 				const updatedFields = { ...newItem };
-				delete (updatedFields as Partial<ItemType>).id; // Remove id from updated fields
+				delete (updatedFields as Partial<ItemTypeZod>).id;
 				await dispatch(updateItem({ itemId, updatedFields }));
 			} else {
-				await dispatch(createItem(newItem));
+				await dispatch(createItem(newItem as unknown as CreateItemInput));
 			}
 
 			navigate({
@@ -222,7 +223,7 @@ export const ItemForm = () => {
 		return filtered.length > 0 ? filtered : [];
 	};
 
-	const buildItem = (): ItemType => {
+	const buildItem = (): ItemTypeZod => {
 		const userId = currentUser?.uid;
 		const owners = userId ? [userId] : [];
 		const keyWords = original.split(' ').reduce<string[]>((acc, word) => {
@@ -254,9 +255,11 @@ export const ItemForm = () => {
 
 		return {
 			...commonFields,
-			id: itemId || nanoid(), // Use existing ID for updates or generate new one
+			id: itemId || nanoid(),
 			letter: firstLetter,
 			keyWords,
+			synonyms: [],
+			examples: [],
 		};
 	};
 
@@ -271,9 +274,9 @@ export const ItemForm = () => {
 			const firstLetter =
 				original.length > 0 ? original.charAt(0).toLowerCase() : '';
 
-			const tempItem: ItemType = {
-				id: itemId || nanoid(), // Use existing ID for updates or generate new one
-				type: formView,
+			const tempItem: ItemTypeZod = {
+				id: itemId || nanoid(),
+				type: formView as ItemTypes,
 				original: original.toLowerCase(),
 				letter: firstLetter,
 				translations: [],
@@ -284,11 +287,11 @@ export const ItemForm = () => {
 			// Calculate how many items we need to generate
 			const translationsNeeded = Math.max(
 				0,
-				3 - translations.filter((t) => t.value.trim() !== '').length
+				3 - translations.filter((t) => t.value.trim() !== '').length,
 			);
 			const synonymsNeeded = Math.max(
 				0,
-				3 - synonyms.filter((s) => s.value.trim() !== '').length
+				3 - synonyms.filter((s) => s.value.trim() !== '').length,
 			);
 
 			const missingParts = {
@@ -354,7 +357,7 @@ export const ItemForm = () => {
 					'Translation',
 					'Translation...',
 					formView === ItemTypes.PHRASE ? 'textarea' : 'text',
-					'translation'
+					'translation',
 				)}
 				{error && <div className='item-form__error'>{error}</div>}
 				{duplicateError && (
@@ -368,7 +371,7 @@ export const ItemForm = () => {
 							'Synonym',
 							'Synonym...',
 							'text',
-							'synonym'
+							'synonym',
 						)}
 						{renderFields(
 							examples,
@@ -376,7 +379,7 @@ export const ItemForm = () => {
 							'Example',
 							'Example...',
 							'textarea',
-							'example'
+							'example',
 						)}
 					</>
 				) : null}

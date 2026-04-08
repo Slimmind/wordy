@@ -7,7 +7,7 @@ import {
 	MissingParts,
 	ItemDetailType,
 	MissingPartInfo,
-} from './constants';
+} from '../utils/constants';
 
 /**
  * Вычисляет количество недостающих элементов
@@ -26,7 +26,7 @@ const calculateMissingExamplesQuantity = (currentAmount: number): number =>
  */
 const createMissingPartInfo = (
 	items: ItemDetailType[],
-	currentAmount: number
+	currentAmount: number,
 ): MissingPartInfo => ({
 	missingQuantity: calculateMissingQuantity(currentAmount),
 	existing: items
@@ -38,7 +38,7 @@ const createMissingPartInfo = (
  * Создает массив примеров с переводами
  */
 const createExamplesWithTranslations = (
-	examples: ItemDetailType[]
+	examples: ItemDetailType[],
 ): ItemDetailType[] => {
 	const examplesQuantity = Math.max(examples.length, desiredAmountOfExamples);
 
@@ -65,7 +65,7 @@ const createExamplesWithTranslations = (
 const canItemBeExtended = (
 	missingTranslations: number,
 	missingSynonyms?: number,
-	missingExamples?: number
+	missingExamples?: number,
 ): boolean =>
 	(missingSynonyms && missingSynonyms > 0) ||
 	(missingExamples && missingExamples > 0) ||

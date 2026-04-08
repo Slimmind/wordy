@@ -23,3 +23,5 @@ routerTree.gen.ts
 *.njsproj
 *.sln
 *.sw?
+.qwen/
+QWEN.md

@@ -1,7 +1,7 @@
 import { PropsWithChildren, lazy } from 'react';
 import { Link, useRouter } from '@tanstack/react-router';
 import clsx from 'clsx';
-import getMod from '../../utils/get-mod';
+import getMod from '../../utils/helpers/get-mod';
 import './internal-window.styles.css';
 
 const Button = lazy(() => import('../button'));

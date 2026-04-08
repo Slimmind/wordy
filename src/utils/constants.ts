@@ -1,3 +1,9 @@
+/**
+ * @deprecated Use `APP_CONFIG` from `../config` instead.
+ * These exports are kept for backwards compatibility.
+ */
+import { APP_CONFIG, AI_SYSTEM_PROMPT } from '../config';
+
 export enum ItemTypes {
 	PHRASE = 'phrase',
 	WORD = 'word',
@@ -5,19 +11,22 @@ export enum ItemTypes {
 
 export const THEME_DARK = 'dark';
 export const THEME_LIGHT = 'light';
-export const desiredAmountOfItemDetails = 3;
-export const desiredAmountOfExamples = 10;
+
+/** @deprecated Use APP_CONFIG.desiredItemDetails from config.ts */
+export const desiredAmountOfItemDetails = APP_CONFIG.desiredItemDetails;
+/** @deprecated Use APP_CONFIG.desiredExamples from config.ts */
+export const desiredAmountOfExamples = APP_CONFIG.desiredExamples;
 
 export const ValidationMessages = {
 	REQUIRED: 'This field is required',
 	EMAIL: 'Invalid email address',
-	PASSWORD: 'Password must be at least 8 characters',
+	PASSWORD: `Password must be at least ${APP_CONFIG.minPasswordLength} characters`,
 	PASSWORD_CONFIRMATION: 'Passwords must match',
-	NAME: 'Name must be at least 2 characters',
+	NAME: `Name must be at least ${APP_CONFIG.minNameLength} characters`,
 };
 
-export const presettingAI =
-	'You are a helpful assistant that helps to extend English words with translations, synonyms, and examples. Please provide the response in a structured JSON format with the following structure: { "translations": ["translation1", "translation2"], "synonyms": ["synonym1", "synonym2"], "examples": [{"value": "example1", "translation": "translation1"}, {"value": "example2", "translation": "translation2"}] }';
+/** @deprecated Use AI_SYSTEM_PROMPT from config.ts */
+export const presettingAI = AI_SYSTEM_PROMPT;
 
 export type ItemDetailType = {
 	id: string;

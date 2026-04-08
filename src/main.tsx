@@ -5,7 +5,7 @@ import { routeTree } from './routeTree.gen';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import './index.css';
-import { initFirebaseAuth } from './utils/auth-init';
+import { initFirebaseAuth } from './auth/init';
 
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', () => {
@@ -43,5 +43,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 		<Provider store={store}>
 			<RouterProvider router={router} />
 		</Provider>
-	</React.StrictMode>
+	</React.StrictMode>,
 );

@@ -1,9 +1,8 @@
-import { ExtendResponse, presettingAI } from './constants';
+import { AIProvider, ExtendResponse } from '../ai/types';
+import { AI_SYSTEM_PROMPT } from '../config';
 
-export const extendByLocalAI = async (
-	prompt: string
-): Promise<ExtendResponse> => {
-	try {
+export const localAiProvider: AIProvider = {
+	async extend(prompt: string): Promise<ExtendResponse> {
 		const response = await fetch(import.meta.env.VITE_LOCAL_AI_URL, {
 			method: 'POST',
 			headers: {
@@ -12,7 +11,7 @@ export const extendByLocalAI = async (
 			},
 			body: JSON.stringify({
 				model: 'wordy',
-				prompt: `${presettingAI} ${prompt}`,
+				prompt: `${AI_SYSTEM_PROMPT}\n\n${prompt}`,
 				email: 'slimmind@gmail.com',
 			}),
 		});
@@ -22,13 +21,10 @@ export const extendByLocalAI = async (
 		}
 
 		const data = await response.json();
-		return data;
-	} catch (error) {
-		console.error('Error fetching from local AI:', error);
 		return {
-			translations: [],
-			synonyms: [],
-			examples: [],
+			translations: data.translations ?? [],
+			synonyms: data.synonyms ?? [],
+			examples: data.examples ?? [],
 		};
-	}
+	},
 };
