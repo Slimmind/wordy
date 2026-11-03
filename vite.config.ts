@@ -5,6 +5,20 @@ import { TanStackRouterVite } from '@tanstack/router-vite-plugin';
 // https://vitejs.dev/config/
 export default defineConfig({
 	plugins: [react(), TanStackRouterVite()],
+	build: {
+		rollupOptions: {
+			output: {
+				manualChunks: {
+					firebase: [
+						'firebase/app',
+						'firebase/auth',
+						'firebase/firestore',
+					],
+					react: ['react', 'react-dom'],
+				},
+			},
+		},
+	},
 	server: {
 		proxy: {
 			'/api': {

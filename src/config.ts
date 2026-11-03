@@ -26,3 +26,4 @@ export type AIProviderType = 'openai' | 'local';
 
 /** Currently selected AI provider — change this to switch providers */
 export const CURRENT_AI_PROVIDER: AIProviderType = 'openai';
+export const OPENAI_MODEL = 'gpt-6-luna';

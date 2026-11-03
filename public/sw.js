@@ -1,12 +1,12 @@
 // Cache version
-const CACHE_NAME = 'wordy-cache-v1';
+const CACHE_NAME = 'wordy-cache-v3';
 
 // Files to cache initially
 const urlsToCache = [
 	'/',
 	'/index.html',
 	'/manifest.json',
-	'/images/bg.png',
+	'/bg.webp',
 	// Add any other static assets that need to be cached initially
 ];
 
@@ -48,6 +48,16 @@ self.addEventListener('activate', (event) => {
 
 // Fetch cached assets or network fallback and cache /assets dynamically
 self.addEventListener('fetch', (event) => {
+	// HTML is network-first so users get new deploys
+	if (event.request.mode === 'navigate') {
+		event.respondWith(
+			fetch(event.request).catch(async () => {
+				return (await caches.match('/index.html')) || Response.error();
+			})
+		);
+		return;
+	}
+
 	event.respondWith(
 		(async () => {
 			const cache = await caches.open(CACHE_NAME);

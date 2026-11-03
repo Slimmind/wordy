@@ -1,7 +1,11 @@
 // Your web app's Firebase configuration
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import {
+	initializeFirestore,
+	persistentLocalCache,
+	persistentMultipleTabManager,
+} from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -15,6 +19,11 @@ export const firebaseConfig = {
 	measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
-export default getFirestore();
+// Offline cache: instant first paint from IndexedDB, fewer billed reads
+export default initializeFirestore(app, {
+	localCache: persistentLocalCache({
+		tabManager: persistentMultipleTabManager(),
+	}),
+});

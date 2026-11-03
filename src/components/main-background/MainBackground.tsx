@@ -3,7 +3,7 @@ import './main-background.styles.css';
 
 const BACKGROUND_CLASS = 'main-background';
 const IMAGE_CLASS = 'main-background__image';
-const IMAGE_SRC = '/bg.png';
+const IMAGE_SRC = '/bg.webp';
 const IMAGE_ALT = 'Background';
 const IMAGE_WIDTH = '1024';
 const IMAGE_HEIGHT = '1024';

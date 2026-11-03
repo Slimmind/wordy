@@ -1,8 +1,7 @@
-import { useMemo, lazy, useState, useRef, useEffect } from 'react';
+import { useMemo, lazy, useState, useRef } from 'react';
 import { ItemType, ItemTypes } from '../../utils/constants';
-import { useSelector, useDispatch } from 'react-redux';
-import { AppDispatch, RootState } from '../../store/store';
-import { listenToItems } from '../../store/firebase';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 import './phrases.styles.css';
 
 const Phrase = lazy(() => import('../phrase'));
@@ -10,31 +9,14 @@ const InternalWindow = lazy(() => import('../internal-window'));
 const Button = lazy(() => import('../button'));
 
 export const Phrases = () => {
-  console.log('Redux state:', useSelector((state: RootState) => state.firestore));
-  const dispatch = useDispatch<AppDispatch>();
-  const { items, loading, error } = useSelector((state: RootState) => state.firestore);
+  const { items, error } = useSelector((state: RootState) => state.firestore);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
   const phrasesRef = useRef<HTMLUListElement>(null);
 
-  useEffect(() => {
-    dispatch(listenToItems());
-  
-  // Firestore сам управляет подпиской, явная отписка не всегда нужна
-  return () => {
-    // Можно оставить пустым или добавить действие для очистки
-  };
-}, [dispatch]);
-
-  useEffect(() => {
-    console.log('Current items:', items);
-    console.log('Loading state:', loading);
-    console.log('Error state:', error);
-  }, [items, loading, error]);
-
   const collection = useMemo(() => {
     if (!items) return [];
-    
+
     const wordExamples = items
       .filter(
         (item) =>
@@ -43,11 +25,11 @@ export const Phrases = () => {
       .flatMap((item) =>
         item.examples
           ? item.examples.map((example) => ({
-              value: example.value,
-              id: example.id,
-              wordId: item.id,
-              translations: example.translations,
-            }))
+            value: example.value,
+            id: example.id,
+            wordId: item.id,
+            translations: example.translations,
+          }))
           : []
       );
 
@@ -85,7 +67,7 @@ export const Phrases = () => {
         ))}
       </ul>
       <div className="phrases__pagination">
-        <Button 
+        <Button
           mod='circle arrow-left'
           onClick={() => changePage(currentPage - 1)}
           disabled={currentPage === 1}

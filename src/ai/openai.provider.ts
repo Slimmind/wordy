@@ -1,17 +1,19 @@
 import OpenAI from 'openai';
 
 import { AIProvider, ExtendResponse } from '../ai/types';
-import { AI_SYSTEM_PROMPT } from '../config';
+import { AI_SYSTEM_PROMPT, OPENAI_MODEL } from '../config';
 
 const client = new OpenAI({
 	apiKey: import.meta.env.VITE_OPENAI_API_KEY,
 	dangerouslyAllowBrowser: true,
+	timeout: 30_000,
+	maxRetries: 2,
 });
 
 export const openaiProvider: AIProvider = {
 	async extend(prompt: string): Promise<ExtendResponse> {
 		const completion = await client.chat.completions.create({
-			model: 'gpt-3.5-turbo',
+			model: OPENAI_MODEL,
 			messages: [
 				{ role: 'system', content: AI_SYSTEM_PROMPT },
 				{ role: 'user', content: prompt },

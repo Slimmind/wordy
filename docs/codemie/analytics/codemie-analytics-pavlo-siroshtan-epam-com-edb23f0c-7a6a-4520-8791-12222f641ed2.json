@@ -1,0 +1,293 @@
+{
+  "meta": {
+    "generatedAt": "2026-11-03T21:54:08.889Z",
+    "rangeLabel": "all",
+    "agents": [
+      "claude"
+    ],
+    "projectFilter": "all",
+    "totals": {
+      "sessions": 1,
+      "durationMs": 77402,
+      "turns": 10,
+      "files": 2,
+      "netLines": 74,
+      "toolCallsTotal": 17,
+      "toolSuccessRate": 100,
+      "totalCostUSD": 0.49443771000000003,
+      "cacheReadCostUSD": 0.09294921,
+      "pricedSessions": 1
+    },
+    "unpricedModels": [],
+    "estimatedModels": [],
+    "localModels": [],
+    "coverage": [
+      {
+        "agentName": "claude",
+        "total": 1,
+        "priced": 1,
+        "withLog": 1
+      }
+    ],
+    "userEmail": "pavlo_siroshtan@epam.com",
+    "periodStart": "2026-11-03T21:52:47.992Z",
+    "periodEnd": "2026-11-03T21:54:05.394Z"
+  },
+  "sessions": [
+    {
+      "sessionId": "edb23f0c-7a6a-4520-8791-12222f641ed2",
+      "agentName": "claude",
+      "provider": "ai-run-sso",
+      "title": "/init",
+      "project": "/Users/Pavlo_Siroshtan/Sites/wordy",
+      "branch": "master",
+      "startTime": 1793742767992,
+      "durationMs": 77402,
+      "turns": 10,
+      "fileOps": 2,
+      "linesAdded": 74,
+      "linesRemoved": 0,
+      "linesModified": 0,
+      "netLines": 74,
+      "filesChanged": 1,
+      "filesWritten": 1,
+      "filesEdited": 0,
+      "toolCallsTotal": 17,
+      "toolCallsSuccess": 17,
+      "toolCallsFailure": 0,
+      "models": [
+        "claude-sonnet-4-6"
+      ],
+      "languages": [
+        "markdown"
+      ],
+      "tools": [
+        {
+          "toolName": "Bash",
+          "totalCalls": 15,
+          "successCount": 15,
+          "failureCount": 0,
+          "successRate": 100
+        },
+        {
+          "toolName": "Read",
+          "totalCalls": 1,
+          "successCount": 1,
+          "failureCount": 0,
+          "successRate": 100
+        },
+        {
+          "toolName": "Write",
+          "totalCalls": 1,
+          "successCount": 1,
+          "failureCount": 0,
+          "successRate": 100
+        }
+      ],
+      "tokens": {
+        "input": 12,
+        "output": 4038,
+        "cacheRead": 282743,
+        "cacheCreation": 51919,
+        "cacheCreation1h": 51919,
+        "total": 338712
+      },
+      "costUSD": 0.49443771000000003,
+      "cacheReadCostUSD": 0.09294921,
+      "perModelCost": [
+        {
+          "model": "claude-sonnet-4-6",
+          "tokens": {
+            "input": 3,
+            "output": 276,
+            "cacheRead": 11866,
+            "cacheCreation": 12381,
+            "cacheCreation1h": 12381,
+            "total": 24526
+          },
+          "costUSD": 0.0819948,
+          "unpriced": false
+        },
+        {
+          "model": "claude-sonnet-4-6",
+          "tokens": {
+            "input": 9,
+            "output": 3762,
+            "cacheRead": 270877,
+            "cacheCreation": 39538,
+            "cacheCreation1h": 39538,
+            "total": 314186
+          },
+          "costUSD": 0.41244291000000005,
+          "unpriced": false
+        }
+      ],
+      "hadLog": true,
+      "agentSessionFile": "/Users/Pavlo_Siroshtan/.claude/projects/-Users-Pavlo-Siroshtan-Sites-wordy/daf39b26-64ac-408f-b380-459b7ed15998.jsonl",
+      "costSeries": [
+        {
+          "t": 1793742776224,
+          "cost": 0.0819948,
+          "tokens": 24526
+        },
+        {
+          "t": 1793742782516,
+          "cost": 0.10682301000000001,
+          "tokens": 51002
+        },
+        {
+          "t": 1793742786240,
+          "cost": 0.12973194000000002,
+          "tokens": 78982
+        },
+        {
+          "t": 1793742789333,
+          "cost": 0.16302762,
+          "tokens": 109897
+        },
+        {
+          "t": 1793742791953,
+          "cost": 0.30542460000000005,
+          "tokens": 142303
+        },
+        {
+          "t": 1793742794390,
+          "cost": 0.33958158000000005,
+          "tokens": 176131
+        },
+        {
+          "t": 1793742797379,
+          "cost": 0.37750914,
+          "tokens": 213264
+        },
+        {
+          "t": 1793742800355,
+          "cost": 0.40151301,
+          "tokens": 251491
+        },
+        {
+          "t": 1793742814901,
+          "cost": 0.46647252,
+          "tokens": 294980
+        },
+        {
+          "t": 1793742832600,
+          "cost": 0.49443771000000003,
+          "tokens": 338712
+        }
+      ],
+      "dispatches": [
+        {
+          "kind": "command",
+          "name": "init",
+          "start": 1793742772056,
+          "durationMs": 0,
+          "id": "command:6ffc168c-d78e-4c45-b89f-e2ef2cbe93de:0",
+          "ownerAgentId": "edb23f0c-7a6a-4520-8791-12222f641ed2",
+          "relationshipStatus": "root",
+          "elapsedMs": 0,
+          "status": "completed",
+          "attributionStatus": "unavailable",
+          "attributionScope": "owner-window"
+        }
+      ],
+      "costSource": "native-estimate",
+      "costBasis": "standard-api-tokens",
+      "dispatchesComplete": true,
+      "rootOwnCostUSD": 0.45694290000000004,
+      "unlinkedCostUSD": 0,
+      "unlinkedAgentIds": [],
+      "observedEnd": 1793742845394,
+      "rootOwnTokens": {
+        "input": 12,
+        "output": 4038,
+        "cacheRead": 282743,
+        "cacheCreation": 51919,
+        "cacheCreation1h": 51919,
+        "total": 338712
+      },
+      "unlinkedTokens": {
+        "input": 0,
+        "output": 0,
+        "cacheRead": 0,
+        "cacheCreation": 0,
+        "cacheCreation1h": 0,
+        "total": 0
+      },
+      "modelTimeline": [
+        {
+          "t": 1793742776224,
+          "model": "claude-sonnet-4-6",
+          "costUSD": 0.0819948,
+          "tokens": 24526
+        },
+        {
+          "t": 1793742782516,
+          "model": "claude-sonnet-4-6",
+          "costUSD": 0.02482821,
+          "tokens": 26476
+        },
+        {
+          "t": 1793742786240,
+          "model": "claude-sonnet-4-6",
+          "costUSD": 0.02290893,
+          "tokens": 27980
+        },
+        {
+          "t": 1793742789333,
+          "model": "claude-sonnet-4-6",
+          "costUSD": 0.03329568,
+          "tokens": 30915
+        },
+        {
+          "t": 1793742791953,
+          "model": "claude-sonnet-4-6",
+          "costUSD": 0.14239698,
+          "tokens": 32406
+        },
+        {
+          "t": 1793742794390,
+          "model": "claude-sonnet-4-6",
+          "costUSD": 0.03415698,
+          "tokens": 33828
+        },
+        {
+          "t": 1793742797379,
+          "model": "claude-sonnet-4-6",
+          "costUSD": 0.03792756,
+          "tokens": 37133
+        },
+        {
+          "t": 1793742800355,
+          "model": "claude-sonnet-4-6",
+          "costUSD": 0.02400387,
+          "tokens": 38227
+        },
+        {
+          "t": 1793742814901,
+          "model": "claude-sonnet-4-6",
+          "costUSD": 0.06495951,
+          "tokens": 43489
+        },
+        {
+          "t": 1793742832600,
+          "model": "claude-sonnet-4-6",
+          "costUSD": 0.02796519,
+          "tokens": 43732
+        }
+      ],
+      "routedTurnsPct": 0,
+      "skillInvocations": [],
+      "agentInvocations": [],
+      "commandInvocations": [
+        {
+          "name": "init",
+          "totalCalls": 1,
+          "successCount": 1,
+          "failureCount": 0
+        }
+      ],
+      "sessionSource": "Pure chat"
+    }
+  ]
+}
